@@ -1,10 +1,11 @@
 const url = 'http://localhost:3000/Proveedor/';
 const contenedor = document.querySelector('tbody');
+console.log(contenedor);
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
-
+console.log(formLinea);
 const rif_proveedor = document.getElementById('rif_proveedor');
 const direccion = document.getElementById('direccion');
 const razonsocial = document.getElementById('razonsocial');
@@ -43,6 +44,7 @@ const mostrar = (l) => {
                         </tr>`;
     });
     contenedor.innerHTML = resultados;
+    console.log(resultados);
     
 };
 
