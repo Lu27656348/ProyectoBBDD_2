@@ -1,0 +1,459 @@
+/*EN ESTA SECCIÓN SE DEFINEN LOS DOMINIOS ASOCIADOS A LAS TABLAS*/
+CREATE DOMAIN DominioNombre AS VARCHAR (50);
+CREATE DOMAIN DominioReserva AS CHAR(1) 
+								CHECK(VALUE IN('S','N'));
+CREATE DOMAIN DominioPD AS CHAR(1) 
+								CHECK(VALUE IN('S','N'));
+CREATE DOMAIN DominioEcologico AS CHAR(1) 
+								CHECK(VALUE IN('S','N'));
+/*EN ESTA SECCIÓN SE DEFINEN LAS TABLAS DE LA BASE DE DATOS*/
+/*************************TABLAS PRIMAS*********************/
+-----------------------------------------------------------------
+-------------------   Tabla Servicio   --------------------------
+-------2---------------------------------------------------------
+CREATE TABLE SERVICIO(
+Cod_Servicio SERIAL NOT NULL,
+NombreServ DominioNombre NOT NULL,
+DescripcionServ  VARCHAR(125),
+Anticipacion INTEGER,
+Reserva DominioReserva DEFAULT('N'),
+PRIMARY KEY(Cod_Servicio)
+);
+-----------------------------------------------------------------
+-------------------   Tabla Personal   --------------------------
+-----------------------------------------------------------------
+CREATE TABLE Personal(
+CedulaPer VARCHAR(10) NOT NULL,
+NombrePer DominioNombre NOT NULL,
+Sueldo DECIMAL(11,2) NOT NULL
+					 CONSTRAINT ck_sueldoPositivo
+					 check(Sueldo>=0.00),
+TelefonoPer VARCHAR(12),
+PRIMARY KEY(CedulaPer)
+);
+-----------------------------------------------------------------
+-------------------   Tabla Ciudad   ----------------------------
+-----------------------------------------------------------------
+CREATE TABLE Ciudad(
+Nombre_Ciudad DominioNombre NOT NULL,
+PRIMARY KEY(Nombre_Ciudad)
+);
+-----------------------------------------------------------------
+-------------------   Tabla TipoVehículo   ----------------------
+-----------------------------------------------------------------
+CREATE TABLE TipoVehiculo(
+Cod_TipoVehiculo SERIAL,
+Descripcion VARCHAR(25) NOT NULL,
+PRIMARY KEY(Cod_TipoVehiculo)
+);
+-----------------------------------------------------------------
+-------------------   Tabla Cliente   ---------------------------
+-----------------------------------------------------------------
+CREATE TABLE Cliente(
+Cedula_Cliente INTEGER NOT NULL,
+Nombre DominioNombre NOT NULL,
+Email VARCHAR(75),
+Frecuente VARCHAR(2) NOT NULL,
+CantidadServicios INTEGER DEFAULT 0
+						  CONSTRAINT ck_CantidadServicios
+						  CHECK(CantidadServicios>=0),
+PRIMARY KEY(Cedula_Cliente)
+);
+------------------------------------------------------------------
+-------------------   Tabla MarcaVehículo   ----------------------
+------------------------------------------------------------------
+CREATE TABLE MarcaVehiculo(
+NombreMarca DominioNombre NOT NULL,
+AceiteCaja VARCHAR(25) NOT NULL,
+Descripcion VARCHAR(125),
+CantidadP INTEGER NOT NULL
+				  CONSTRAINT ck_Puesto
+			      CHECK(   CantidadP   >=   1   ),
+Refrigerante VARCHAR(20) NOT NULL,
+Octanaje INTEGER NOT NULL
+				 CONSTRAINT ck_Octanaje
+			     CHECK(   Octanaje   >  0   ),
+PRIMARY KEY(NombreMarca)
+);
+------------------------------------------------------------------
+-------------------   Tabla Proveedor   --------------------------
+------------------------------------------------------------------
+CREATE TABLE Proveedor(
+Rif_Proveedor VARCHAR(10) NOT NULL,
+Direccion VARCHAR(250) NOT NULL,
+RazonSocial VARCHAR(50) NOT NULL,
+Telefono VARCHAR(12) NOT NULL,
+Celular VARCHAR(12),
+Nombre DominioNombre NOT NULL,
+Cedula VARCHAR(10) NOT NULL,
+PRIMARY KEY(Rif_Proveedor)
+);
+------------------------------------------------------------------
+--------------   Tabla Línea de Suministro   ---------------------
+------------------------------------------------------------------
+CREATE TABLE LineaSuministro(
+Cod_Linea SERIAL,
+Descripcion VARCHAR(125) NOT NULL,
+PRIMARY KEY(Cod_Linea)
+);
+/********TABLAS FUERTES CON REFERENCIAS***********/
+-----------------------------------------------------------------
+--------------Etidades fuertes con referencias-------------------
+---------1-------------------------------------------------------
+
+CREATE TABLE Locales(
+RifLocal VARCHAR(10) NOT NULL,
+Nombre DominioNombre NOT NULL,
+Direccion VARCHAR(250) NOT NULL,
+FechaInventario DATE,
+Fecha_Encargado DATE NOT NULL,
+Encargado VARCHAR(10) NOT NULL,
+Nombre_Ciudad VARCHAR(25) NOT NULL,
+PRIMARY KEY(RifLocal),
+FOREIGN KEY(Encargado) 
+REFERENCES Personal(CedulaPer)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(Nombre_Ciudad) 
+REFERENCES Ciudad(Nombre_Ciudad)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+------------------   Tabla Reservación   ------------------------
+-----------------------------------------------------------------
+CREATE TABLE Reservacion(
+Num_Reservacion SERIAL,
+Fecha_Reservacion DATE NOT NULL,
+Cedula_Cliente INTEGER NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+PRIMARY KEY(Num_Reservacion),
+FOREIGN KEY(Cedula_Cliente) 
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+--------------------   Tabla Vehículo   -------------------------
+-----------------------------------------------------------------
+CREATE TABLE Vehiculo(
+Cod_Vehiculo SERIAL,
+Modelo VARCHAR(25) NOT NULL,
+Capacidad_Tanque INTEGER NOT NULL,
+Placa VARCHAR(10) NOT NULL,
+TiempoUso INTEGER NOT NULL
+				  CONSTRAINT ck_Vehiculos
+				  CHECK(TiempoUso>0),
+Kilometraje INTEGER NOT NULL
+					CONSTRAINT ck_Kilometraje
+					CHECK(Kilometraje>=0),
+Fecha_Adquisicion DATE NOT NULL,
+Cod_TipoVehiculo INTEGER NOT NULL,
+Cedula_Cliente INTEGER NOT NULL,
+PRIMARY KEY(Cod_Vehiculo),
+FOREIGN KEY(Cod_TipoVehiculo)
+REFERENCES TipoVehiculo(Cod_TipoVehiculo)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(Cedula_Cliente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+--------------------   Tabla FichaServicio   --------------------
+-----------------------------------------------------------------
+CREATE TABLE FichaServicio(
+Num_Unico SERIAL,
+FechaEnt DATE NOT NULL,
+HoraEnt TIME NOT NULL,
+FechaEst DATE NOT NULL,
+HoraEst DATE NOT NULL,
+FechaReal DATE,
+HoraReal DATE,
+CedulaAut VARCHAR(10),
+NombreAut VARCHAR(50),
+PersonaDistinta DominioPD NOT NULL,
+Cedula_Cliente INTEGER NOT null,
+Cod_Vehiculo INTEGER NOT null,
+PRIMARY KEY(Num_Unico),
+FOREIGN KEY(Cedula_Cliente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(Cod_Vehiculo)
+REFERENCES Vehiculo(Cod_Vehiculo)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+------------------------------------------------------------------
+--------------------   Tabla Producto   -------------------------
+------------------------------------------------------------------
+CREATE TABLE Producto(
+Cod_Producto SERIAL,
+NombreP varchar(50) NOT NULL,
+Maximo integer NOT NULL
+	 	 	   CONSTRAINT ck_Maximo
+			   CHECK(Maximo>Minimo),
+Minimo integer NOT NULL
+			   CONSTRAINT ck_Minimo
+			   CHECK(Minimo>=0),
+DescripcionP varchar(125),
+Fabricante varchar(50) NOT NULL,
+Precio Decimal(11,2) NOT NULL
+					 CONSTRAINT ck_Precio
+				     CHECK(Precio>0.00),
+Existencia integer NOT NULL
+				   CONSTRAINT ck_Existencia
+				   CHECK(Existencia>=0),
+Ecologico DominioEcologico NOT NULL,
+Cod_Linea integer NOT NULL,
+Rif_Proveedor varchar(10) NOT NULL,
+PRIMARY KEY(Cod_Producto),
+FOREIGN KEY(Cod_Linea) 
+REFERENCES LineaSuministro(Cod_Linea)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(Rif_Proveedor) 
+REFERENCES Proveedor(Rif_Proveedor)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+--------------------   Tabla OrdenCompra   ----------------------
+-----------------------------------------------------------------
+CREATE TABLE OrdenCompra(
+Cod_Orden SERIAL,
+FechaOrden DATE NOT NULL,
+Rif_Proveedor VARCHAR(10) NOT NULL,
+PRIMARY KEY(Cod_Orden),
+FOREIGN KEY(Rif_Proveedor)
+REFERENCES Proveedor(Rif_Proveedor)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+--------------------   Tabla FacturaProveedor   -----------------
+-----------------------------------------------------------------
+CREATE TABLE FacturaProveedor(
+Cod_FacturaP SERIAL,
+FechaFacturaP date NOT NULL,
+OrdenCompra integer NOT NULL,
+PRIMARY KEY(Cod_FacturaP),
+FOREIGN KEY(OrdenCompra)
+REFERENCES OrdenCompra(Cod_Orden)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+-----------------------------------------------------------------
+--------------------   Tabla FacturaServicio   -----------------
+-----------------------------------------------------------------
+CREATE TABLE FacturaServicio(
+Cod_FacturaS SERIAL,
+MontoTotal decimal(11,2) NOT NULL,
+Ficha integer NOT null,
+PRIMARY KEY(Cod_FacturaS),
+FOREIGN KEY(Ficha)
+REFERENCES FichaServicio(Num_Unico)
+ON UPDATE cascade
+ON DELETE cascade
+);
+/********TABLAS DEBILES ***********/
+-----------------------------------------------------------------
+---------------------   Tabla Actividades -----------------------
+----------17-----------------------------------------------------
+CREATE TABLE Actividad(
+Nro_Consecutivo SERIAL,
+Cod_Servicio integer NOT NULL,
+Nombre varchar(50) NOT NULL,
+Descripcion varchar(125),
+Capacidad integer NOT NULL
+				  CONSTRAINT ck_Capacidad
+				  CHECK(Capacidad>0),
+Costo decimal (11,2) NOT NULL
+					 CONSTRAINT ck_Costo
+					 CHECK(Costo>0.00),
+PRIMARY KEY(Nro_Consecutivo,Cod_Servicio),
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+----------19-----------------------------------------------------
+CREATE TABLE AjusteProducto(
+Cod_Producto INTEGER NOT NULL,
+-------TipoDiferencia
+Cantidad INTEGER NOT NULL,
+FechaAjuste DATE NOT NULL,
+PRIMARY KEY(Cod_Producto),
+FOREIGN KEY(Cod_Producto)
+REFERENCES Producto(Cod_Producto)
+ON UPDATE cascade
+ON DELETE cascade);
+----------20-----------------------------------------------------
+CREATE TABLE Mantenimiento(
+Cod_Vehiculo INTEGER NOT NULL,
+Descripcion VARCHAR(125) NOT NULL,
+Fecha_Mantenimiento DATE NOT NULL,
+PRIMARY KEY(Cod_Vehiculo),
+FOREIGN KEY(Cod_Vehiculo)
+REFERENCES Vehiculo(Cod_Vehiculo)
+ON UPDATE cascade
+ON DELETE cascade);
+----------21-----------------------------------------------------
+CREATE TABLE Mecanico(
+Cod_Vehiculo INTEGER NOT NULL,
+Nombre VARCHAR(50) NOT NULL,
+Telefono VARCHAR(12) NOT NULL,
+PRIMARY KEY(Cod_Vehiculo),
+FOREIGN KEY(Cod_Vehiculo)
+REFERENCES Vehiculo(Cod_Vehiculo)
+ON UPDATE cascade
+ON DELETE cascade);
+----------22-----------------------------------------------------
+CREATE TABLE DetalleOrden(
+Nro_Consecutivo INTEGER NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+CostoManoObra DECIMAL(11,2) NOT NULL
+							CONSTRAINT ck_CostoManoObra
+							CHECK(CostoManoObra>=0.00),
+PRIMARY KEY(Nro_Consecutivo,Cod_Servicio),
+FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
+REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade);
+----------23-----------------------------------------------------
+CREATE TABLE CompraProducto(
+Cod_Producto INTEGER NOT NULL,
+Cedula_Cliente INTEGER NOT NULL,
+Cantidad INTEGER NOT NULL
+				 CONSTRAINT ck_Cantidad
+				 CHECK(Cantidad>0),
+Monto DECIMAL(11,2) NOT NULL
+					CONSTRAINT ck_Monto
+				    CHECK(Monto>0.00),
+PRIMARY KEY(Cod_Producto,Cedula_Cliente),
+FOREIGN KEY(Cod_Producto)
+REFERENCES Producto(Cod_Producto)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cedula_Cliente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE cascade
+ON DELETE cascade);
+----------24-----------------------------------------------------
+CREATE TABLE Pago(
+Cedula_Cliente INTEGER NOT NULL,
+Monto DECIMAL(11,2) NOT NULL
+					CONSTRAINT ck_Monto
+					CHECK(Monto>0.00),
+FechaPago DATE NOT NULL,
+Banco VARCHAR(25) NOT NULL,
+NumeroT INTEGER NOT NULL,
+PRIMARY KEY(Cedula_Cliente),
+FOREIGN KEY(Cedula_Cliente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE cascade
+ON DELETE cascade);
+----------25-----------------------------------------------------
+CREATE TABLE Ofrece(
+RifLocal VARCHAR(10) NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+PRIMARY KEY(RifLocal,Cod_Servicio),
+FOREIGN KEY(RifLocal)
+REFERENCES Locales(RifLocal)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade
+);
+----------26-----------------------------------------------------
+CREATE TABLE Asignado(
+Cedula_Personal VARCHAR(10) NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+PRIMARY KEY(Cedula_Personal,Cod_Servicio),
+FOREIGN KEY(Cedula_Personal)
+REFERENCES Personal(CedulaPer)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade);
+----------27-----------------------------------------------------
+CREATE TABLE Contiene(
+Cod_Orden INTEGER NOT NULL,
+Cod_Producto INTEGER NOT NULL,
+Cantidad INTEGER NOT NULL
+				 CONSTRAINT ck_Cantidad
+				 CHECK(Cantidad>=0),
+Precio DECIMAL(11,2) NOT NULL
+					 CONSTRAINT ck_Precio
+				 	 CHECK(Precio>=0.00),
+PRIMARY KEY(Cod_Orden,Cod_Producto),
+FOREIGN KEY(Cod_Orden)
+REFERENCES OrdenCompra(Cod_Orden)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_Producto)
+REFERENCES Producto(Cod_Producto)
+ON UPDATE cascade
+ON DELETE cascade);
+----------28-----------------------------------------------------
+CREATE TABLE Necesita(
+Cod_Producto INTEGER NOT NULL,
+Nro_Consecutivo INTEGER NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+Cantidad INTEGER NOT NULL
+					 CONSTRAINT ck_Cantidad
+					 CHECK(Cantidad>=0),
+monto DECIMAL(11,2) NOT NULL
+					CONSTRAINT ck_monto
+					CHECK(Monto>=0.00),
+PRIMARY KEY(Cod_Producto,Nro_Consecutivo,Cod_Servicio),
+FOREIGN KEY(Cod_Producto)
+REFERENCES Producto(Cod_Producto)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
+REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade);
+----------29-----------------------------------------------------
+CREATE TABLE Modalidades(
+Cedula_Cliente INTEGER NOT NULL,
+Modalidades VARCHAR(25) NOT NULL,
+PRIMARY KEY(Cedula_Cliente,Modalidades),
+FOREIGN KEY(Cedula_Cliente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE cascade
+ON DELETE cascade);
+----------30-----------------------------------------------------
+CREATE TABLE Consume(
+Cedula_Personal VARCHAR(10) NOT NULL,
+Cod_Producto INTEGER NOT NULL,
+Nro_Consecutivo INTEGER NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
+PRIMARY KEY(Cedula_Personal,Cod_Producto,Nro_Consecutivo,Cod_Servicio),
+FOREIGN KEY(Cedula_Personal)
+REFERENCES Personal(CedulaPer)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_Producto)
+REFERENCES Producto(Cod_Producto)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
+REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade);
+
+
+
+

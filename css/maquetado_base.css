@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;1,100&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    color: #111110;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background: #edeaf1;
+}
+.header{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+    overflow-x: hidden;
+    background: #2b1055;
+    text-shadow: #111110 -5px 5px 5px;
+    height: 45.2em;
+}
+.header__logo {
+    padding: 30px;
+    font-size: 40px;
+    color: #edeaf1;
+    display: flex;
+    justify-content: center;
+}
+.header__nav{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 20px;
+    list-style: none;
+    text-decoration: none;
+    /* overflow:unset; */
+}
+/* .header__nav li{
+    margin-right: 10px;
+    /*padding: 15px; 
+} */
+.header__nav li a{
+    text-decoration: none;
+    margin: 0;
+    padding: 6px 15px;
+    color: #FFF;  
+    border-radius: 50px;
+}
+/* .header__nav li:first-child{
+    /* margin-top: 60px; 
+} */
+
+#actual{
+    background: #FFF;
+    color: #2b1055;
+    text-shadow: none;
+}
+
+.header__nav li a:hover{
+    background: #FFF;
+    color: #2b1055;
+    text-shadow: none;
+}
+.main{
+    display: flex;
+    color: #FFF;
+    flex-direction: column;
+    width: 1300px
+}
+
+.main__barraSuperior{
+    background: #111110;
+    height: 5em;
+}
+.main__barraSuperior input{
+    margin: 20px;
+    padding: 5px;
+    width: 300px;
+}
+.main__content{
+    display: flex;
+    color: blueviolet;
+    height: 40.2em;
+    flex-flow: column;
+    overflow-y: visible;
+    margin: 10px;
+}
+
+
