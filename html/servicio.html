@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <title>SERVICIOS</title>
+    <style>
+        body{
+            background-color: #f7f6f6;
+        }
+        table thead{
+            background-color: #0A4f70;
+            color: white;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+        <button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
+        <table id="tablaLinea" class="table mt-2 table-bordered table-striped">
+            <thead>
+                <tr class="text-center">
+                    <th>CODSERVICIO</th>
+                    <th>NOMBRE</th>
+                    <th>DESCRIPCION</th>
+                    <th>RESERVA</th>
+                    <th>ANTICIPACION</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SERVICIOS</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form">
+                            <div class="mb-3">
+                                <label for="codservicio" class="col-form-label">CODServicio</label>
+                                <input id="codservicio" type="number" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nombreservicio" class="col-form-label">Nombreserv</label>
+                                <input id="nombreservicio" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion" class="col-form-label">Descripcionserv</label>
+                                <input id="descripcion" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="anticipacion" class="col-form-label">Anticipacion</label>
+                                <input id="anticipacion" type="number" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="reserva" class="col-form-label">Reserva</label>
+                                <input id="reserva" type="text" class="form-control">
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div><!-- FIN DELMODAL -->
+
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../scripts/servicio.js">
+
+    </script>
+  </body>
+</html>
