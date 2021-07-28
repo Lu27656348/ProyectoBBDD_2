@@ -1,0 +1,25 @@
+{
+  "name": "ProyectoBBDD",
+  "version": "1.0.0",
+  "description": "ProyectoBBDD Vamos a ver que pedo con este ProyectoBBDD",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lu27656348/ProyectoBBDD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lu27656348/ProyectoBBDD/issues"
+  },
+  "homepage": "https://github.com/Lu27656348/ProyectoBBDD#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "pg": "^8.6.0"
+  }
+}
