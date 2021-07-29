@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>OFRECE</title>
+	<!-- Se comento la linea que se ve abajo porque interfiere con el disenno visual de la pantalla -->
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	
+	<!-- Nuestro css-->
+	<link rel="stylesheet" href="../css/maquetado_base.css">
+</head>
+<body>
+
+	<!-- Sidebar -->
+    <header class="header">
+        <div class="header__logo">
+            <h4 class="header__logo--Texto">M & M</h4>
+        </div>
+        <ul class="header__nav"> <!-- ion-md-apps -->
+            <li ><a id="DashBoard" href="Dashboard.html">DashBoard</a></li>
+            <li ><a id="login" href="Login.html">Login</a></li>
+            <li ><a id="actual" href="Personal.html">Personal</a></li>
+            <li ><a id="local" href="Local.html">Local</a></li>
+            <li ><a id="productos" href="Productos.html">Productos</a></li>
+            <li ><a id="proveedores" href="Proveedores.html">Proveedores</a></li>
+            <li ><a id="cliente" href="#">Cliente</a></li>
+            <li ><a id="finanzas" href="#">Finanzas</a></li>
+            <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
+            <li ><a id="vehiculos" href="#">Vehiculos</a></li>
+            <li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
+            <li ><a id="Reservacion" href="Reservacion.html">Reservacion</a</li>
+            <li ><a id="salir" href="https://www.google.com/">Salir</a></li>
+        </ul>
+    </header>
+    <!-- Fin sidebar -->
+    <!-- Page Content -->
+    <section class="main">
+        <section class="main__barraSuperior">
+            <img src="" alt="">
+            <input type="search" name="" id="" placeholder="Buscar Personal">
+        </section>
+        <section class="main__content">
+            <div class="container">
+				<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+					<ul class="nav nav-tabs justify-content-end">
+						<li class="nav-item">
+						<a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">List</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+							<div class="card">
+								<div class="card-header">
+									<h4>Lista de Ofrece</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
+										<table id="userList" class="table table-bordered table-hover table-striped">
+											<thead class="thead-light">
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">RifLocal</th>
+												<th scope="col">Cod_Servicio</th>
+												<th></th>
+											</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="mt-4 text-center">
+								¿Desea volver al menú de inicio?
+							</div>
+							
+							<div class="form-group m-0">
+								<a href="Dashboard.html"  class="btn btn-primary btn-sm" role="button">
+									Volver a menú
+								</a>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+							<div class="card">
+								<div class="card-header">
+									<h4>Informacion de Ofrece</h4>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </section>
+    </section>
+	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form">
+						<div class="mb-3">
+							<label for="RifLocal" class="col-form-label">RifLocal</label>
+							<input id="RifLocal" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Cod_Servicio" class="col-form-label">Cod_Servicio</label>
+							<input id="Cod_Servicio" type="text" class="form-control">
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">GUARDAR</button>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div><!-- FIN DELMODAL -->
+    <!-- Fin Page Content -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!--JQUERY-->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script 
+		src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script 
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	
+	<!-- Los iconos tipo Solid de Fontawesome-->
+	<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../scripts/ofrece.js"></script>
+</body>
+</html>

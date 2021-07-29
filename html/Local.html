@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>PERSONAL</title>
+	<title>LOCALES</title>
 	<!-- Se comento la linea que se ve abajo porque interfiere con el disenno visual de la pantalla -->
 	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-	
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	<!-- Nuestro css-->
 	<link rel="stylesheet" href="../css/maquetado_base.css">
+	
 </head>
 <body>
-
 	<!-- Sidebar -->
-    <header class="header">
-        <div class="header__logo">
-            <h4 class="header__logo--Texto">M & M</h4>
-        </div>
-        <ul class="header__nav"> <!-- ion-md-apps -->
-            <li ><a id="DashBoard" href="Dashboard.html">DashBoard</a></li>
-            <li ><a id="login" href="Login.html">Login</a></li>
-            <li ><a id="actual" href="Personal.html">Personal</a></li>
-            <li ><a id="local" href="Local.html">Local</a></li>
-            <li ><a id="productos" href="Productos.html">Productos</a></li>
-            <li ><a id="proveedores" href="Proveedores.html">Proveedores</a></li>
-            <li ><a id="cliente" href="#">Cliente</a></li>
-            <li ><a id="finanzas" href="#">Finanzas</a></li>
-            <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
-            <li ><a id="vehiculos" href="#">Vehiculos</a></li>
-            <li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
-            <li ><a id="salir" href="https://www.google.com/">Salir</a></li>
-        </ul>
-    </header>
-    <!-- Fin sidebar -->
-    <!-- Page Content -->
-    <section class="main">
-        <section class="main__barraSuperior">
-            <img src="" alt="">
-            <input type="search" name="" id="" placeholder="Buscar Personal">
-        </section>
-        <section class="main__content">
-            <div class="container">
+	<header class="header">
+		<div class="header__logo">
+			<h4 class="header__logo--Texto">M & M</h4>
+		</div>
+		<ul class="header__nav"> <!-- ion-md-apps -->
+			<li ><a id="DashBoard" href="Dashboard.html">DashBoard</a></li>
+			<li ><a id="login" href="Login.html">Login</a></li>
+			<li ><a id="personal" href="Personal.html">Personal</a></li>
+			<li ><a id="actual" href="Local.html">Local</a></li>
+			<li ><a id="productos" href="Productos.html">Productos</a></li>
+			<li ><a id="proveedores" href="Proveedores.html">Proveedores</a></li>
+			<li ><a id="cliente" href="#">Cliente</a></li>
+			<li ><a id="finanzas" href="#">Finanzas</a></li>
+			<li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
+			<li ><a id="vehiculos" href="#">Vehiculos</a></li>
+			<li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
+			<li ><a id="salir" href="https://www.google.com/">Salir</a></li>
+		</ul>
+	</header>
+	<!-- Fin sidebar -->
+	<!-- Page Content -->
+	<section class="main">
+		<section class="main__barraSuperior">
+			<img src="" alt="">
+			<input type="search" name="" id="" placeholder="Buscar Local">
+		</section>
+		<section class="main__content">
+			<div class="container">
 				<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
 					<ul class="nav nav-tabs justify-content-end">
 						<li class="nav-item">
@@ -53,7 +53,7 @@
 						<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 							<div class="card">
 								<div class="card-header">
-									<h4>Lista de Personal</h4>
+									<h4>Lista de Locales</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -62,10 +62,13 @@
 											<thead class="thead-light">
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">Cedula</th>
+												<th scope="col">RIF Local</th>
 												<th scope="col">Nombre</th>
-												<th scope="col">Sueldo</th>
-												<th scope="col">Telefono</th>
+												<th scope="col">Direccion</th>
+												<th scope="col">FechaInventario</th>
+												<th scope="col">Encargado</th>
+												<th scope="col">Fecha_Encargado</th>
+												<th scope="col">Nombre_Ciudad</th>
 												<th></th>
 											</tr>
 											</thead>
@@ -83,10 +86,10 @@
 								</a>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+						<div class="tab-pane fade" id="form1" role="tabpanel" aria-labelledby="form-tab">
 							<div class="card">
 								<div class="card-header">
-									<h4>Informacion del personal</h4>
+									<h4>Informacion del Local</h4>
 								</div>
 								<div class="card-body">
 								</div>
@@ -95,32 +98,44 @@
 					</div>
 				</div>
 			</div>
-        </section>
-    </section>
+		</section>
+	</section>
 	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		  <div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">PERSONAL</h5>
+					<h5 class="modal-title" id="exampleModalLabel">LOCALES</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form id="form">
 						<div class="mb-3">
-							<label for="Cedula" class="col-form-label">Cedula</label>
-							<input id="Cedula" type="text" class="form-control">
+							<label for="RIF_Local" class="col-form-label">RIF del Local</label>
+							<input id="RIF_Local" type="text" class="form-control">
 						</div>
 						<div class="mb-3">
 							<label for="Nombre" class="col-form-label">Nombre</label>
 							<input id="Nombre" type="text" class="form-control">
 						</div>
 						<div class="mb-3">
-							<label for="Sueldo" class="col-form-label">Sueldo</label>
-							<input id="Sueldo" type="text" class="form-control">
+							<label for="Direccion" class="col-form-label">Direccion</label>
+							<input id="Direccion" type="text" class="form-control">
 						</div>
 						<div class="mb-3">
-							<label for="Telefono" class="col-form-label">Telefono</label>
-							<input id="Telefono" type="text" class="form-control">
+							<label for="FechaInventario" class="col-form-label">FechaInventario</label>
+							<input id="FechaInventario" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Encargado" class="col-form-label">Encargado</label>
+							<input id="Encargado" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Fecha_Encargado" class="col-form-label">Fecha_Encargado</label>
+							<input id="Fecha_Encargado" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Nombre_Ciudad" class="col-form-label">Nombre_Ciudad</label>
+							<input id="Nombre_Ciudad" type="text" class="form-control">
 						</div>
 				</div>
 				<div class="modal-footer">
@@ -131,7 +146,7 @@
 			</div>
 		</div>
 	</div><!-- FIN DELMODAL -->
-    <!-- Fin Page Content -->
+	<!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<!--JQUERY-->
@@ -153,8 +168,13 @@
 		href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 	
-	<!-- JavaScript -->
+	<!-- DATA TABLE -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="../scripts/personal.js"></script>
+    <script src="../scripts/local.js"></script>
+	
 </body>
 </html>
