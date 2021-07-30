@@ -9,13 +9,98 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getActividad,postActividad, getActividadByCod, deleteActividadByCod, updateActividadByCod,
         getLinea,getLineaByCod,postLinea,deleteLineaByCod,updateLineaByCod,
         getProveedor,getProveedorByCod,postProveedor,deleteProveedorByCod,updateProveedorByCod,
-        getProducto, getProductoByCod, postProducto, deleteProductoByCod, updateProductoByCod} = require('../controllers/index.controller');
+        getProducto, getProductoByCod, postProducto, deleteProductoByCod, updateProductoByCod,
+        getReservacion, getReservacionByCod, postReservacion, deleteReservacionByCod, updateReservacionByCod,
+        getPersonal, getPersonalByCod, postPersonal, deletePersonalByCod, updatePersonalByCod,
+        getPago, getPagoByCod, postPago, deletePagoByCod, updatePagoByCod,
+        getOrdencompra, getOrdencompraByCod, postOrdencompra, deleteOrdencompraByCod, updateOrdencompraByCod,
+        getLocales, getLocalesByCod, postLocales, deleteLocalesByCod, updateLocalesByCod,
+        getOfrece, getOfreceByCod, postOfrece, deleteOfreceByCod, updateOfreceByCod,
+        getFichaServicio, getFichaServicioByCod, postFichaServicio, deleteFichaServicioByCod, updateFichaServicioByCod,
+        getCompraProducto, getCompraProductoByCod, postCompraProducto, deleteCompraProductoByCod, updateCompraProductoByCod,
+        getConsume, getConsumeByCod, postConsume, deleteConsumeByCod, updateConsumeByCod, 
+        getContiene, getContieneByCod, postContiene, deleteContieneByCod, updateContieneByCod,
+        getFacturaServicio, getFacturaServicioByCod, postFacturaServicio, deleteFacturaServicioByCod, updateFacturaServicioByCod,
+        getFacturaProveedor, getFacturaProveedorByCod, postFacturaProveedor, deleteFacturaProveedorByCod, updateFacturaProveedorByCod} = require('../controllers/index.controller');
 
 router.get('/Servicio', getServicio);
 router.get('/Servicio/:cod_servicio', getServicioByCod);
 router.post('/Servicio', postServicio);
 router.delete('/Servicio/:cod_servicio', deleteServicioByCod);
 router.put('/Servicio/:cod_servicio', updateServicioByCod);
+
+router.get('/FacturaProveedor', getFacturaProveedor);
+router.get('/FacturaProveedor/:cod_facturap', getFacturaProveedorByCod);
+router.post('/FacturaProveedor', postFacturaProveedor);
+router.delete('/FacturaProveedor/:cod_facturap', deleteFacturaProveedorByCod);
+router.put('/FacturaProveedor/:cod_facturap', updateFacturaProveedorByCod);
+
+
+router.get('/FacturaServicio', getFacturaServicio);
+router.get('/FacturaServicio/:cod_facturas', getFacturaServicioByCod);
+router.post('/FacturaServicio', postFacturaServicio);
+router.delete('/FacturaServicio/:cod_facturas', deleteFacturaServicioByCod);
+router.put('/FacturaServicio/:cod_facturas', updateFacturaServicioByCod);
+
+router.get('/Contiene', getContiene);
+router.get('/OrdenServicio/:cod_orden/Producto/:cod_producto', getContieneByCod);
+router.post('/OrdenServicio/:cod_orden/Producto/:cod_producto', postContiene);
+router.delete('/OrdenServicio/:cod_orden/Producto/:cod_producto', deleteContieneByCod);
+router.put('/OrdenServicio/:cod_orden/Producto/:cod_producto', updateContieneByCod);
+
+router.get('/Consume', getConsume);
+router.get('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', getConsumeByCod);
+router.post('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', postConsume);
+router.delete('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', deleteConsumeByCod);
+router.put('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', updateConsumeByCod);
+
+router.get('/Compraproducto', getCompraProducto);
+router.get('/Cliente/:cedula_cliente/Producto/:cod_producto', getCompraProductoByCod);
+router.post('/Cliente/:cedula_cliente/Producto/:cod_producto', postCompraProducto);
+router.delete('/Cliente/:cedula_cliente/Producto/:cod_producto', deleteCompraProductoByCod);
+router.put('/Cliente/:cedula_cliente/Producto/:cod_producto', updateCompraProductoByCod);
+
+router.get('/FichaServicio', getFichaServicio);
+router.get('/FichaServicio/:num_unico', getFichaServicioByCod);
+router.post('/FichaServicio', postFichaServicio);
+router.delete('/FichaServicio/:num_unico', deleteFichaServicioByCod);
+router.put('/FichaServicio/:num_unico', updateFichaServicioByCod);
+
+router.get('/Ofrece', getOfrece);
+router.get('/Locales/:riflocal/Servicio/:cod_servicio', getOfreceByCod);
+router.post('/Locales/:riflocal/Servicio/:cod_servicio', postOfrece);
+router.delete('/Locales/:riflocal/Servicio/:cod_servicio', deleteOfreceByCod);
+router.put('/Locales/:riflocal/Servicio/:cod_servicio', updateOfreceByCod);
+
+router.get('/Locales', getLocales);
+router.get('/Locales/:riflocal', getLocalesByCod);
+router.post('/Locales', postLocales);
+router.delete('/Locales/:riflocal', deleteLocalesByCod);
+router.put('/Locales/:riflocal', updateLocalesByCod);
+
+router.get('/Ordencompra', getOrdencompra);
+router.get('/Ordencompra/:cod_orden', getOrdencompraByCod);
+router.post('/Ordencompra', postOrdencompra);
+router.delete('/Ordencompra/:cod_orden', deleteOrdencompraByCod);
+router.put('/Ordencompra/:cod_orden', updateOrdencompraByCod);
+
+router.get('/Pago', getPago);
+router.get('/Pago/:cedula_cliente', getPagoByCod);
+router.post('/Pago', postPago);
+router.delete('/Pago/:cedula_cliente', deletePagoByCod);
+router.put('/Pago/:cedula_cliente', updatePagoByCod);
+
+router.get('/Personal', getPersonal);
+router.get('/Personal/:cedulaper', getPersonalByCod);
+router.post('/Personal', postPersonal);
+router.delete('/Personal/:cedulaper', deletePersonalByCod);
+router.put('/Personal/:cedulaper', updatePersonalByCod);
+
+router.get('/Reservacion', getReservacion);
+router.get('/Reservacion/:num_reservacion', getReservacionByCod);
+router.post('/Reservacion', postReservacion);
+router.delete('/Reservacion/:num_reservacion', deleteReservacionByCod);
+router.put('/Reservacion/:num_reservacion', updateReservacionByCod);
 
 router.get('/Producto', getProducto);
 router.get('/Producto/:cod_producto', getProductoByCod);

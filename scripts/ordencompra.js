@@ -1,16 +1,21 @@
-const url = 'http://localhost:3000/Ciudad/';
+const url = 'http://localhost:3000/Ordencompra/';
 const contenedor = document.querySelector('tbody');
+console.log(contenedor);
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const nombre_ciudad= document.getElementById('nombre_ciudad');
+const cod_orden = document.getElementById('cod_orden');
+const fechaorden = document.getElementById('fechaorden');
+const rif_proveedor = document.getElementById('rif_proveedor');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    nombre_ciudad.value = '';
+    cod_orden.value = '';
+    fechaorden.value = '';
+    rif_proveedor.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -20,11 +25,14 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.nombre_ciudad}</td>
+                            <td>${linea.cod_orden}</td>
+                            <td>${linea.fechaorden}</td>
+                            <td>${linea.rif_proveedor}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
     contenedor.innerHTML = resultados;
+    console.log(resultados);
     
 };
 
@@ -39,7 +47,6 @@ const on = (element, event, selector, handler) => {
 on(document, 'click','.btnBorrar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     const idaux = fila.firstElementChild.innerHTML;
-    console.log('BORRANDO '+ idaux);
     alertify.confirm("This is a confirm dialog.",
     function(){
         fetch(url+idaux, {
@@ -58,11 +65,15 @@ on(document, 'click','.btnBorrar', (e)=>{
 let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
-
+    
     idForm = fila.children[0].innerHTML;
-    console.log(idForm);
-    nombre_ciudad.value = idForm;
-
+    const fechaordenForm = fila.children[1].innerHTML;
+    const rif_proveedorForm = fila.children[2].innerHTML;
+   
+    cod_orden.value = idForm;
+    fechaorden.value = fechaordenForm;
+    rif_proveedor.value = rif_proveedorForm;
+    
     opcion = 'editar';
     modalLinea.show();
 });
@@ -71,11 +82,14 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+        console.log(idForm);
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
+                cod_orden: cod_orden.value,
+                fechaorden: fechaorden.value,
+                rif_proveedor: rif_proveedor.value
             })
         })
         .then((response) => response.json())
@@ -83,12 +97,14 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log(idForm);
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
+                cod_orden: cod_orden.value,
+                fechaorden: fechaorden.value,
+                rif_proveedor: rif_proveedor.value
            })
        })
        .then((response) => response.json())
@@ -97,7 +113,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });

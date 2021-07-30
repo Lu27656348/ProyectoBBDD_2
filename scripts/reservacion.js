@@ -1,16 +1,23 @@
-const url = 'http://localhost:3000/Ciudad/';
+const url = 'http://localhost:3000/Reservacion/';
 const contenedor = document.querySelector('tbody');
+console.log(contenedor);
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const nombre_ciudad= document.getElementById('nombre_ciudad');
+const num_reservacion = document.getElementById('num_reservacion');
+const fecha_reservacion = document.getElementById('fecha_reservacion');
+const cedula_cliente = document.getElementById('cedula_cliente');
+const cod_servicio = document.getElementById('cod_servicio');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    nombre_ciudad.value = '';
+    num_reservacion.value = '';
+    fecha_reservacion.value = '';
+    cedula_cliente.value = '';
+    cod_servicio.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -20,11 +27,15 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.nombre_ciudad}</td>
+                            <td>${linea.num_reservacion}</td>
+                            <td>${linea.fecha_reservacion}</td>
+                            <td>${linea.cedula_cliente}</td>
+                            <td>${linea.cod_servicio}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
     contenedor.innerHTML = resultados;
+    console.log(resultados);
     
 };
 
@@ -39,7 +50,6 @@ const on = (element, event, selector, handler) => {
 on(document, 'click','.btnBorrar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     const idaux = fila.firstElementChild.innerHTML;
-    console.log('BORRANDO '+ idaux);
     alertify.confirm("This is a confirm dialog.",
     function(){
         fetch(url+idaux, {
@@ -58,11 +68,17 @@ on(document, 'click','.btnBorrar', (e)=>{
 let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
-
+    
     idForm = fila.children[0].innerHTML;
-    console.log(idForm);
-    nombre_ciudad.value = idForm;
+    const fecha_reservacionForm = fila.children[1].innerHTML;
+    const cedula_clienteForm = fila.children[2].innerHTML;
+    const cod_servicioForm = fila.children[3].innerHTML;
 
+    num_reservacion.value = idForm;
+    fecha_reservacion.value = fecha_reservacionForm;
+    cedula_cliente.value = cedula_clienteForm;
+    cod_servicio.value = cod_servicioForm;
+    
     opcion = 'editar';
     modalLinea.show();
 });
@@ -71,11 +87,15 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+        console.log(idForm);
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
+                num_reservacion: num_reservacion.value,
+                fecha_reservacion: fecha_reservacion.value,
+                cedula_cliente: cedula_cliente.value,
+                cod_servicio: cod_servicio.value
             })
         })
         .then((response) => response.json())
@@ -83,12 +103,15 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log(idForm);
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
+                num_reservacion: num_reservacion.value,
+                fecha_reservacion: fecha_reservacion.value,
+                cedula_cliente: cedula_cliente.value,
+                cod_servicio: cod_servicio.value
            })
        })
        .then((response) => response.json())
@@ -97,7 +120,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });

@@ -1,16 +1,20 @@
-const url = 'http://localhost:3000/Ciudad/';
+const url = 'http://localhost:3000/FacturaProveedor/';
 const contenedor = document.querySelector('tbody');
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const nombre_ciudad= document.getElementById('nombre_ciudad');
+const cod_facturap= document.getElementById('cod_facturap');
+const fechafacturap= document.getElementById('fechafacturap');
+const ordencompra= document.getElementById('ordencompra');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    nombre_ciudad.value = '';
+    cod_facturap.value = '';
+    fechafacturap.value = '';
+    ordencompra.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -20,7 +24,9 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.nombre_ciudad}</td>
+                            <td>${linea.cod_facturap}</td>
+                            <td>${linea.fechafacturap}</td>
+                            <td>${linea.ordencompra}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -37,9 +43,10 @@ const on = (element, event, selector, handler) => {
 };
 //PROCEDIMIENTO PARA BORRAR EN LA BASE DE DATOS
 on(document, 'click','.btnBorrar', (e)=>{
+    console.log('Click en borrar');
     const fila = e.target.parentNode.parentNode;
     const idaux = fila.firstElementChild.innerHTML;
-    console.log('BORRANDO '+ idaux);
+    
     alertify.confirm("This is a confirm dialog.",
     function(){
         fetch(url+idaux, {
@@ -56,12 +63,17 @@ on(document, 'click','.btnBorrar', (e)=>{
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
 let idForm;
+
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
-
+    
     idForm = fila.children[0].innerHTML;
-    console.log(idForm);
-    nombre_ciudad.value = idForm;
+    const fechafacturapForm = fila.children[1].innerHTML;
+    const ordencompraForm = fila.children[2].innerHTML;
+
+    cod_facturap.value = idForm;
+    fechafacturap.value = fechafacturapForm;
+    ordencompra.value = ordencompraForm;
 
     opcion = 'editar';
     modalLinea.show();
@@ -70,12 +82,16 @@ on(document, 'click','.btnEditar', (e)=>{
 //PROCEDIMIENTO PARA GUARDAR O EDITAR DATOS DE LA BASE DE DATOS
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
+
     if(opcion=='editar'){
+ 
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
+                cod_facturap: cod_facturap.value,
+                fechafacturap: fechafacturap.value,
+                ordencompra: ordencompra.value
             })
         })
         .then((response) => response.json())
@@ -83,13 +99,15 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log(idForm);
+     
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                nombre_ciudad: nombre_ciudad.value
-           })
+                cod_facturap: cod_facturap.value,
+                fechafacturap: fechafacturap.value,
+                ordencompra: ordencompra.value
+            })
        })
        .then((response) => response.json())
        .then((data )=>{
@@ -100,6 +118,7 @@ formLinea.addEventListener('submit', (e)=>{
        .then((response) => location.reload())
     }
     modalLinea.hide();
+    console.log('Creación de Actividad exitosa!');
 });
 
 fetch (url)

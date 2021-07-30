@@ -74,7 +74,7 @@ on(document, 'click','.btnBorrar', (e)=>{
 });//FIN DE FUNCION ON(); PARA BORRADO DE LINEA
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
-let idForm = 0;
+let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     
@@ -102,6 +102,7 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+        console.log(idForm);
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
@@ -120,6 +121,7 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
@@ -139,7 +141,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });
