@@ -97,49 +97,41 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion de las Personas Asociadas a un Proveedor</h4>
+						<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
-								<div class="card-body">
+								<div class="modal-body">
+									<form id="form">
+										<div class="mb-3">
+											<label for="cedula" class="col-form-label">Cedula</label>
+											<input id="cedula" type="text" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="nombre" class="col-form-label">Nombre</label>
+											<input id="nombre" type="text" class="form-control">
+										</div>
 								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+								</div>
+							</form>
 							</div>
 						</div>
+					</div><!-- FIN DELMODAL -->
 					</div>
 				</div>
 			</div>
         </section>
     </section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="Cedula" class="col-form-label">Cedula</label>
-							<input id="Cedula" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="Nombre" class="col-form-label">Nombre</label>
-							<input id="Nombre" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
     <!-- Fin Page Content -->
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 	<!--JQUERY-->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
