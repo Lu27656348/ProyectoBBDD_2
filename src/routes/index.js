@@ -22,13 +22,36 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getContiene, getContieneByCod, postContiene, deleteContieneByCod, updateContieneByCod,
         getFacturaServicio, getFacturaServicioByCod, postFacturaServicio, deleteFacturaServicioByCod, updateFacturaServicioByCod,
         getFacturaProveedor, getFacturaProveedorByCod, postFacturaProveedor, deleteFacturaProveedorByCod, updateFacturaProveedorByCod,
-        getAsignado, getAsignadoByCod, postAsignado, deleteAsignadoByCod, updateAsignadoByCod} = require('../controllers/index.controller');
+        getAsignado, getAsignadoByCod, postAsignado, deleteAsignadoByCod, updateAsignadoByCod,
+        getAjusteProducto, getAjusteProductoByCod, postAjusteProducto, deleteAjusteProductoByCod, updateAjusteProductoByCod,
+        getMarcaVehiculo, getMarcaVehiculoByCod, postMarcaVehiculo, deleteMarcaVehiculoByCod, updateMarcaVehiculoByCod,
+        getDetalleOrden, getDetalleOrdenByCod, postDetalleOrden, deleteDetalleOrdenByCod, updateDetalleOrdenByCod,
+        getNecesita, getNecesitaByCod, postNecesita, deleteNecesitaByCod, updateNecesitaByCod} = require('../controllers/index.controller');
+
+
+router.get('/Necesita', getNecesita);
+router.get('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getNecesitaByCod);
+router.post('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', postNecesita);
+router.delete('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', deleteNecesitaByCod);
+router.put('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', updateNecesitaByCod);
+
+router.get('/MarcaVehiculo', getMarcaVehiculo);
+router.get('/MarcaVehiculo/:nombremarca', getMarcaVehiculoByCod);
+router.post('/MarcaVehiculo', postMarcaVehiculo);
+router.delete('/MarcaVehiculo/:nombremarca', deleteMarcaVehiculoByCod);
+router.put('/MarcaVehiculo/:nombremarca', updateMarcaVehiculoByCod);
 
 router.get('/Servicio', getServicio);
 router.get('/Servicio/:cod_servicio', getServicioByCod);
 router.post('/Servicio', postServicio);
 router.delete('/Servicio/:cod_servicio', deleteServicioByCod);
 router.put('/Servicio/:cod_servicio', updateServicioByCod);
+
+router.get('/AjusteProducto', getAjusteProducto);
+router.get('/AjusteProducto/:cod_producto', getAjusteProductoByCod);
+router.post('/AjusteProducto', postAjusteProducto);
+router.delete('/AjusteProducto/:cod_producto', deleteAjusteProductoByCod);
+router.put('/AjusteProducto/:cod_producto', updateAjusteProductoByCod);
 
 router.get('/Asignado', getAsignado);
 router.get('/Personal/:cedula_personal/Servicio/:cod_servicio', getAsignadoByCod);
