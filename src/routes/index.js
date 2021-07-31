@@ -21,13 +21,20 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getConsume, getConsumeByCod, postConsume, deleteConsumeByCod, updateConsumeByCod, 
         getContiene, getContieneByCod, postContiene, deleteContieneByCod, updateContieneByCod,
         getFacturaServicio, getFacturaServicioByCod, postFacturaServicio, deleteFacturaServicioByCod, updateFacturaServicioByCod,
-        getFacturaProveedor, getFacturaProveedorByCod, postFacturaProveedor, deleteFacturaProveedorByCod, updateFacturaProveedorByCod} = require('../controllers/index.controller');
+        getFacturaProveedor, getFacturaProveedorByCod, postFacturaProveedor, deleteFacturaProveedorByCod, updateFacturaProveedorByCod,
+        getAsignado, getAsignadoByCod, postAsignado, deleteAsignadoByCod, updateAsignadoByCod} = require('../controllers/index.controller');
 
 router.get('/Servicio', getServicio);
 router.get('/Servicio/:cod_servicio', getServicioByCod);
 router.post('/Servicio', postServicio);
 router.delete('/Servicio/:cod_servicio', deleteServicioByCod);
 router.put('/Servicio/:cod_servicio', updateServicioByCod);
+
+router.get('/Asignado', getAsignado);
+router.get('/Personal/:cedula_personal/Servicio/:cod_servicio', getAsignadoByCod);
+router.post('/Personal/:cedula_personal/Servicio/:cod_servicio', postAsignado);
+router.delete('/Personal/:cedula_personal/Servicio/:cod_servicio', deleteAsignadoByCod);
+router.put('/Personal/:cedula_personal/Servicio/:cod_servicio', updateAsignadoByCod);
 
 router.get('/FacturaProveedor', getFacturaProveedor);
 router.get('/FacturaProveedor/:cod_facturap', getFacturaProveedorByCod);

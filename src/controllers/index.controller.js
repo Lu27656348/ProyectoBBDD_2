@@ -293,6 +293,7 @@ const updatePersonalByCod = async (req,res) => {
     const response = await pool.query('UPDATE PERSONAL SET cedulaper = $1, nombreper = $2, sueldo = $3, telefonoper = $4 WHERE cedulaper = $5', [ cedulaper, nombreper, sueldo, telefonoper, codlineaaux]);
     res.json(response.rows);
 };
+
 const getPago = async (req,res) => {
     const response = await pool.query('SELECT * FROM PAGO');
     res.json(response.rows);
@@ -544,7 +545,7 @@ const updateFacturaServicioByCod = async (req,res) => {
     const response = await pool.query('UPDATE FACTURASERVICIO SET cod_facturas = $1, montototal = $2, ficha = $3 WHERE cod_facturas = $4', [ cod_facturas, montototal, ficha, codlineaaux]);
     res.json(response.rows);
 };
-/*NO FUNCIONALES*/
+
 const getFacturaProveedor= async (req,res) => {
     const response = await pool.query('SELECT * FROM FACTURAPROVEEDOR');
     res.json(response.rows);
@@ -570,7 +571,62 @@ const updateFacturaProveedorByCod = async (req,res) => {
     const response = await pool.query('UPDATE FACTURAPROVEEDOR SET cod_facturap = $1, fechafacturap = $2, ordencompra = $3 WHERE cod_facturap = $4', [ cod_facturap, fechafacturap, ordencompra, codlineaaux]);
     res.json(response.rows);
 };
+/*NO FUNCIONALES*/
 
+const getAjusteProducto= async (req,res) => {
+    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO');
+    res.json(response.rows);
+};
+const postAjusteProducto = async (req,res) => {
+    const {  } = req.body;
+    const response = await pool.query('INSERT INTO AJUSTEPRODUCTO (  cod_facturap, fechafacturap, ordencompra  ) VALUES ($1,$2,$3)',[ cod_facturap, fechafacturap, ordencompra ]);
+    res.json(response.rows);
+};
+const getAjusteProductoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturap;
+    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const deleteAjusteProductoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturap;
+    const response = await pool.query('DELETE FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const updateAjusteProductoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturap;
+    const { cod_facturap, fechafacturap, ordencompra } = req.body;
+    const response = await pool.query('UPDATE AJUSTEPRODUCTO SET cod_facturap = $1, fechafacturap = $2, ordencompra = $3 WHERE cod_facturap = $4', [ cod_facturap, fechafacturap, ordencompra, codlineaaux]);
+    res.json(response.rows);
+};
+
+const getAsignado= async (req,res) => {
+    const response = await pool.query('SELECT * FROM ASIGNADO');
+    res.json(response.rows);
+};
+const postAsignado = async (req,res) => {
+    const { cedula_personal, cod_servicio } = req.body;
+    const response = await pool.query('INSERT INTO ASIGNADO (  cedula_personal, cod_servicio  ) VALUES ($1,$2)',[ cedula_personal, cod_servicio ]);
+    res.json(response.rows);
+};
+const getAsignadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedula_personal;
+    const codlineaauxx = req.params.cod_servicio;
+    const response = await pool.query('SELECT * FROM ASIGNADO WHERE cedula_personal = $1 AND cod_servicio = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const deleteAsignadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedula_personal;
+    const codlineaauxx = req.params.cod_servicio;
+    const response = await pool.query('DELETE FROM ASIGNADO WHERE cod_facturap = $1 AND ', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const updateAsignadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedula_personal;
+    const codlineaauxx = req.params.cod_servicio;
+    const { cedula_personal, cod_servicio } = req.body;
+    const response = await pool.query('UPDATE ASIGNADO SET cedula_personal = $1, cod_servicio = $2 WHERE cedula_personal = $3 AND cod_servicio = $4', [ cedula_personal, cod_servicio, codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
 module.exports = {
 
     getOfrece,
@@ -578,6 +634,12 @@ module.exports = {
     getOfreceByCod,
     deleteOfreceByCod,
     updateOfreceByCod,
+
+    getAsignado,
+    postAsignado,
+    getAsignadoByCod,
+    deleteAsignadoByCod,
+    updateAsignadoByCod,
 
     getFacturaProveedor,
     postFacturaProveedor,

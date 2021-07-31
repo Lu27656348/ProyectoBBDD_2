@@ -7,6 +7,8 @@
 }
 
 body{
+    height: 100%;
+    width: 100%;
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -17,40 +19,64 @@ body{
 }
 .header{
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     flex-direction: column;
     overflow-x: hidden;
+    overflow-y: hidden;
     background: #2b1055;
     text-shadow: #111110 -5px 5px 5px;
-    height: 45.2em;
+    /* height: 45.2em; */
+    height: 100%;
 }
 .header__logo {
+    /* margin-bottom: 0px; */
     padding: 30px;
-    font-size: 40px;
     color: #edeaf1;
     display: flex;
     justify-content: center;
+    font-size: 40px;
+    text-shadow: #111110 -5px 5px 10px;
+    border-bottom: 2px solid #edeaf1;
 }
 .header__nav{
     position: relative;
-    height: 100%;
+    height: 75%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
+    /* border-top: 2px solid #edeaf1; */
+    padding-top: 10px;
     padding-left: 20px;
     list-style: none;
     text-decoration: none;
-    /* overflow:unset; */
+    overflow:scroll;
+    overflow-x: hidden;
+    overflow-y:auto;
 }
-/* .header__nav li{
+.header__nav::-webkit-scrollbar{
+    width: 8px;
+    margin-right: 5px;
+}
+.header__nav::-webkit-scrollbar-thumb{
+    background: #edeaf1;
+    border-radius: 4px;
+    border-right: 5px solid #2b1055;
+    /* margin-right: 10px; */
+}
+.header__nav::-webkit-scrollbar-thumb:active {
+    background-color: #d6d3da;
+  }
+
+
+.header__nav li{
     margin-right: 10px;
-    /*padding: 15px; 
-} */
+    padding: 15px; 
+}
 .header__nav li a{
     text-decoration: none;
     margin: 0;
     padding: 6px 15px;
-    color: #FFF;  
+    color: #edeaf1;  
     border-radius: 50px;
 }
 /* .header__nav li:first-child{
@@ -68,21 +94,36 @@ body{
     color: #2b1055;
     text-shadow: none;
 }
+.header p{
+    margin: 0px;
+    padding: 0% 20%;
+    padding-top: 20px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    color: #edeaf1;
+    border-top: 2px solid #edeaf1;
+    background: linear-gradient(#220d4405,#090313);
+    display: flex;
+    flex-wrap: wrap;
+    /* text-decoration: underline; */
+    text-align-last: center;
+}
 .main{
     display: flex;
-    color: #FFF;
+    /* color: #FFF; */
     flex-direction: column;
-    width: 1300px
+    width: 100%;
+    background: #edeaf1;
 }
 
 .main__barraSuperior{
     background: #111110;
-    height: 5em;
+    /* height: 5em; */
 }
 .main__barraSuperior input{
     margin: 20px;
     padding: 5px;
-    width: 300px;
+    width: 40%;
 }
 .main__content{
     display: flex;
@@ -92,5 +133,3 @@ body{
     overflow-y: visible;
     margin: 10px;
 }
-
-

@@ -17,98 +17,154 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet" href="../css/maquetado_base.css">
   </head>
   <body>
-    <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
-        <button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
-        <table id="tablaLinea" class="table mt-2 table-bordered table-striped">
-            <thead>
-                <tr class="text-center">
-                    <th>cod_producto</th>
-                    <th>nombrep</th>
-                    <th>maximo</th>
-                    <th>minimo</th>
-                    <th>descripcionp</th>
-                    <th>fabricante</th>
-                    <th>precio</th>
-                    <th>existencia</th>
-                    <th>ecologico</th>
-                    <th>cod_linea</th>
-                    <th>rif_proveedor</th>
-                    <th>ACCIONES</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
-        <div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">PRODUCTO</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Sidebar -->
+    <header class="header">
+        <div class="header__logo">
+            <h1 class="header__logo--Texto">M & M</h1>
+        </div>
+        <ul class="header__nav"> <!-- ion-md-apps -->
+            <li ><a id="DashBoard" href="Dashboard.html">DashBoard</a></li>
+            <li ><a id="login" href="Login.html">Login</a></li>
+            <li ><a id="personal" href="Personal.html">Personal</a></li>
+            <li ><a id="local" href="Local.html">Local</a></li>
+            <li ><a id="actual" href="Productos.html">Productos</a></li>
+            <li ><a id="proveedores" href="Proveedores2.html">Proveedores</a></li>
+            <li ><a id="personaasociada" href="personaAsociada.html">Persona Asociada a Proveedor</a></li>
+            <li ><a id="cliente" href="cliente.html">Cliente</a></li>
+            <li ><a id="finanzas" href="#">Finanzas</a></li>
+            <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
+            <li ><a id="vehiculos" href="vehiculo.html">Vehiculos</a></li>
+            <li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
+            <li ><a id="lineasuministro" href="lineasuministro.html">Linea de Suministro</a</li>
+            <li ><a id="fichaservicio" href="fichaservicio.html">Ficha de Servicio</a</li>
+            <li ><a id="Autorizado" href="autorizado.html">Autorizado</a</li>
+            <li ><a id="reservacion" href="Reservacion.html">Reservacion</a</li>
+            <li ><a id="ciudad" href="ciudad.html">Ciudad</a></li>
+            <li ><a id="OrdenCompra" href="ordencompra.html">Orden de Compra</a</li>
+            <li ><a id="facturaproveedor" href="facturaproveedor.html">Factura de Proveedor</a</li>
+            <li ><a id="facturaservicio" href="facturaservicio.html">Factura de Servicio</a</li>
+            <li ><a id="actividades" href="actividad.html">Actividades</a</li>
+            <li ><a id="ajusteproducto" href="ajusteproducto.html">Ajuste Producto</a</li>
+            <li ><a id="mantenimiento" href="mantenimiento.html">Mantenimiento</a</li>
+            <li ><a id="mecanico" href="mecanico.html">Mecanico</a</li>
+            <li ><a id="detalleorden" href="detalleorden.html">Detalle de Orden</a</li>
+            <li ><a id="compraproducto" href="compraproducto.html">Compra Producto</a</li>
+            <li ><a id="Pago" href="pago.html">Pago</a</li>
+            <li ><a id="Ofrece" href="ofrece.html">Ofrece</a</li>
+            <li ><a id="Asignado" href="asignado.html">Asignado</a</li>
+            <li ><a id="Contiene" href="contiene.html">Contiene</a</li>
+            <li ><a id="Necesita" href="necesita.html">Necesita</a</li>
+            <li ><a id="Consume" href="consume.html">Consume</a</li>
+            <li ><a id="salir" href="https://www.google.com/">Salir</a></li>
+        </ul>
+        <p><i>Cuando la calidad de<br/>
+              vida cae para el<br/>
+              ambiente, cae para el <br/>
+              humano</i></p>
+    </header>
+    <!-- Fin sidebar -->
+    <!-- Page Content -->
+    <section class="main">
+        <section class="main__barraSuperior">
+            <img src="" alt="">
+            <input type="search" name="" id="" placeholder="Buscar Personal">
+        </section>
+        <section class="main__content">
+            <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+                <button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
+                <table id="tablaLinea" class="table mt-2 table-bordered table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>cod_producto</th>
+                            <th>nombrep</th>
+                            <th>maximo</th>
+                            <th>minimo</th>
+                            <th>descripcionp</th>
+                            <th>fabricante</th>
+                            <th>precio</th>
+                            <th>existencia</th>
+                            <th>ecologico</th>
+                            <th>cod_linea</th>
+                            <th>rif_proveedor</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+        
+                <div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">PRODUCTO</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form">
+                                    <div class="mb-3">
+                                        <label for="cod_producto" class="col-form-label">cod_producto</label>
+                                        <input id="cod_producto" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nombrep" class="col-form-label">nombrep</label>
+                                        <input id="nombrep" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="maximo" class="col-form-label">maximo</label>
+                                        <input id="maximo" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="minimo" class="col-form-label">minimo</label>
+                                        <input id="minimo" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcionp" class="col-form-label">descripcionp</label>
+                                        <input id="descripcionp" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fabricante" class="col-form-label">fabricante</label>
+                                        <input id="fabricante" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="precio" class="col-form-label">precio</label>
+                                        <input id="precio" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="existencia" class="col-form-label">existencia</label>
+                                        <input id="existencia" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ecologico" class="col-form-label">ecologico</label>
+                                        <input id="ecologico" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cod_linea" class="col-form-label">cod_linea</label>
+                                        <input id="cod_linea" type="number" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="rif_proveedor" class="col-form-label">rif_proveedor</label>
+                                        <input id="rif_proveedor" type="text" class="form-control">
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            </div>
+                        </form>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form id="form">
-                            <div class="mb-3">
-                                <label for="cod_producto" class="col-form-label">cod_producto</label>
-                                <input id="cod_producto" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="nombrep" class="col-form-label">nombrep</label>
-                                <input id="nombrep" type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="maximo" class="col-form-label">maximo</label>
-                                <input id="maximo" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="minimo" class="col-form-label">minimo</label>
-                                <input id="minimo" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="descripcionp" class="col-form-label">descripcionp</label>
-                                <input id="descripcionp" type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fabricante" class="col-form-label">fabricante</label>
-                                <input id="fabricante" type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="precio" class="col-form-label">precio</label>
-                                <input id="precio" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="existencia" class="col-form-label">existencia</label>
-                                <input id="existencia" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="ecologico" class="col-form-label">ecologico</label>
-                                <input id="ecologico" type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="cod_linea" class="col-form-label">cod_linea</label>
-                                <input id="cod_linea" type="number" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="rif_proveedor" class="col-form-label">rif_proveedor</label>
-                                <input id="rif_proveedor" type="text" class="form-control">
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">GUARDAR</button>
-                    </div>
-                </form>
-                </div>
+                </div><!-- FIN DELMODAL -->
             </div>
-        </div><!-- FIN DELMODAL -->
+        </section>
+    </section>
+    <!-- Fin Page Content -->
 
 
-
-
-    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
