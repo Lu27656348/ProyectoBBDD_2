@@ -89,6 +89,8 @@
 												<th scope="col">#</th>
 												<th scope="col">Cedula_Personal</th>
 												<th scope="col">Cod_Servicio</th>
+												<th scope="col">Cantidad</th>
+												<th scope="col">Precio</th>
 												<th></th>
 											</tr>
 											</thead>
@@ -97,46 +99,53 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion del Contiene</h4>
-								</div>
-								<div class="card-body">
-								</div>
+						<div class="mt-4 text-center">
+								¿Desea volver al menú de inicio?
+							</div>
+							
+							<div class="form-group m-0">
+								<a href="Dashboard.html"  class="btn btn-primary btn-sm" role="button">
+									Volver a menú
+								</a>
 							</div>
 						</div>
+					<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">CONTIENE</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="form">
+									<div class="mb-3">
+										<label for="cod_orden" class="col-form-label">Cod_Orden</label>
+										<input id="cod_orden" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cod_producto" class="col-form-label">Cod_Producto</label>
+										<input id="cod_producto" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cantidad" class="col-form-label">Cantidad</label>
+										<input id="cantidad" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="precio" class="col-form-label">Precio</label>
+										<input id="precio" type="number" class="form-control">
+									</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">GUARDAR</button>
+							</div>
+						</form>
+						</div>
 					</div>
-				</div>
+				</div><!-- FIN DELMODAL -->
 			</div>
         </section>
     </section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">CONTIENE</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="Cedula_Personal" class="col-form-label">Cedula_Personal</label>
-							<input id="Cedula_Personal" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="Cod_Servicio" class="col-form-label">Cod_Servicio</label>
-							<input id="Cod_Servicio" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
     <!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

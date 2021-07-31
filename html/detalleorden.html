@@ -89,7 +89,10 @@
 												<th scope="col">#</th>
 												<th scope="col">Nro_Consecutivo</th>
 												<th scope="col">Cod_Servicio</th>
-												<th scope="col">CostoManoObra</th>
+												<th scope="col">Nombre</th>
+												<th scope="col">Descripcion</th>
+												<th scope="col">Cantidad</th>
+												<th scope="col">Costo</th>
 												<th></th>
 											</tr>
 											</thead>
@@ -98,50 +101,61 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion de Detalle de Orden</h4>
-								</div>
-								<div class="card-body">
-								</div>
+						<div class="mt-4 text-center">
+								¿Desea volver al menú de inicio?
+							</div>
+							
+							<div class="form-group m-0">
+								<a href="Dashboard.html"  class="btn btn-primary btn-sm" role="button">
+									Volver a menú
+								</a>
 							</div>
 						</div>
+					<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">DETALLEORDEN</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="form">
+									<div class="mb-3">
+										<label for="nro_consecutivo" class="col-form-label">Nro_Consecutivo</label>
+										<input id="nro_consecutivo" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cod_servicio" class="col-form-label">Cod_Servicio</label>
+										<input id="cod_servicio" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="nombre" class="col-form-label">Nombre</label>
+										<input id="nombre" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="descripcion" class="col-form-label">Descripcion</label>
+										<input id="descripcion" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cantidad" class="col-form-label">Cantidad</label>
+										<input id="cantidad" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="costo" class="col-form-label">Costo</label>
+										<input id="costo" type="number" class="form-control">
+									</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">GUARDAR</button>
+							</div>
+						</form>
+						</div>
 					</div>
-				</div>
+				</div><!-- FIN DELMODAL -->
 			</div>
         </section>
     </section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">DETALLEORDEN</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="Nro_Consecutivo" class="col-form-label">Nro_Consecutivo</label>
-							<input id="Nro_Consecutivo" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="Cod_Servicio" class="col-form-label">Cod_Servicio</label>
-							<input id="Cod_Servicio" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="CostoManoObra" class="col-form-label">CostoManoObra</label>
-							<input id="CostoManoObra" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
     <!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

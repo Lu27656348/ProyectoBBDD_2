@@ -107,50 +107,39 @@
 								</a>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion del Factura de Proveedor</h4>
-								</div>
-								<div class="card-body">
-								</div>
+					<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">FACTURAPTOVEEDOR</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
+							<div class="modal-body">
+								<form id="form">
+									<div class="mb-3">
+										<label for="cod_facturap" class="col-form-label">Cod_FacturaP</label>
+										<input id="cod_facturap" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="fechafacturap" class="col-form-label">FechaFacturaP</label>
+										<input id="fechafacturap" type="date" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="ordencompra" class="col-form-label">OrdenCompra</label>
+										<input id="ordencompra" type="text" class="form-control">
+									</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">GUARDAR</button>
+							</div>
+						</form>
 						</div>
 					</div>
-				</div>
+				</div><!-- FIN DELMODAL -->
 			</div>
         </section>
     </section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">FACTURAPTOVEEDOR</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="Cod_FacturaP" class="col-form-label">Cod_FacturaP</label>
-							<input id="Cod_FacturaP" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="FechaFacturaP" class="col-form-label">FechaFacturaP</label>
-							<input id="FechaFacturaP" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="OrdenCompra" class="col-form-label">OrdenCompra</label>
-							<input id="OrdenCompra" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
     <!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

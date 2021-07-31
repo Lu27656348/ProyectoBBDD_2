@@ -100,58 +100,59 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion del Pago</h4>
-								</div>
-								<div class="card-body">
-								</div>
+						<div class="mt-4 text-center">
+								¿Desea volver al menú de inicio?
+							</div>
+							
+							<div class="form-group m-0">
+								<a href="Dashboard.html"  class="btn btn-primary btn-sm" role="button">
+									Volver a menú
+								</a>
 							</div>
 						</div>
+						<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form id="form">
+										<div class="mb-3">
+											<label for="cedula_cliente" class="col-form-label">Cedula_Cliente</label>
+											<input id="cedula_cliente" type="number" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="monto" class="col-form-label">Monto</label>
+											<input id="monto" type="number" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="fechapago" class="col-form-label">FechaPago</label>
+											<input id="fechapago" type="date" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="banco" class="col-form-label">Banco</label>
+											<input id="banco" type="text" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="numerot" class="col-form-label">NumeroT</label>
+											<input id="numerot" type="number" class="form-control">
+										</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div><!-- FIN DELMODAL -->
 					</div>
 				</div>
 			</div>
         </section>
     </section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="Cedula_Cliente" class="col-form-label">Cedula_Cliente</label>
-							<input id="Cedula_Cliente" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="Monto" class="col-form-label">Monto</label>
-							<input id="Monto" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="FechaPago" class="col-form-label">FechaPago</label>
-							<input id="FechaPago" type="text" class="form-control">
-						</div>
-                        <div class="mb-3">
-							<label for="Banco" class="col-form-label">Banco</label>
-							<input id="Banco" type="text" class="form-control">
-						</div>
-                        <div class="mb-3">
-							<label for="NumeroT" class="col-form-label">NumeroT</label>
-							<input id="NumeroT" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
     <!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

@@ -102,66 +102,55 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="form1" role="tabpanel" aria-labelledby="form-tab">
-							<div class="card">
-								<div class="card-header">
-									<h4>Informacion del proveedor</h4>
-								</div>
-								<div class="card-body">
-								</div>
+				<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">PROVEEDORES</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
+							<div class="modal-body">
+								<form id="form">
+									<div class="mb-3">
+										<label for="rif_proveedor" class="col-form-label">rif_proveedor</label>
+										<input id="rif_proveedor" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="direccion" class="col-form-label">direccion</label>
+										<input id="direccion" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="razonsocial" class="col-form-label">razonsocial</label>
+										<input id="razonsocial" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="telefono" class="col-form-label">telefono</label>
+										<input id="telefono" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="celular" class="col-form-label">celular</label>
+										<input id="celular" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="nombre" class="col-form-label">nombre</label>
+										<input id="nombre" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cedula" class="col-form-label">cedula</label>
+										<input id="cedula" type="text" class="form-control">
+									</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">GUARDAR</button>
+							</div>
+						</form>
 						</div>
 					</div>
-				</div>
+				</div><!-- FIN DELMODAL -->
 			</div>
 		</section>
 	</section>
-	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">PROVEEDORES</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="form">
-						<div class="mb-3">
-							<label for="rif_proveedor" class="col-form-label">rif_proveedor</label>
-							<input id="rif_proveedor" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="direccion" class="col-form-label">direccion</label>
-							<input id="direccion" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="razonsocial" class="col-form-label">razonsocial</label>
-							<input id="razonsocial" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="telefono" class="col-form-label">telefono</label>
-							<input id="telefono" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="celular" class="col-form-label">celular</label>
-							<input id="celular" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="nombre" class="col-form-label">nombre</label>
-							<input id="nombre" type="text" class="form-control">
-						</div>
-						<div class="mb-3">
-							<label for="cedula" class="col-form-label">cedula</label>
-							<input id="cedula" type="text" class="form-control">
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">GUARDAR</button>
-				</div>
-			</form>
-			</div>
-		</div>
-	</div><!-- FIN DELMODAL -->
 	<!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
