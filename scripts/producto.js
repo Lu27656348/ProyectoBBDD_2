@@ -65,8 +65,6 @@ const on = (element, event, selector, handler) => {
         }
     });
 };
-
-
 //PROCEDIMIENTO PARA BORRAR EN LA BASE DE DATOS
 on(document, 'click','.btnBorrar', (e)=>{
     const fila = e.target.parentNode.parentNode;

@@ -1,20 +1,28 @@
-const url = 'http://localhost:3000/AjusteProducto/';
+const url = 'http://localhost:3000/Locales/';
 const contenedor = document.querySelector('tbody');
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cod_producto = document.getElementById('cod_producto');
-const cantidad = document.getElementById('cantidad');
-const fechaajuste = document.getElementById('fechaajuste');
+const riflocal= document.getElementById('riflocal');
+const nombre= document.getElementById('nombre');
+const direccion= document.getElementById('direccion');
+const fechainventario= document.getElementById('fechainventario');
+const fecha_encargado= document.getElementById('fecha_encargado');
+const encargado= document.getElementById('encargado');
+const nombre_ciudad= document.getElementById('nombre_ciudad');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cod_producto.value = '';
-    cantidad.value = '';
-    fechaajuste.value = '';
+    riflocal.value = '';
+    nombre.value = '';
+    direccion.value = '';
+    fechainventario.value = '';
+    fecha_encargado.value = '';
+    encargado.value = '';
+    nombre_ciudad.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -24,9 +32,13 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cod_producto}</td>
-                            <td>${linea.cantidad}</td>
-                            <td>${linea.fechaajuste}</td>
+                            <td>${linea.riflocal}</td>
+                            <td>${linea.nombre}</td>
+                            <td>${linea.direccion}</td>
+                            <td>${linea.fechainventario}</td>
+                            <td>${linea.fecha_encargado}</td>
+                            <td>${linea.encargado}</td>
+                            <td>${linea.nombre_ciudad}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -60,22 +72,26 @@ on(document, 'click','.btnBorrar', (e)=>{
 });//FIN DE FUNCION ON(); PARA BORRADO DE LINEA
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
-let idForm = 0;
+let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
-    
-    idForm = fila.children[0].innerHTML;
-    const cantidadForm = fila.children[1].innerHTML;
-    const fechaajusteForm = fila.children[2].innerHTML;
 
-    const cod_producto = idForm;
-    const cantidad = cantidadForm;
-    const fechaajuste = fechaajusteForm;
-   
-    cod_producto.value = idForm;
-    cantidad.value = cantidad;
-    fechaajuste.value = fechaajuste;
+    idForm = fila.children[0].innerHTML;
+    const nombreForm = fila.children[1].innerHTML;
+    const direccionForm = fila.children[2].innerHTML;
+    const fechainventarioForm = fila.children[3].innerHTML;
+    const fecha_encargadoForm = fila.children[4].innerHTML;
+    const encargadoForm = fila.children[5].innerHTML;
+    const nombre_ciudadForm = fila.children[6].innerHTML;
     
+    riflocal.value = idForm;
+    nombre.value = nombreForm;
+    direccion.value = direccionForm;
+    fechainventario.value = fechainventarioForm;
+    fecha_encargado.value = fecha_encargadoForm;
+    encargado.value = encargadoForm;
+    nombre_ciudad.value = nombre_ciudadForm;
+
     opcion = 'editar';
     modalLinea.show();
 });
@@ -88,9 +104,13 @@ formLinea.addEventListener('submit', (e)=>{
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                riflocal: riflocal.value,
+                nombre: nombre.value,
+                direccion: direccion.value,
+                fechainventario: fechainventario.value,
+                fecha_encargado: fecha_encargado.value,
+                encargado: encargado.value,
+                nombre_ciudad: nombre_ciudad.value
             })
         })
         .then((response) => response.json())
@@ -98,13 +118,18 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
+       console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                riflocal: riflocal.value,
+                nombre: nombre.value,
+                direccion: direccion.value,
+                fechainventario: fechainventario.value,
+                fecha_encargado: fecha_encargado.value,
+                encargado: encargado.value,
+                nombre_ciudad: nombre_ciudad.value
            })
        })
        .then((response) => response.json())

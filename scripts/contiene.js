@@ -1,5 +1,5 @@
-const url = 'http://localhost:3000/Actividad/';
-const urlaux = 'http://localhost:3000/Servicio/';
+const url = 'http://localhost:3000/Contiene/';
+const urlaux = 'http://localhost:3000/OrdenServicio/';
 const conector = '/';
 const contenedor = document.querySelector('tbody');
 let resultados = '';
@@ -7,22 +7,18 @@ let resultados = '';
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const nro_consecutivo= document.getElementById('nro_consecutivo');
-const cod_servicio= document.getElementById('cod_servicio');
-const nombre= document.getElementById('nombre');
-const descripcion= document.getElementById('descripcion');
-const capacidad= document.getElementById('capacidad');
-const costo= document.getElementById('costo');
+const cod_orden= document.getElementById('cod_orden');
+const cod_producto= document.getElementById('cod_producto');
+const cantidad= document.getElementById('cantidad');
+const precio= document.getElementById('precio');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    nro_consecutivo.value = '';
-    cod_servicio.value = '';
-    nombre.value = '';
-    descripcion.value = '';
-    capacidad.value = '';
-    costo.value = '';
+    cod_orden.value = '';
+    cod_producto.value = '';
+    cantidad.value = '';
+    precio.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -32,12 +28,10 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.nro_consecutivo}</td>
-                            <td>${linea.cod_servicio}</td>
-                            <td>${linea.nombre}</td>
-                            <td>${linea.descripcion}</td>
-                            <td>${linea.capacidad}</td>
-                            <td>${linea.costo}</td>
+                            <td>${linea.cod_orden}</td>
+                            <td>${linea.cod_producto}</td>
+                            <td>${linea.cantidad}</td>
+                            <td>${linea.precio}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -67,7 +61,7 @@ on(document, 'click','.btnBorrar', (e)=>{
     //console.log('BORRANDO '+ idaux);
     alertify.confirm("This is a confirm dialog.",
     function(){
-        fetch(urlaux+idauxx+conector+'Actividad/'+idaux, {
+        fetch(urlaux+idaux+conector+'Producto/'+idauxx, {
             method: 'DELETE'
         })
         .then(  (response) => response.json() )
@@ -88,23 +82,13 @@ on(document, 'click','.btnEditar', (e)=>{
     
     idForm = fila.children[0].innerHTML;
     id2Form = fila.children[1].innerHTML;
+    const cantidadForm = fila.children[2].innerHTML;
+    const precioForm  = fila.children[3].innerHTML;
 
-    console.log('En editar en idForm tiene un valor de: ');
-    console.log(idForm);
-    console.log('En editar en id2Form tiene un valor de: ');
-    console.log(id2Form);
-
-    const nombreForm = fila.children[2].innerHTML;
-    const descripcionForm = fila.children[3].innerHTML;
-    const capacidadForm = fila.children[4].innerHTML;
-    const costoForm = fila.children[5].innerHTML;
-
-    nro_consecutivo.value = idForm;
-    cod_servicio.value = id2Form;
-    nombre.value = nombreForm;
-    descripcion.value = descripcionForm;
-    capacidad.value = capacidadForm;
-    costo.value = costoForm;
+    cod_orden.value = idForm;
+    cod_producto.value = id2Form;
+    cantidad.value = cantidadForm;
+    precio.value = precioForm;
 
     opcion = 'editar';
     modalLinea.show();
@@ -125,16 +109,14 @@ formLinea.addEventListener('submit', (e)=>{
         console.log('opcion == editar');
         console.log('edicion llevada en la ruta');
         console.log(url+idForm);
-        fetch(urlaux+id2Form+conector+'Actividad/'+idForm, {
+        fetch(urlaux+idForm+conector+'Producto/'+id2Form, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                nro_consecutivo: nro_consecutivo.value,
-                cod_servicio: cod_servicio.value,
-                nombre: nombre.value,
-                descripcion: descripcion.value,
-                capacidad: capacidad.value,
-                costo: costo.value
+                cod_orden: cod_orden.value,
+                cod_producto: cod_producto.value,
+                cantidad: cantidad.value,
+                precio: precio.value
             })
         })
         .then((response) => response.json())
@@ -142,19 +124,16 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log('opcion == crear');
-       console.log(urlaux+filacod+conector+'Actividad'+conector+filanro);
-       fetch(urlaux+filacod+conector+'Actividad'+conector+filanro, {
+      
+       fetch(urlaux+filanro+conector+'Producto'+conector+filacod, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                nro_consecutivo: filanro,
-                cod_servicio: filacod,
-                nombre: nombre.value,
-                descripcion: descripcion.value,
-                capacidad: capacidad.value,
-                costo: costo.value
-           })
+                cod_orden: cod_orden.value,
+                cod_producto: cod_producto.value,
+                cantidad: cantidad.value,
+                precio: precio.value
+            })
        })
        .then((response) => response.json())
        .then((data )=>{

@@ -1,20 +1,23 @@
-const url = 'http://localhost:3000/AjusteProducto/';
+const url = 'http://localhost:3000/Reservacion/';
 const contenedor = document.querySelector('tbody');
+console.log(contenedor);
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cod_producto = document.getElementById('cod_producto');
-const cantidad = document.getElementById('cantidad');
-const fechaajuste = document.getElementById('fechaajuste');
+const num_reservacion = document.getElementById('num_reservacion');
+const fecha_reservacion = document.getElementById('fecha_reservacion');
+const cedula_cliente = document.getElementById('cedula_cliente');
+const cod_servicio = document.getElementById('cod_servicio');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cod_producto.value = '';
-    cantidad.value = '';
-    fechaajuste.value = '';
+    num_reservacion.value = '';
+    fecha_reservacion.value = '';
+    cedula_cliente.value = '';
+    cod_servicio.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -24,13 +27,15 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cod_producto}</td>
-                            <td>${linea.cantidad}</td>
-                            <td>${linea.fechaajuste}</td>
+                            <td>${linea.num_reservacion}</td>
+                            <td>${linea.fecha_reservacion}</td>
+                            <td>${linea.cedula_cliente}</td>
+                            <td>${linea.cod_servicio}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
     contenedor.innerHTML = resultados;
+    console.log(resultados);
     
 };
 
@@ -60,21 +65,19 @@ on(document, 'click','.btnBorrar', (e)=>{
 });//FIN DE FUNCION ON(); PARA BORRADO DE LINEA
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
-let idForm = 0;
+let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     
     idForm = fila.children[0].innerHTML;
-    const cantidadForm = fila.children[1].innerHTML;
-    const fechaajusteForm = fila.children[2].innerHTML;
+    const fecha_reservacionForm = fila.children[1].innerHTML;
+    const cedula_clienteForm = fila.children[2].innerHTML;
+    const cod_servicioForm = fila.children[3].innerHTML;
 
-    const cod_producto = idForm;
-    const cantidad = cantidadForm;
-    const fechaajuste = fechaajusteForm;
-   
-    cod_producto.value = idForm;
-    cantidad.value = cantidad;
-    fechaajuste.value = fechaajuste;
+    num_reservacion.value = idForm;
+    fecha_reservacion.value = fecha_reservacionForm;
+    cedula_cliente.value = cedula_clienteForm;
+    cod_servicio.value = cod_servicioForm;
     
     opcion = 'editar';
     modalLinea.show();
@@ -84,13 +87,15 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+        console.log(idForm);
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                num_reservacion: num_reservacion.value,
+                fecha_reservacion: fecha_reservacion.value,
+                cedula_cliente: cedula_cliente.value,
+                cod_servicio: cod_servicio.value
             })
         })
         .then((response) => response.json())
@@ -98,13 +103,15 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                num_reservacion: num_reservacion.value,
+                fecha_reservacion: fecha_reservacion.value,
+                cedula_cliente: cedula_cliente.value,
+                cod_servicio: cod_servicio.value
            })
        })
        .then((response) => response.json())
@@ -113,7 +120,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });

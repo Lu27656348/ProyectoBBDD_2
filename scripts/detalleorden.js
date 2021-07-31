@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/Actividad/';
+const url = 'http://localhost:3000/DetalleOrden/';
 const urlaux = 'http://localhost:3000/Servicio/';
 const conector = '/';
 const contenedor = document.querySelector('tbody');

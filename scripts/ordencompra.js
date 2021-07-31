@@ -1,20 +1,21 @@
-const url = 'http://localhost:3000/AjusteProducto/';
+const url = 'http://localhost:3000/Ordencompra/';
 const contenedor = document.querySelector('tbody');
+console.log(contenedor);
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cod_producto = document.getElementById('cod_producto');
-const cantidad = document.getElementById('cantidad');
-const fechaajuste = document.getElementById('fechaajuste');
+const cod_orden = document.getElementById('cod_orden');
+const fechaorden = document.getElementById('fechaorden');
+const rif_proveedor = document.getElementById('rif_proveedor');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cod_producto.value = '';
-    cantidad.value = '';
-    fechaajuste.value = '';
+    cod_orden.value = '';
+    fechaorden.value = '';
+    rif_proveedor.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -24,13 +25,14 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cod_producto}</td>
-                            <td>${linea.cantidad}</td>
-                            <td>${linea.fechaajuste}</td>
+                            <td>${linea.cod_orden}</td>
+                            <td>${linea.fechaorden}</td>
+                            <td>${linea.rif_proveedor}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
     contenedor.innerHTML = resultados;
+    console.log(resultados);
     
 };
 
@@ -60,21 +62,17 @@ on(document, 'click','.btnBorrar', (e)=>{
 });//FIN DE FUNCION ON(); PARA BORRADO DE LINEA
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
-let idForm = 0;
+let idForm;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     
     idForm = fila.children[0].innerHTML;
-    const cantidadForm = fila.children[1].innerHTML;
-    const fechaajusteForm = fila.children[2].innerHTML;
-
-    const cod_producto = idForm;
-    const cantidad = cantidadForm;
-    const fechaajuste = fechaajusteForm;
+    const fechaordenForm = fila.children[1].innerHTML;
+    const rif_proveedorForm = fila.children[2].innerHTML;
    
-    cod_producto.value = idForm;
-    cantidad.value = cantidad;
-    fechaajuste.value = fechaajuste;
+    cod_orden.value = idForm;
+    fechaorden.value = fechaordenForm;
+    rif_proveedor.value = rif_proveedorForm;
     
     opcion = 'editar';
     modalLinea.show();
@@ -84,13 +82,14 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+        console.log(idForm);
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                cod_orden: cod_orden.value,
+                fechaorden: fechaorden.value,
+                rif_proveedor: rif_proveedor.value
             })
         })
         .then((response) => response.json())
@@ -98,13 +97,14 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                cod_orden: cod_orden.value,
+                fechaorden: fechaorden.value,
+                rif_proveedor: rif_proveedor.value
            })
        })
        .then((response) => response.json())
@@ -113,7 +113,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });

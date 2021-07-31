@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/Proveedor/";
+const url = 'http://localhost:3000/Proveedor/';
 const contenedor = document.querySelector('tbody');
 console.log(contenedor);
 let resultados = '';
@@ -121,7 +121,7 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-        console.log(url);
+        console.log(idForm);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
@@ -141,7 +141,7 @@ formLinea.addEventListener('submit', (e)=>{
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
        })
-       .then((response) => location.reload())
+       .then((response) => location.reload());
     }
     modalLinea.hide();
 });
