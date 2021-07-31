@@ -2,21 +2,11 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-    <title>PERSONAL</title>
-    <style>
-        body{
-            background-color: #f7f6f6;
-        }
-        table thead{
-            background-color: #0A4f70;
-            color: white;
-        }
-    </style>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<title>PERSONAL</title>
     <link rel="stylesheet" href="../css/maquetado_base.css">
   </head>
   <body>
@@ -67,37 +57,63 @@
     </header>
     <!-- Fin sidebar -->
     <!-- Page Content -->
-    <section class="main">
+     <section class="main">
         <section class="main__barraSuperior">
             <img src="" alt="">
             <input type="search" name="" id="" placeholder="Buscar Personal">
         </section>
-        <section class="main__content">
-            <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
-                <button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
-                <table id="tablaLinea" class="table table-bordered table-hover table-striped">
-                    <thead>
-                        <tr class="text-center">
-                            <th>CÉDULA</th>
-                            <th>NOMBRE</th>
-                            <th>SUELDO</th>
-                            <th>TELEFONO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-        
-                <div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
+        <section class="main__content"> 
+            <div class="container">
+				<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+					<ul class="nav nav-tabs justify-content-end">
+						<li class="nav-item">
+						<a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">List</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+							<div class="card">
+								<div class="card-header">
+									<h4>Lista de Personal</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
+										<table id="userList" class="table table-bordered table-hover table-striped">
+											<thead class="thead-light">
+											<tr>
+                                                <th>CÉDULA</th>
+                                                <th>NOMBRE</th>
+                                                <th>SUELDO</th>
+                                                <th>TELEFONO</th>
+                                                <th>ACCIONES</th>
+											</tr>
+											</thead>
+											<tbody>
+                    						</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="mt-4 text-center">
+								¿Desea volver al menú de inicio?
+							</div>
+							
+							<div class="form-group m-0">
+								<a href="Dashboard.html"  class="btn btn-primary btn-sm" role="button">
+									Volver a menú
+								</a>
+							</div>
+						</div>
+						<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">PERSONAL</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="form">
+								<form id="form">
                                     <div class="mb-3">
                                         <label for="cedulaper" class="col-form-label">cedulaper</label>
                                         <input id="cedulaper" type="text" class="form-control">
@@ -114,17 +130,18 @@
                                         <label for="telefonoper" class="col-form-label">telefonoper</label>
                                         <input id="telefonoper" type="text" class="form-control">
                                     </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                                <button type="submit" class="btn btn-primary">GUARDAR</button>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                </div><!-- FIN DELMODAL -->
-        
-            </div>
+                                </div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div><!-- FIN DELMODAL -->
+					</div>
+				</div>
+			</div>
         </section>
     </section>
     <!-- Fin Page Content -->
