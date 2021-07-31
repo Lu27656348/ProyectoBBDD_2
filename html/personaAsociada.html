@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>PERSONA ASOCIADA</title>
+	<!-- Se comento la linea que se ve abajo porque interfiere con el disenno visual de la pantalla -->
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	
+	<!-- Nuestro css-->
+	<link rel="stylesheet" href="../css/maquetado_base.css">
+</head>
+<body>
+
+	<!-- Sidebar -->
+    <header class="header">
+        <div class="header__logo">
+            <h1 class="header__logo--Texto">M & M</h1>
+        </div>
+        <ul class="header__nav"> <!-- ion-md-apps -->
+            <li ><a id="DashBoard" href="Dashboard.html">DashBoard</a></li>
+            <li ><a id="login" href="Login.html">Login</a></li>
+            <li ><a id="personal" href="Personal.html">Personal</a></li>
+            <li ><a id="local" href="Local.html">Local</a></li>
+            <li ><a id="productos" href="Productos.html">Productos</a></li>
+            <li ><a id="proveedores" href="Proveedores2.html">Proveedores</a></li>
+            <li ><a id="actual" href="personaAsociada.html">Persona Asociada a Proveedor</a></li>
+            <li ><a id="cliente" href="cliente.html">Cliente</a></li>
+            <li ><a id="finanzas" href="#">Finanzas</a></li>
+            <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
+            <li ><a id="vehiculos" href="vehiculo.html">Vehiculos</a></li>
+            <li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
+            <li ><a id="lineasuministro" href="lineasuministro.html">Linea de Suministro</a</li>
+            <li ><a id="fichaservicio" href="fichaservicio.html">Ficha de Servicio</a</li>
+            <li ><a id="Autorizado" href="autorizado.html">Autorizado</a</li>
+            <li ><a id="reservacion" href="Reservacion.html">Reservacion</a</li>
+            <li ><a id="ciudad" href="ciudad.html">Ciudad</a></li>
+            <li ><a id="OrdenCompra" href="ordencompra.html">Orden de Compra</a</li>
+            <li ><a id="facturaproveedor" href="facturaproveedor.html">Factura de Proveedor</a</li>
+            <li ><a id="facturaservicio" href="facturaservicio.html">Factura de Servicio</a</li>
+            <li ><a id="actividades" href="actividad.html">Actividades</a</li>
+            <li ><a id="ajusteproducto" href="ajusteproducto.html">Ajuste Producto</a</li>
+            <li ><a id="mantenimiento" href="mantenimiento.html">Mantenimiento</a</li>
+            <li ><a id="mecanico" href="mecanico.html">Mecanico</a</li>
+            <li ><a id="detalleorden" href="detalleorden.html">Detalle de Orden</a</li>
+            <li ><a id="compraproducto" href="compraproducto.html">Compra Producto</a</li>
+            <li ><a id="Pago" href="pago.html">Pago</a</li>
+            <li ><a id="Ofrece" href="ofrece.html">Ofrece</a</li>
+            <li ><a id="Asignado" href="asignado.html">Asignado</a</li>
+            <li ><a id="Contiene" href="contiene.html">Contiene</a</li>
+            <li ><a id="Necesita" href="necesita.html">Necesita</a</li>
+            <li ><a id="Consume" href="consume.html">Consume</a</li>
+            <li ><a id="salir" href="https://www.google.com/">Salir</a></li>
+        </ul>
+        <p><i>Cuando la calidad de<br/>
+              vida cae para el<br/>
+              ambiente, cae para el <br/>
+              humano</i></p>
+    </header>
+    <!-- Fin sidebar -->
+    <!-- Page Content -->
+    <section class="main">
+        <section class="main__barraSuperior">
+            <img src="" alt="">
+            <input type="search" name="" id="" placeholder="Buscar Personal">
+        </section>
+        <section class="main__content">
+            <div class="container">
+				<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+					<ul class="nav nav-tabs justify-content-end">
+						<li class="nav-item">
+						<a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">List</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+							<div class="card">
+								<div class="card-header">
+									<h4>Lista de Personas Asociadas a un Proveedor</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
+										<table id="userList" class="table table-bordered table-hover table-striped">
+											<thead class="thead-light">
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">Cedula</th>
+												<th scope="col">Nombre</th>
+												<th></th>
+											</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form id="form">
+										<div class="mb-3">
+											<label for="cedula" class="col-form-label">Cedula</label>
+											<input id="cedula" type="text" class="form-control">
+										</div>
+										<div class="mb-3">
+											<label for="nombre" class="col-form-label">Nombre</label>
+											<input id="nombre" type="text" class="form-control">
+										</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">GUARDAR</button>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div><!-- FIN DELMODAL -->
+					</div>
+				</div>
+			</div>
+        </section>
+    </section>
+    <!-- Fin Page Content -->
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<!--JQUERY-->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script 
+		src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script 
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	
+	<!-- Los iconos tipo Solid de Fontawesome-->
+	<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="../scripts/personaAsociada.js"></script>
+</body>
+</html>

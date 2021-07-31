@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>MECANICO</title>
+	<title>MARCA DE VEHICULO</title>
 	<!-- Se comento la linea que se ve abajo porque interfiere con el disenno visual de la pantalla -->
 	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	
 	<!-- Nuestro css-->
 	<link rel="stylesheet" href="../css/maquetado_base.css">
 </head>
 <body>
-
+	<!-- Sidebar -->
 	<!-- Sidebar -->
     <header class="header">
         <div class="header__logo">
@@ -31,7 +31,7 @@
             <li ><a id="finanzas" href="#">Finanzas</a></li>
             <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
             <li ><a id="vehiculos" href="vehiculo.html">Vehiculos</a></li>
-            <li ><a id="marcaVehiculos" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
+            <li ><a id="actual" href="MarcaVehiculo.html">Marca de Vehiculos</a</li>
             <li ><a id="lineasuministro" href="lineasuministro.html">Linea de Suministro</a</li>
             <li ><a id="fichaservicio" href="fichaservicio.html">Ficha de Servicio</a</li>
             <li ><a id="Autorizado" href="autorizado.html">Autorizado</a</li>
@@ -43,7 +43,7 @@
             <li ><a id="actividades" href="actividad.html">Actividades</a</li>
             <li ><a id="ajusteproducto" href="ajusteproducto.html">Ajuste Producto</a</li>
             <li ><a id="mantenimiento" href="mantenimiento.html">Mantenimiento</a</li>
-            <li ><a id="actual" href="mecanico.html">Mecanico</a</li>
+            <li ><a id="mecanico" href="mecanico.html">Mecanico</a</li>
             <li ><a id="detalleorden" href="detalleorden.html">Detalle de Orden</a</li>
             <li ><a id="compraproducto" href="compraproducto.html">Compra Producto</a</li>
             <li ><a id="Pago" href="pago.html">Pago</a</li>
@@ -59,15 +59,15 @@
               ambiente, cae para el <br/>
               humano</i></p>
     </header>
-    <!-- Fin sidebar -->
-    <!-- Page Content -->
-    <section class="main">
-        <section class="main__barraSuperior">
-            <img src="" alt="">
-            <input type="search" name="" id="" placeholder="Buscar Personal">
-        </section>
-        <section class="main__content">
-            <div class="container">
+	<!-- Fin sidebar -->
+	<!-- Page Content -->
+	<section class="main">
+		<section class="main__barraSuperior">
+			<img src="" alt="">
+			<input type="search" name="" id="" placeholder="Buscar Personal">
+		</section>
+		<section class="main__content">
+			<div class="container">
 				<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
 					<ul class="nav nav-tabs justify-content-end">
 						<li class="nav-item">
@@ -78,7 +78,7 @@
 						<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 							<div class="card">
 								<div class="card-header">
-									<h4>Lista de Mecanico</h4>
+									<h4>Lista de Marcas de Vehiculo</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -87,9 +87,13 @@
 											<thead class="thead-light">
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">Cod_Vehiculo</th>
-												<th scope="col">Nombre</th>
-												<th scope="col">Telefono</th>
+												<th scope="col">NombreMarca</th>
+												<th scope="col">AceiteCaja</th>
+												<th scope="col">TipoAceite</th>
+												<th scope="col">Descripcion</th>
+												<th scope="col">CantidadP</th>
+												<th scope="col">Refrigerante</th>
+												<th scope="col">Octanaje</th>
 												<th></th>
 											</tr>
 											</thead>
@@ -101,7 +105,7 @@
 						<div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
 							<div class="card">
 								<div class="card-header">
-									<h4>Informacion del Mecanico</h4>
+									<h4>Informacion de la marca de vehiculo</h4>
 								</div>
 								<div class="card-body">
 								</div>
@@ -110,28 +114,44 @@
 					</div>
 				</div>
 			</div>
-        </section>
-    </section>
+		</section>
+	</section>
 	<div class="modal fade" id="modalLinea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		  <div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">RESERVACION</h5>
+					<h5 class="modal-title" id="exampleModalLabel">PROVEEDORES</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form id="form">
 						<div class="mb-3">
-							<label for="Cod_Vehiculo" class="col-form-label">Cod_Vehiculo</label>
-							<input id="Cod_Vehiculo" type="text" class="form-control">
+							<label for="NombreMarca" class="col-form-label">NombreMarca</label>
+							<input id="NombreMarca" type="text" class="form-control">
 						</div>
 						<div class="mb-3">
-							<label for="Nombre" class="col-form-label">Nombre</label>
-							<input id="Nombre" type="text" class="form-control">
+							<label for="AceiteCaja" class="col-form-label">AceiteCaja</label>
+							<input id="AceiteCaja" type="text" class="form-control">
 						</div>
 						<div class="mb-3">
-							<label for="Telefono" class="col-form-label">Telefono</label>
-							<input id="Telefono" type="text" class="form-control">
+							<label for="TipoAceite" class="col-form-label">TipoAceite</label>
+							<input id="TipoAceite" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Descripcion" class="col-form-label">Descripcion</label>
+							<input id="Descripcion" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="CantidadP" class="col-form-label">CantidadP</label>
+							<input id="CantidadP" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Refrigerante" class="col-form-label">Refrigerante</label>
+							<input id="Refrigerante" type="text" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="Octanaje" class="col-form-label">Octanaje</label>
+							<input id="Octanaje" type="text" class="form-control">
 						</div>
 				</div>
 				<div class="modal-footer">
@@ -142,7 +162,7 @@
 			</div>
 		</div>
 	</div><!-- FIN DELMODAL -->
-    <!-- Fin Page Content -->
+	<!-- Fin Page Content -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<!--JQUERY-->
@@ -161,11 +181,17 @@
 	
 	<!-- Los iconos tipo Solid de Fontawesome-->
 	<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+		href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 	
+	<!-- DATA TABLE -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
     <!-- JavaScript -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="../scripts/mecanicos.js"></script>
+    <script src="../scripts/marcavehiculo.js"></script>
 </body>
 </html>

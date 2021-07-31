@@ -4,7 +4,9 @@ const contenedor = document.querySelector('tbody');
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
+console.log(modalLinea);
 const formLinea = document.querySelector('form');
+console.log(formLinea);
 
 const cod_producto = document.getElementById('cod_producto');
 const cedula_cliente = document.getElementById('cedula_cliente');
