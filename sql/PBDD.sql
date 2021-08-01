@@ -6,12 +6,14 @@ CREATE DOMAIN DominioPD AS CHAR(1)
 								CHECK(VALUE IN('S','N'));
 CREATE DOMAIN DominioEcologico AS CHAR(1) 
 								CHECK(VALUE IN('S','N'));
+								CREATE DOMAIN DominioDescuento AS CHAR(1) 
+								CHECK(VALUE IN('S','N'));
 /*EN ESTA SECCIÓN SE DEFINEN LAS TABLAS DE LA BASE DE DATOS*/
 /*************************TABLAS PRIMAS*********************/
 -----------------------------------------------------------------
 -------------------   Tabla Servicio   --------------------------
 -------2---------------------------------------------------------
-CREATE TABLE SERVICIO(
+CREATE TABLE Servicio(
 Cod_Servicio SERIAL NOT NULL,
 NombreServ DominioNombre NOT NULL,
 DescripcionServ  VARCHAR(125),
@@ -23,13 +25,14 @@ PRIMARY KEY(Cod_Servicio)
 -------------------   Tabla Personal   --------------------------
 -----------------------------------------------------------------
 CREATE TABLE Personal(
-CedulaPer VARCHAR(10) NOT NULL,
-NombrePer DominioNombre NOT NULL,
+Cedula_Personal VARCHAR(10) NOT NULL,
+Nombre DominioNombre NOT NULL,
+Direccion varchar(250),
 Sueldo DECIMAL(11,2) NOT NULL
 					 CONSTRAINT ck_sueldoPositivo
 					 check(Sueldo>=0.00),
-TelefonoPer VARCHAR(12),
-PRIMARY KEY(CedulaPer)
+Telefono_Personal VARCHAR(12),
+PRIMARY KEY(Cedula_Personal)
 );
 -----------------------------------------------------------------
 -------------------   Tabla Ciudad   ----------------------------
@@ -63,16 +66,16 @@ PRIMARY KEY(Cedula_Cliente)
 -------------------   Tabla MarcaVehículo   ----------------------
 ------------------------------------------------------------------
 CREATE TABLE MarcaVehiculo(
-NombreMarca DominioNombre NOT NULL,
-AceiteCaja VARCHAR(25) NOT NULL,
+Nombre_Marca DominioNombre NOT NULL,
 Descripcion VARCHAR(125),
+AceiteCaja VARCHAR(25) NOT NULL,
 CantidadP INTEGER NOT NULL
 				  CONSTRAINT ck_Puesto
 			      CHECK(   CantidadP   >=   1   ),
 Refrigerante VARCHAR(20) NOT NULL,
 Octanaje INTEGER NOT NULL
 				 CONSTRAINT ck_Octanaje
-			     CHECK(   Octanaje   >  0   ),
+			     CHECK(   Octanaje   =  91 OR Octanaje = 95  ),
 PRIMARY KEY(NombreMarca)
 );
 ------------------------------------------------------------------
@@ -80,13 +83,25 @@ PRIMARY KEY(NombreMarca)
 ------------------------------------------------------------------
 CREATE TABLE Proveedor(
 Rif_Proveedor VARCHAR(10) NOT NULL,
-Direccion VARCHAR(250) NOT NULL,
 RazonSocial VARCHAR(50) NOT NULL,
+Direccion VARCHAR(250) NOT NULL,
 Telefono VARCHAR(12) NOT NULL,
 Celular VARCHAR(12),
 Nombre DominioNombre NOT NULL,
 Cedula VARCHAR(10) NOT NULL,
-PRIMARY KEY(Rif_Proveedor)
+PRIMARY KEY(Rif_Proveedor),
+FOREIGN KEY(Cedula) 
+REFERENCES Contactos(CedulaContacto)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+------------------------------------------------------------------
+-------------------   Tabla Proveedor   --------------------------
+------------------------------------------------------------------
+CREATE TABLE Contactos(
+CedulaContacto VARCHAR(10) NOT NULL,
+Nombre DominioNombre NOT NULL,
+PRIMARY KEY(CedulaContacto)
 );
 ------------------------------------------------------------------
 --------------   Tabla Línea de Suministro   ---------------------
@@ -101,17 +116,17 @@ PRIMARY KEY(Cod_Linea)
 --------------Etidades fuertes con referencias-------------------
 ---------1-------------------------------------------------------
 
-CREATE TABLE Locales(
-RifLocal VARCHAR(10) NOT NULL,
+CREATE TABLE Local(
+Rif_Local VARCHAR(10) NOT NULL,
 Nombre DominioNombre NOT NULL,
 Direccion VARCHAR(250) NOT NULL,
-FechaInventario DATE,
+Fecha_Inventario DATE,
 Fecha_Encargado DATE NOT NULL,
-Encargado VARCHAR(10) NOT NULL,
+Cedula_Encargado VARCHAR(10) NOT NULL,
 Nombre_Ciudad VARCHAR(25) NOT NULL,
-PRIMARY KEY(RifLocal),
+PRIMARY KEY(Rif_Local),
 FOREIGN KEY(Encargado) 
-REFERENCES Personal(CedulaPer)
+REFERENCES Personal(Cedula_Personal)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
 FOREIGN KEY(Nombre_Ciudad) 
@@ -125,8 +140,8 @@ ON DELETE CASCADE
 CREATE TABLE Reservacion(
 Num_Reservacion SERIAL,
 Fecha_Reservacion DATE NOT NULL,
-Cedula_Cliente INTEGER NOT NULL,
 Cod_Servicio INTEGER NOT NULL,
+Cedula_Cliente INTEGER NOT NULL,
 PRIMARY KEY(Num_Reservacion),
 FOREIGN KEY(Cedula_Cliente) 
 REFERENCES Cliente(Cedula_Cliente)
@@ -142,15 +157,15 @@ ON DELETE CASCADE
 -----------------------------------------------------------------
 CREATE TABLE Vehiculo(
 Cod_Vehiculo SERIAL,
-Modelo VARCHAR(25) NOT NULL,
-Capacidad_Tanque INTEGER NOT NULL,
 Placa VARCHAR(10) NOT NULL,
+Modelo VARCHAR(25) NOT NULL,
 TiempoUso INTEGER NOT NULL
 				  CONSTRAINT ck_Vehiculos
 				  CHECK(TiempoUso>0),
 Kilometraje INTEGER NOT NULL
 					CONSTRAINT ck_Kilometraje
 					CHECK(Kilometraje>=0),
+Capacidad_Tanque INTEGER NOT NULL,
 Fecha_Adquisicion DATE NOT NULL,
 Cod_TipoVehiculo INTEGER NOT NULL,
 Cedula_Cliente INTEGER NOT NULL,
@@ -172,14 +187,14 @@ Num_Unico SERIAL,
 FechaEnt DATE NOT NULL,
 HoraEnt TIME NOT NULL,
 FechaEst DATE NOT NULL,
-HoraEst DATE NOT NULL,
+HoraEst TIME NOT NULL,
 FechaReal DATE,
-HoraReal DATE,
-CedulaAut VARCHAR(10),
-NombreAut VARCHAR(50),
+HoraReal TIME,
 PersonaDistinta DominioPD NOT NULL,
+CedulaAut VARCHAR(10),
 Cedula_Cliente INTEGER NOT null,
 Cod_Vehiculo INTEGER NOT null,
+Cod_Servicio INTEGER NOT NULL,
 PRIMARY KEY(Num_Unico),
 FOREIGN KEY(Cedula_Cliente)
 REFERENCES Cliente(Cedula_Cliente)
@@ -188,28 +203,41 @@ ON DELETE CASCADE,
 FOREIGN KEY(Cod_Vehiculo)
 REFERENCES Vehiculo(Cod_Vehiculo)
 ON UPDATE CASCADE
-ON DELETE CASCADE
-);
+ON DELETE CASCADE,
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
+ON UPDATE CASCADE
+ON DELETE CASCADE);
 ------------------------------------------------------------------
 --------------------   Tabla Producto   -------------------------
 ------------------------------------------------------------------
 CREATE TABLE Producto(
 Cod_Producto SERIAL,
-NombreP varchar(50) NOT NULL,
-Maximo integer NOT NULL
-	 	 	   CONSTRAINT ck_Maximo
-			   CHECK(Maximo>Minimo),
-Minimo integer NOT NULL
-			   CONSTRAINT ck_Minimo
-			   CHECK(Minimo>=0),
-DescripcionP varchar(125),
+Nombre varchar(50) NOT NULL,
+Descripcion varchar(125),
 Fabricante varchar(50) NOT NULL,
 Precio Decimal(11,2) NOT NULL
-					 CONSTRAINT ck_Precio
-				     CHECK(Precio>0.00),
-Existencia integer NOT NULL
-				   CONSTRAINT ck_Existencia
-				   CHECK(Existencia>=0),
+			CONSTRAINT ck_Precio
+			CHECK(Precio>0.00),
+Maximo integer NOT NULL
+	 	 	CONSTRAINT ck_Maximo
+			CHECK(Maximo>Minimo),
+Minimo integer NOT NULL
+			CONSTRAINT ck_Minimo
+			CHECK(Minimo>=0),
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
+------------------VA EN ALMACEN (REVISAR)--------------------|||
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
+Existencia integer NOT NULL ---------------------------------|||
+				   CONSTRAINT ck_Existencia --|||
+				   CHECK(Existencia>=0),    --|||
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
+-------------------------------------------------------------|||
 Ecologico DominioEcologico NOT NULL,
 Cod_Linea integer NOT NULL,
 Rif_Proveedor varchar(10) NOT NULL,
@@ -255,20 +283,43 @@ ON DELETE CASCADE
 CREATE TABLE FacturaServicio(
 Cod_FacturaS SERIAL,
 MontoTotal decimal(11,2) NOT NULL,
-Ficha integer NOT null,
+Descuento DominioDescuento NOT NULL,
+Num_Unico integer NOT null,
 PRIMARY KEY(Cod_FacturaS),
-FOREIGN KEY(Ficha)
+FOREIGN KEY(Num_Unico)
 REFERENCES FichaServicio(Num_Unico)
 ON UPDATE cascade
 ON DELETE cascade
+);
+-----------------------------------------------------------------
+--------------------   Tabla FacturaCompra   --------------------
+-----------------------------------------------------------------
+CREATE TABLE FacturaCompra(
+Cod_FacturaC SERIAL,
+FechaFactura DATE NOT NULL,
+FormaPago varchar(15) NOT NULL
+				CONSTRAINT ck_FormaPago 
+				CHECK(FormaPago='Transferencia' or 					FormaPago='Efectivo' or FormaPago='Debito' or 				FormaPago='Credito' or FormaPago='Divisa'),
+Descuento DominioDescuento NOT NULL,
+Rif_Local varchar(10) NOT NULL,
+Cedula_Cliente varchar(10) NOT NULL,
+PRIMARY KEY(Cod_FacturaC),
+FOREIGN KEY(Rif_Local)
+REFERENCES Local(Rif_Local)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cedula_CLiente)
+REFERENCES Cliente(Cedula_Cliente)
+ON UPDATE cascade
+ON DELETE cascade,
 );
 /********TABLAS DEBILES ***********/
 -----------------------------------------------------------------
 ---------------------   Tabla Actividades -----------------------
 ----------17-----------------------------------------------------
 CREATE TABLE Actividad(
-Nro_Consecutivo SERIAL,
 Cod_Servicio integer NOT NULL,
+Nro_Consecutivo SERIAL,
 Nombre varchar(50) NOT NULL,
 Descripcion varchar(125),
 Capacidad integer NOT NULL
@@ -277,7 +328,7 @@ Capacidad integer NOT NULL
 Costo decimal (11,2) NOT NULL
 					 CONSTRAINT ck_Costo
 					 CHECK(Costo>0.00),
-PRIMARY KEY(Nro_Consecutivo,Cod_Servicio),
+PRIMARY KEY(Cod_Servicio,Nro_Consecutivo),
 FOREIGN KEY(Cod_Servicio)
 REFERENCES Servicio(Cod_Servicio)
 ON UPDATE CASCADE
@@ -286,10 +337,12 @@ ON DELETE CASCADE
 ----------19-----------------------------------------------------
 CREATE TABLE AjusteProducto(
 Cod_Producto INTEGER NOT NULL,
+Fecha_Ajuste DATE NOT NULL,
+Cantidad INTEGER NOT NULL
+					CONSTRAINT ck_CantidadPr
+					CHECK(Cantidad>=0),
 -------TipoDiferencia
-Cantidad INTEGER NOT NULL,
-FechaAjuste DATE NOT NULL,
-PRIMARY KEY(Cod_Producto),
+PRIMARY KEY(Cod_Producto,FechaAjuste),
 FOREIGN KEY(Cod_Producto)
 REFERENCES Producto(Cod_Producto)
 ON UPDATE cascade
@@ -297,9 +350,9 @@ ON DELETE cascade);
 ----------20-----------------------------------------------------
 CREATE TABLE Mantenimiento(
 Cod_Vehiculo INTEGER NOT NULL,
-Descripcion VARCHAR(125) NOT NULL,
 Fecha_Mantenimiento DATE NOT NULL,
-PRIMARY KEY(Cod_Vehiculo),
+Descripcion VARCHAR(125) NOT NULL,
+PRIMARY KEY(Cod_Vehiculo,Fecha_Mantenimiento),
 FOREIGN KEY(Cod_Vehiculo)
 REFERENCES Vehiculo(Cod_Vehiculo)
 ON UPDATE cascade
@@ -307,25 +360,31 @@ ON DELETE cascade);
 ----------21-----------------------------------------------------
 CREATE TABLE Mecanico(
 Cod_Vehiculo INTEGER NOT NULL,
-Nombre VARCHAR(50) NOT NULL,
 Telefono VARCHAR(12) NOT NULL,
-PRIMARY KEY(Cod_Vehiculo),
+Nombre VARCHAR(50) NOT NULL,
+PRIMARY KEY(Cod_Vehiculo,Telefono),
 FOREIGN KEY(Cod_Vehiculo)
 REFERENCES Vehiculo(Cod_Vehiculo)
 ON UPDATE cascade
 ON DELETE cascade);
 ----------22-----------------------------------------------------
 CREATE TABLE DetalleOrden(
-Nro_Consecutivo INTEGER NOT NULL,
+Num_Unico INTEGER NOT NULL
 Cod_Servicio INTEGER NOT NULL,
+Nro_Consecutivo INTEGER NOT NULL,
 CostoManoObra DECIMAL(11,2) NOT NULL
 							CONSTRAINT ck_CostoManoObra
 							CHECK(CostoManoObra>=0.00),
-PRIMARY KEY(Nro_Consecutivo,Cod_Servicio),
-FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
-REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
+PRIMARY KEY(Num_Unico,Cod_Servicio,Nro_Consecutivo),
+FOREIGN KEY(Cod_Servicio,Nro_Consecutivo)
+REFERENCES Actividad(Cod_Servicio,Nro_Consecutivo)
 ON UPDATE cascade
-ON DELETE cascade);
+ON DELETE cascade,
+FOREIGN KEY(Num_Unico)
+REFERENCES FichaServicio(Num_Unico)
+ON UPDATE cascade
+ON DELETE cascade
+);
 ----------23-----------------------------------------------------
 CREATE TABLE CompraProducto(
 Cod_Producto INTEGER NOT NULL,
@@ -346,26 +405,42 @@ REFERENCES Cliente(Cedula_Cliente)
 ON UPDATE cascade
 ON DELETE cascade);
 ----------24-----------------------------------------------------
-CREATE TABLE Pago(
-Cedula_Cliente INTEGER NOT NULL,
-Monto DECIMAL(11,2) NOT NULL
-					CONSTRAINT ck_Monto
-					CHECK(Monto>0.00),
+CREATE TABLE Pago(					      --REVISAR Num_Pago
+Cedula_Cliente INTEGER NOT NULL,			      --REVISAR Num_Pago
+Num_Pago SERIAL NOT NULL,                                   --REVISAR Num_Pago
 FechaPago DATE NOT NULL,
-Banco VARCHAR(25) NOT NULL,
 NumeroT INTEGER NOT NULL,
-PRIMARY KEY(Cedula_Cliente),
+					CONSTRAINT ck_Monto   --REVISAR Num_Pago
+					CHECK(Monto>0.00),    --REVISAR Num_Pago
+Banco VARCHAR(25) NOT NULL,
+Monto DECIMAL(11,2) NOT NULL,
+PRIMARY KEY(Cedula_Cliente,Num_Pago),
 FOREIGN KEY(Cedula_Cliente)
 REFERENCES Cliente(Cedula_Cliente)
 ON UPDATE cascade
 ON DELETE cascade);
+---------------------------------------------------------------
+CREATE TABLE Recibe(
+Rif_Local VARCHAR(10) NOT NULL,
+Cod_TipoVehiculo INTEGER NOT NULL,
+PRIMARY KEY(Rif_Local,Cod_TipoVehiculo),
+FOREIGN KEY(Rif_Local)
+REFERENCES Local(Rif_Local)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_TipoVehiculo)
+REFERENCES TipoVehiculo(Cod_Tipovehiculo)
+ON UPDATE cascade
+ON DELETE cascade
+);
+
 ----------25-----------------------------------------------------
 CREATE TABLE Ofrece(
-RifLocal VARCHAR(10) NOT NULL,
+Rif_Local VARCHAR(10) NOT NULL,
 Cod_Servicio INTEGER NOT NULL,
-PRIMARY KEY(RifLocal,Cod_Servicio),
-FOREIGN KEY(RifLocal)
-REFERENCES Locales(RifLocal)
+PRIMARY KEY(Rif_Local,Cod_Servicio),
+FOREIGN KEY(Rif_Local)
+REFERENCES Local(Rif_Local)
 ON UPDATE cascade
 ON DELETE cascade,
 FOREIGN KEY(Cod_Servicio)
@@ -379,7 +454,7 @@ Cedula_Personal VARCHAR(10) NOT NULL,
 Cod_Servicio INTEGER NOT NULL,
 PRIMARY KEY(Cedula_Personal,Cod_Servicio),
 FOREIGN KEY(Cedula_Personal)
-REFERENCES Personal(CedulaPer)
+REFERENCES Personal(Cedula_Personal)
 ON UPDATE cascade
 ON DELETE cascade,
 FOREIGN KEY(Cod_Servicio)
@@ -388,72 +463,73 @@ ON UPDATE cascade
 ON DELETE cascade);
 ----------27-----------------------------------------------------
 CREATE TABLE Contiene(
-Cod_Orden INTEGER NOT NULL,
-Cod_Producto INTEGER NOT NULL,
+Cedula_Personal INTEGER NOT NULL,
+Cod_Servicio INTEGER NOT NULL,
 Cantidad INTEGER NOT NULL
 				 CONSTRAINT ck_Cantidad
 				 CHECK(Cantidad>=0),
-Precio DECIMAL(11,2) NOT NULL
-					 CONSTRAINT ck_Precio
-				 	 CHECK(Precio>=0.00),
-PRIMARY KEY(Cod_Orden,Cod_Producto),
-FOREIGN KEY(Cod_Orden)
-REFERENCES OrdenCompra(Cod_Orden)
+Monto DECIMAL(11,2) NOT NULL
+					 CONSTRAINT ck_MontoCont
+				 	 CHECK(Monto>=0.00),
+PRIMARY KEY(Cedula_Personal,Cod_Servicio),
+FOREIGN KEY(Cedula_Personal)
+REFERENCES Personal(Cedula_Personal)
 ON UPDATE cascade
 ON DELETE cascade,
-FOREIGN KEY(Cod_Producto)
-REFERENCES Producto(Cod_Producto)
+FOREIGN KEY(Cod_Servicio)
+REFERENCES Servicio(Cod_Servicio)
 ON UPDATE cascade
-ON DELETE cascade);
+ON DELETE cascade
+);
 ----------28-----------------------------------------------------
-CREATE TABLE Necesita(
-Cod_Producto INTEGER NOT NULL,
-Nro_Consecutivo INTEGER NOT NULL,
+CREATE TABLE Requiere(
+Num_Unico INTEGER NOT NULL,
 Cod_Servicio INTEGER NOT NULL,
+Nro_Consecutivo INTEGER NOT NULL,
+Cod_Producto INTEGER NOT NULL,
 Cantidad INTEGER NOT NULL
 					 CONSTRAINT ck_Cantidad
 					 CHECK(Cantidad>=0),
-monto DECIMAL(11,2) NOT NULL
+Monto DECIMAL(11,2) NOT NULL
 					CONSTRAINT ck_monto
 					CHECK(Monto>=0.00),
-PRIMARY KEY(Cod_Producto,Nro_Consecutivo,Cod_Servicio),
+PRIMARY KEY(Num_Unico,Cod_Servicio,Nro_Consecutivo,Cod_Producto),
+FOREIGN KEY(Num_Unico)
+REFERENCES FichaServicio(Num_Unico)
+ON UPDATE cascade
+ON DELETE cascade,
+FOREIGN KEY(Cod_Servicio,Nro_Consecutivo)
+REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
+ON UPDATE cascade
+ON DELETE cascade,
 FOREIGN KEY(Cod_Producto)
 REFERENCES Producto(Cod_Producto)
 ON UPDATE cascade
-ON DELETE cascade,
-FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
-REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
-ON UPDATE cascade
-ON DELETE cascade);
-----------29-----------------------------------------------------
-CREATE TABLE Modalidades(
-Cedula_Cliente INTEGER NOT NULL,
-Modalidades VARCHAR(25) NOT NULL,
+ON DELETE cascade
+);
+----------29-----------------------REVISAR TABLA------------------------------
+CREATE TABLE Modalidades(			
+Cedula_Cliente INTEGER NOT NULL,		--REVISAR TABLA
+Modalidades VARCHAR(25) NOT NULL,			--REVISAR TABLA
 PRIMARY KEY(Cedula_Cliente,Modalidades),
-FOREIGN KEY(Cedula_Cliente)
-REFERENCES Cliente(Cedula_Cliente)
-ON UPDATE cascade
-ON DELETE cascade);
+FOREIGN KEY(Cedula_Cliente)				--REVISAR TABLA
+REFERENCES Cliente(Cedula_Cliente)			--REVISAR TABLA
+ON UPDATE cascade				--REVISAR TABLA
+ON DELETE cascade);			--REVISAR TABLA
 ----------30-----------------------------------------------------
-CREATE TABLE Consume(
-Cedula_Personal VARCHAR(10) NOT NULL,
+CREATE TABLE Almacena(
+Rif_Local VARCHAR(10) NOT NULL,
 Cod_Producto INTEGER NOT NULL,
-Nro_Consecutivo INTEGER NOT NULL,
-Cod_Servicio INTEGER NOT NULL,
-PRIMARY KEY(Cedula_Personal,Cod_Producto,Nro_Consecutivo,Cod_Servicio),
-FOREIGN KEY(Cedula_Personal)
-REFERENCES Personal(CedulaPer)
+Cantidad INTEGER NOT NULL
+				 CONSTRAINT ck_CantidadAlmacena
+				 CHECK(Cantidad>=0),
+PRIMARY KEY(Rif_Local,Cod_Producto),
+FOREIGN KEY(Rif_Local)
+REFERENCES Local(Rif_Local)
 ON UPDATE cascade
 ON DELETE cascade,
 FOREIGN KEY(Cod_Producto)
 REFERENCES Producto(Cod_Producto)
 ON UPDATE cascade
 ON DELETE cascade,
-FOREIGN KEY(Nro_Consecutivo,Cod_Servicio)
-REFERENCES Actividad(Nro_Consecutivo,Cod_Servicio)
-ON UPDATE cascade
-ON DELETE cascade);
-
-
-
-
+);
