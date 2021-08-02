@@ -10,7 +10,7 @@ const formLinea = document.querySelector('form');
 const cod_orden= document.getElementById('cod_orden');
 const cod_producto= document.getElementById('cod_producto');
 const cantidad= document.getElementById('cantidad');
-const precio= document.getElementById('precio');
+const monto= document.getElementById('monto');
 
 let opcion = '';
 
@@ -18,7 +18,7 @@ btnCrear.addEventListener('click', ()=> {
     cod_orden.value = '';
     cod_producto.value = '';
     cantidad.value = '';
-    precio.value = '';
+    monto.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -31,7 +31,7 @@ const mostrar = (l) => {
                             <td>${linea.cod_orden}</td>
                             <td>${linea.cod_producto}</td>
                             <td>${linea.cantidad}</td>
-                            <td>${linea.precio}</td>
+                            <td>${linea.monto}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -83,12 +83,12 @@ on(document, 'click','.btnEditar', (e)=>{
     idForm = fila.children[0].innerHTML;
     id2Form = fila.children[1].innerHTML;
     const cantidadForm = fila.children[2].innerHTML;
-    const precioForm  = fila.children[3].innerHTML;
+    const montoForm  = fila.children[3].innerHTML;
 
     cod_orden.value = idForm;
     cod_producto.value = id2Form;
     cantidad.value = cantidadForm;
-    precio.value = precioForm;
+    monto.value = montoForm;
 
     opcion = 'editar';
     modalLinea.show();
@@ -116,7 +116,7 @@ formLinea.addEventListener('submit', (e)=>{
                 cod_orden: cod_orden.value,
                 cod_producto: cod_producto.value,
                 cantidad: cantidad.value,
-                precio: precio.value
+                monto: monto.value
             })
         })
         .then((response) => response.json())
@@ -132,7 +132,7 @@ formLinea.addEventListener('submit', (e)=>{
                 cod_orden: cod_orden.value,
                 cod_producto: cod_producto.value,
                 cantidad: cantidad.value,
-                precio: precio.value
+                monto: monto.value
             })
        })
        .then((response) => response.json())

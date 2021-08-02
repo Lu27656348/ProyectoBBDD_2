@@ -7,6 +7,7 @@ const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
 const cedula_cliente = document.getElementById('cedula_cliente');
+const num_pago = document.getElementById('num_pago');
 const monto = document.getElementById('monto');
 const fechapago = document.getElementById('fechapago');
 const banco = document.getElementById('banco');
@@ -16,6 +17,7 @@ let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
     cedula_cliente.value = '';
+    num_pago.value = '';
     monto.value = '';
     fechapago.value = '';
     banco.value = '';
@@ -30,10 +32,11 @@ const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
                             <td>${linea.cedula_cliente}</td>
-                            <td>${linea.monto}</td>
+                            <td>${linea.num_pago}</td>
                             <td>${linea.fechapago}</td>
-                            <td>${linea.banco}</td>
                             <td>${linea.numerot}</td>
+                            <td>${linea.banco}</td>
+                            <td>${linea.monto}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -53,9 +56,10 @@ const on = (element, event, selector, handler) => {
 on(document, 'click','.btnBorrar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     const idaux = fila.firstElementChild.innerHTML;
+    const idauxx = fila.children[1].innerHTML;
     alertify.confirm("This is a confirm dialog.",
     function(){
-        fetch(url+idaux, {
+        fetch(url+idaux+'/Numero/'+idauxx, {
             method: 'DELETE'
         })
         .then(  (response) => response.json() )
@@ -69,20 +73,31 @@ on(document, 'click','.btnBorrar', (e)=>{
 
 //PROCEDIMIENTO EDITAR DATOS DE LA BASE DE DATOS
 let idForm;
+let id2Form;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     
     idForm = fila.children[0].innerHTML;
-    const montoForm = fila.children[1].innerHTML;
+    id2Form = fila.children[1].innerHTML;
+    const montoForm = fila.children[5].innerHTML;
     const fechapagoForm = fila.children[2].innerHTML;
-    const bancoForm = fila.children[3].innerHTML;
-    const numerotForm = fila.children[4].innerHTML;
+    const bancoForm = fila.children[4].innerHTML;
+    const numerotForm = fila.children[3].innerHTML;
    
     cedula_cliente.value = idForm; 
+    num_pago.value = id2Form;
     monto.value = montoForm;
     fechapago.value = fechapagoForm;
     banco.value = bancoForm;
     numerot.value = numerotForm;
+
+    console.log(cedula_cliente.value);
+    console.log(num_pago.value);
+    console.log(fechapago.value);
+    console.log(numerot.value);
+    console.log(banco.value);
+    console.log(monto.value);
+
     
     opcion = 'editar';
     modalLinea.show();
@@ -91,12 +106,17 @@ on(document, 'click','.btnEditar', (e)=>{
 //PROCEDIMIENTO PARA GUARDAR O EDITAR DATOS DE LA BASE DE DATOS
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
+    const fila = e.target;
+    const filanro = fila.children[1].children[1].value;
+    const filacli = fila.children[0].children[1].value;
+
     if(opcion=='editar'){
         console.log(idForm);
-        fetch(url+idForm, {
+        fetch(url+idForm+'/Numero/'+id2Form, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
+                num_pago: num_pago.value,
                 cedula_cliente: cedula_cliente.value,
                 monto: monto.value,
                 fechapago: fechapago.value,
@@ -109,11 +129,11 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-        console.log(idForm);
-       fetch(url, {
+       fetch(url+filacli+'/Numero/'+filanro, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
+                num_pago: num_pago.value,
                 cedula_cliente: cedula_cliente.value,
                 monto: monto.value,
                 fechapago: fechapago.value,

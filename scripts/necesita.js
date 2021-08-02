@@ -1,23 +1,25 @@
 const url = 'http://localhost:3000/Necesita/';
-const urlaux = 'http://localhost:3000/Servicio/';
+const urlaux = 'http://localhost:3000/FichaServicio/';
 const contenedor = document.querySelector('tbody');
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cod_producto= document.getElementById('cod_producto');
-const nro_consecutivo= document.getElementById('nro_consecutivo');
+const num_unico = document.getElementById('num_unico');
 const cod_servicio= document.getElementById('cod_servicio');
-const cantidad= document.getElementById('cantidad');
-const monto= document.getElementById('monto');
+const nro_consecutivo= document.getElementById('nro_consecutivo');
+const cod_producto= document.getElementById('cod_producto');
+const cantidad = document.getElementById('cantidad');
+const monto = document.getElementById('monto');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cod_producto.value = '';
-    nro_consecutivo.value = '';
+    num_unico.value = '';
     cod_servicio.value = '';
+    nro_consecutivo.value = '';
+    cod_producto.value = '';
     cantidad.value = '';
     monto.value = '';
 
@@ -29,9 +31,10 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cod_producto}</td>
-                            <td>${linea.nro_consecutivo}</td>
+                            <td>${linea.num_unico}</td>
                             <td>${linea.cod_servicio}</td>
+                            <td>${linea.nro_consecutivo}</td>
+                            <td>${linea.cod_producto}</td>
                             <td>${linea.cantidad}</td>
                             <td>${linea.monto}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
@@ -54,9 +57,10 @@ on(document, 'click','.btnBorrar', (e)=>{
     const idaux = fila.firstElementChild.innerHTML;
     const idauxx = fila.children[1].innerHTML;
     const idauxxx = fila.children[2].innerHTML;
+    const idauxxxx = fila.children[3].innerHTML;
     alertify.confirm("This is a confirm dialog.",
     function(){
-        fetch(urlaux+idauxxx+'/Actividad/'+idauxx+'/Producto/'+idaux, {
+        fetch(urlaux+idaux+'/Servicio/'+idauxx+'/Actividad/'+idauxxx+'/Producto/'+idauxxxx, {
             method: 'DELETE'
         })
         .then(  (response) => response.json() )
@@ -72,21 +76,31 @@ on(document, 'click','.btnBorrar', (e)=>{
 let idForm;
 let id2Form;
 let id3Form;
+let id4Form;
 on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
 
     idForm = fila.children[0].innerHTML;
     id2Form = fila.children[1].innerHTML;
     id3Form = fila.children[2].innerHTML;
-    const cantidadForm = fila.children[3].innerHTML;
-    const montoForm = fila.children[4].innerHTML;
+    id4Form = fila.children[3].innerHTML;
+    const cantidadForm = fila.children[4].innerHTML;
+    const montoForm = fila.children[5].innerHTML;
     
-    cod_producto.value = idForm;
-    nro_consecutivo.value = id2Form;
-    cod_servicio.value = id3Form;
+    num_unico.value = idForm;
+    cod_servicio.value = id2Form;
+    nro_consecutivo.value = id3Form;
+    cod_producto.value = id4Form;
     cantidad.value = cantidadForm;
     monto.value = montoForm;
 
+    console.log('EN EDITAR');
+    console.log(num_unico.value);
+    console.log(cod_servicio.value);
+    console.log(nro_consecutivo.value);
+    console.log(cod_producto.value);
+    console.log(cantidad.value);
+    console.log(monto.value );
     opcion = 'editar';
     modalLinea.show();
 });
@@ -95,17 +109,25 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     const fila = e.target;
-    const filacod_s = fila.children[2].children[1].value;
-    const filanro = fila.children[1].children[1].value;
-    const filacod_p = fila.children[0].children[1].value;
+    const filacod_p = fila.children[3].children[1].value;
+    const filanro = fila.children[2].children[1].value;
+    const filacod_s = fila.children[1].children[1].value;
+    const filanum = fila.children[0].children[1].value;
+
+    console.log('IMPRIMIENDO FILAS');
+    console.log(filanum);
+    console.log(filacod_s);
+    console.log(filanro);
+    console.log(filacod_p);
     if(opcion=='editar'){
-        fetch(urlaux+id3Form+'/Actividad/'+id2Form+'/Producto/'+idForm, {
+        fetch(urlaux+idForm+'/Servicio/'+id2Form+'/Actividad/'+id3Form+'/Producto/'+id4Form, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                nro_consecutivo: nro_consecutivo.value,
+                num_unico: num_unico.value,
                 cod_servicio: cod_servicio.value,
+                nro_consecutivo: nro_consecutivo.value,
+                cod_producto: cod_producto.value,
                 cantidad: cantidad.value,
                 monto: monto.value
             })
@@ -115,14 +137,21 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log(idForm);
-       fetch(urlaux+filacod_p+'/Actividad/'+filanro+'/Producto/'+filacod_s, {
+       console.log(urlaux+filanum+'/Servicio/'+filacod_s+'/Actividad/'+filanro+'/Producto/'+filacod_p);
+        console.log('num_unico.value '+ num_unico.value);
+        console.log('cod_servicio.value '+ cod_servicio.value);
+        console.log('nro_consecutivo.value '+ nro_consecutivo.value);
+        console.log('cod_producto.value '+ cod_producto.value);
+        console.log('cantidad.value ' + cantidad.value);
+        console.log('monto.value ' + monto.value);
+       fetch(urlaux+filanum+'/Servicio/'+filacod_s+'/Actividad/'+filanro+'/Producto/'+filacod_p, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cod_producto: cod_producto.value,
-                nro_consecutivo: nro_consecutivo.value,
+                num_unico: num_unico.value,
                 cod_servicio: cod_servicio.value,
+                nro_consecutivo: nro_consecutivo.value,
+                cod_producto: cod_producto.value,
                 cantidad: cantidad.value,
                 monto: monto.value
            })

@@ -87,11 +87,12 @@
 											<thead class="thead-light">
 											<tr>
 												<th scope="col">#</th>
-												<th scope="col">Cedula_Personal</th>
-												<th scope="col">Cod_Producto</th>
-												<th scope="col">Nro_Consecutivo</th>
+												<th scope="col">NUM_UNICO</th>
 												<th scope="col">Cod_Servicio</th>
-												<th></th>
+												<th scope="col">Nro_Consecutivo</th>
+												<th scope="col">cod_producto</th>
+												<th scope="col">cantidad</th>
+												<th scope="col">monto</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -121,20 +122,28 @@
 							<div class="modal-body">
 								<form id="form">
 									<div class="mb-3">
-										<label for="cedula_personal" class="col-form-label">Cedula_Personal</label>
-										<input id="cedula_personal" type="text" class="form-control">
+										<label for="num_unico" class="col-form-label">num_unico</label>
+										<input id="num_unico" type="text" class="form-control">
 									</div>
 									<div class="mb-3">
-										<label for="cod_producto" class="col-form-label">Cod_Producto</label>
-										<input id="cod_producto" type="number" class="form-control">
+										<label for="cod_servicio" class="col-form-label">cod_servicio</label>
+										<input id="cod_servicio" type="number" class="form-control">
 									</div>
 									<div class="mb-3">
 										<label for="nro_consecutivo" class="col-form-label">Nro_Consecutivo</label>
 										<input id="nro_consecutivo" type="number" class="form-control">
 									</div>
 									<div class="mb-3">
-										<label for="cod_servicio" class="col-form-label">Cod_Servicio</label>
-										<input id="cod_servicio" type="number" class="form-control">
+										<label for="cod_producto"class="col-form-label">cod_producto</label>
+										<input id="cod_producto" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cantidad"class="col-form-label">cantidad</label>
+										<input id="cantidad" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="monto"class="col-form-label">monto</label>
+										<input id="monto" type="number" class="form-control">
 									</div>
 							</div>
 							<div class="modal-footer">

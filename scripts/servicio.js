@@ -29,7 +29,7 @@ const mostrar = (l) => {
         resultados += ` <tr>
                             <td>${linea.cod_servicio}</td>
                             <td>${linea.nombreserv}</td>
-                            <td>${linea.descripcionserv}</td>
+                            <td>${linea.descripcion}</td>
                             <td>${linea.anticipacion}</td>
                             <td>${linea.reserva}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>

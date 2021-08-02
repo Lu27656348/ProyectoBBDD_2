@@ -8,6 +8,7 @@ const formLinea = document.querySelector('form');
 
 const cedulaper = document.getElementById('cedulaper');
 const nombreper = document.getElementById('nombreper');
+const direccion =  document.getElementById('direccion');
 const sueldo = document.getElementById('sueldo');
 const telefonoper = document.getElementById('telefonoper');
 
@@ -18,6 +19,7 @@ btnCrear.addEventListener('click', ()=> {
     nombreper.value = '';
     sueldo.value = '';
     telefonoper.value = '';
+    direccion.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -29,6 +31,7 @@ const mostrar = (l) => {
         resultados += ` <tr>
                             <td>${linea.cedulaper}</td>
                             <td>${linea.nombreper}</td>
+                            <td>${linea.direccion}</td>
                             <td>${linea.sueldo}</td>
                             <td>${linea.telefonoper}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
@@ -71,11 +74,13 @@ on(document, 'click','.btnEditar', (e)=>{
     
     idForm = fila.children[0].innerHTML;
     const nombreperForm = fila.children[1].innerHTML;
-    const sueldoForm = fila.children[2].innerHTML;
-    const telefonoperForm = fila.children[3].innerHTML;
+    const direccionForm = fila.children[2].innerHTML;
+    const sueldoForm = fila.children[3].innerHTML;
+    const telefonoperForm = fila.children[4].innerHTML;
 
     cedulaper.value = idForm;
     nombreper.value = nombreperForm;
+    direccion.value = direccionForm;
     sueldo.value = sueldoForm;
     telefonoper.value = telefonoperForm;
   
@@ -94,6 +99,7 @@ formLinea.addEventListener('submit', (e)=>{
             body: JSON.stringify({
                 cedulaper: cedulaper.value,
                 nombreper: nombreper.value,
+                direccion: direccion.value,
                 sueldo: sueldo.value,
                 telefonoper: telefonoper.value
             })
@@ -110,6 +116,7 @@ formLinea.addEventListener('submit', (e)=>{
            body: JSON.stringify({
                 cedulaper: cedulaper.value,
                 nombreper: nombreper.value,
+                direccion: direccion.value,
                 sueldo: sueldo.value,
                 telefonoper: telefonoper.value
            })

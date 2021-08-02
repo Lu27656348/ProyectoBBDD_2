@@ -26,14 +26,28 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getAjusteProducto, getAjusteProductoByCod, postAjusteProducto, deleteAjusteProductoByCod, updateAjusteProductoByCod,
         getMarcaVehiculo, getMarcaVehiculoByCod, postMarcaVehiculo, deleteMarcaVehiculoByCod, updateMarcaVehiculoByCod,
         getDetalleOrden, getDetalleOrdenByCod, postDetalleOrden, deleteDetalleOrdenByCod, updateDetalleOrdenByCod,
-        getNecesita, getNecesitaByCod, postNecesita, deleteNecesitaByCod, updateNecesitaByCod} = require('../controllers/index.controller');
+        getNecesita, getNecesitaByCod, postNecesita, deleteNecesitaByCod, updateNecesitaByCod,
+        getPersonaAsociada, getPersonaAsociadaByCod, postPersonaAsociada, deletePersonaAsociadaByCod, updatePersonaAsociadaByCod,
+        getAutorizado, getAutorizadoByCod, postAutorizado, deleteAutorizadoByCod, updateAutorizadoByCod} = require('../controllers/index.controller');
 
 
 router.get('/Necesita', getNecesita);
-router.get('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getNecesitaByCod);
-router.post('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', postNecesita);
-router.delete('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', deleteNecesitaByCod);
-router.put('/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', updateNecesitaByCod);
+router.get('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getNecesitaByCod);
+router.post('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', postNecesita);
+router.delete('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', deleteNecesitaByCod);
+router.put('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', updateNecesitaByCod);
+
+router.get('/DetalleOrden', getDetalleOrden);
+router.get('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo', getDetalleOrdenByCod);
+router.post('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo', postDetalleOrden);
+router.delete('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo', deleteDetalleOrdenByCod);
+router.put('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo', updateDetalleOrdenByCod);
+
+router.get('/Autorizado', getAutorizado);
+router.get('/Autorizado/:cedulaaut', getAutorizadoByCod);
+router.post('/Autorizado', postAutorizado);
+router.delete('/Autorizado/:cedulaaut', deleteAutorizadoByCod);
+router.put('/Autorizado/:cedulaaut', updateAutorizadoByCod);
 
 router.get('/MarcaVehiculo', getMarcaVehiculo);
 router.get('/MarcaVehiculo/:nombremarca', getMarcaVehiculoByCod);
@@ -47,6 +61,12 @@ router.post('/Servicio', postServicio);
 router.delete('/Servicio/:cod_servicio', deleteServicioByCod);
 router.put('/Servicio/:cod_servicio', updateServicioByCod);
 
+router.get('/PersonaAsociada', getPersonaAsociada);
+router.get('/PersonaAsociada/:cedulacontacto', getPersonaAsociadaByCod);
+router.post('/PersonaAsociada', postPersonaAsociada);
+router.delete('/PersonaAsociada/:cedulacontacto', deletePersonaAsociadaByCod);
+router.put('/PersonaAsociada/:cedulacontacto', updatePersonaAsociadaByCod);
+
 router.get('/AjusteProducto', getAjusteProducto);
 router.get('/AjusteProducto/:cod_producto', getAjusteProductoByCod);
 router.post('/AjusteProducto', postAjusteProducto);
@@ -54,10 +74,10 @@ router.delete('/AjusteProducto/:cod_producto', deleteAjusteProductoByCod);
 router.put('/AjusteProducto/:cod_producto', updateAjusteProductoByCod);
 
 router.get('/Asignado', getAsignado);
-router.get('/Personal/:cedula_personal/Servicio/:cod_servicio', getAsignadoByCod);
-router.post('/Personal/:cedula_personal/Servicio/:cod_servicio', postAsignado);
-router.delete('/Personal/:cedula_personal/Servicio/:cod_servicio', deleteAsignadoByCod);
-router.put('/Personal/:cedula_personal/Servicio/:cod_servicio', updateAsignadoByCod);
+router.get('/Personal/:cedulaper/Servicio/:cod_servicio', getAsignadoByCod);
+router.post('/Personal/:cedulaper/Servicio/:cod_servicio', postAsignado);
+router.delete('/Personal/:cedulaper/Servicio/:cod_servicio', deleteAsignadoByCod);
+router.put('/Personal/:cedulaper/Servicio/:cod_servicio', updateAsignadoByCod);
 
 router.get('/FacturaProveedor', getFacturaProveedor);
 router.get('/FacturaProveedor/:cod_facturap', getFacturaProveedorByCod);
@@ -79,10 +99,10 @@ router.delete('/OrdenServicio/:cod_orden/Producto/:cod_producto', deleteContiene
 router.put('/OrdenServicio/:cod_orden/Producto/:cod_producto', updateContieneByCod);
 
 router.get('/Consume', getConsume);
-router.get('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', getConsumeByCod);
-router.post('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', postConsume);
-router.delete('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', deleteConsumeByCod);
-router.put('/Personal/:cedula_personal/Producto/:cod_producto/Actividad/:nro_consecutivo/Servicio/:cod_servicio', updateConsumeByCod);
+router.get('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getConsumeByCod);
+router.post('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', postConsume);
+router.delete('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', deleteConsumeByCod);
+router.put('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', updateConsumeByCod);
 
 router.get('/Compraproducto', getCompraProducto);
 router.get('/Cliente/:cedula_cliente/Producto/:cod_producto', getCompraProductoByCod);
@@ -115,10 +135,10 @@ router.delete('/Ordencompra/:cod_orden', deleteOrdencompraByCod);
 router.put('/Ordencompra/:cod_orden', updateOrdencompraByCod);
 
 router.get('/Pago', getPago);
-router.get('/Pago/:cedula_cliente', getPagoByCod);
-router.post('/Pago', postPago);
-router.delete('/Pago/:cedula_cliente', deletePagoByCod);
-router.put('/Pago/:cedula_cliente', updatePagoByCod);
+router.get('/Pago/:cedula_cliente/Numero/:num_pago', getPagoByCod);
+router.post('/Pago/:cedula_cliente/Numero/:num_pago', postPago);
+router.delete('/Pago/:cedula_cliente/Numero/:num_pago', deletePagoByCod);
+router.put('/Pago/:cedula_cliente/Numero/:num_pago', updatePagoByCod);
 
 router.get('/Personal', getPersonal);
 router.get('/Personal/:cedulaper', getPersonalByCod);

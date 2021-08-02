@@ -6,13 +6,13 @@ let resultados = '';
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cedula_personal= document.getElementById('cedula_personal');
+const cedulaper= document.getElementById('cedulaper');
 const cod_servicio= document.getElementById('cod_servicio');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cedula_personal.value = '';
+    cedulaper.value = '';
     cod_servicio.value = '';
 
     modalLinea.show();
@@ -23,7 +23,7 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cedula_personal}</td>
+                            <td>${linea.cedulaper}</td>
                             <td>${linea.cod_servicio}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
@@ -71,7 +71,7 @@ on(document, 'click','.btnEditar', (e)=>{
     console.log(idForm);
     console.log(id2Form);
 
-    cedula_personal.value = idForm;
+    cedulaper.value = idForm;
     cod_servicio.value = id2Form;
 
     opcion = 'editar';
@@ -92,7 +92,7 @@ formLinea.addEventListener('submit', (e)=>{
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cedula_personal: cedula_personal.value,
+                cedulaper: cedulaper.value,
                 cod_servicio: cod_servicio.value
             })
         })
@@ -106,7 +106,7 @@ formLinea.addEventListener('submit', (e)=>{
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cedula_personal: cedula_personal.value,
+                cedulaper: cedulaper.value,
                 cod_servicio: cod_servicio.value
            })
        })

@@ -7,14 +7,16 @@ const formLinea = document.querySelector('form');
 
 const cod_facturas= document.getElementById('cod_facturas');
 const montototal= document.getElementById('montototal');
-const ficha= document.getElementById('ficha');
+const descuento = document.getElementById('descuento');
+const num_unico= document.getElementById('num_unico');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
     cod_facturas.value = '';
     montototal.value = '';
-    ficha.value = '';
+    descuento.value = '';
+    num_unico.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -26,7 +28,8 @@ const mostrar = (l) => {
         resultados += ` <tr>
                             <td>${linea.cod_facturas}</td>
                             <td>${linea.montototal}</td>
-                            <td>${linea.ficha}</td>
+                            <td>${linea.descuento}</td>
+                            <td>${linea.num_unico}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -69,11 +72,14 @@ on(document, 'click','.btnEditar', (e)=>{
     
     idForm = fila.children[0].innerHTML;
     const montototalForm = fila.children[1].innerHTML;
-    const fichaForm = fila.children[2].innerHTML;
+    const descuentoForm = fila.children[2].innerHTML;
+    const num_unicoForm = fila.children[3].innerHTML;
 
     cod_facturas.value = idForm;
     montototal.value = montototalForm;
-    ficha.value = fichaForm;
+    descuento.value =descuentoForm;
+    num_unico.value = num_unicoForm;
+  
 
     opcion = 'editar';
     modalLinea.show();
@@ -91,7 +97,8 @@ formLinea.addEventListener('submit', (e)=>{
             body: JSON.stringify({
                 cod_facturas: cod_facturas.value,
                 montototal: montototal.value,
-                ficha: ficha.value
+                descuento: descuento.value,
+                num_unico: num_unico.value
             })
         })
         .then((response) => response.json())
@@ -106,7 +113,8 @@ formLinea.addEventListener('submit', (e)=>{
            body: JSON.stringify({
                 cod_facturas: cod_facturas.value,
                 montototal: montototal.value,
-                ficha: ficha.value
+                descuento: descuento.value,
+                num_unico: num_unico.value
            })
        })
        .then((response) => response.json())

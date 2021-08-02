@@ -4,7 +4,7 @@ const config = {
     host: 'localhost',
     user: 'postgres',
     password: 'Lu27656348',
-    database: 'PBBDD'
+    database: 'PBBDDFINAL'
 };
 
 const pool = new Pool(config);
@@ -273,8 +273,8 @@ const getPersonal = async (req,res) => {
     res.json(response.rows);
 };
 const postPersonal = async (req,res) => {
-    const { cedulaper, nombreper, sueldo, telefonoper } = req.body;
-    const response = await pool.query('INSERT INTO PERSONAL ( cedulaper, nombreper, sueldo, telefonoper ) VALUES ($1,$2,$3,$4)',[cedulaper, nombreper, sueldo, telefonoper ]);
+    const { cedulaper, nombreper,direccion, sueldo, telefonoper } = req.body;
+    const response = await pool.query('INSERT INTO PERSONAL ( cedulaper, nombreper,direccion, sueldo, telefonoper ) VALUES ($1,$2,$3,$4,$5)',[cedulaper, nombreper, direccion, sueldo, telefonoper ]);
     res.json(response.rows);
 };
 const getPersonalByCod = async (req,res) => {
@@ -289,8 +289,8 @@ const deletePersonalByCod = async (req,res) => {
 };
 const updatePersonalByCod = async (req,res) => {
     const codlineaaux = req.params.cedulaper;
-    const { cedulaper, nombreper, sueldo, telefonoper } = req.body;
-    const response = await pool.query('UPDATE PERSONAL SET cedulaper = $1, nombreper = $2, sueldo = $3, telefonoper = $4 WHERE cedulaper = $5', [ cedulaper, nombreper, sueldo, telefonoper, codlineaaux]);
+    const { cedulaper, nombreper, direccion,sueldo, telefonoper } = req.body;
+    const response = await pool.query('UPDATE PERSONAL SET cedulaper = $1, nombreper = $2, direccion = $3, sueldo = $4, telefonoper = $5 WHERE cedulaper = $6', [ cedulaper, nombreper,direccion, sueldo, telefonoper, codlineaaux]);
     res.json(response.rows);
 };
 
@@ -299,24 +299,27 @@ const getPago = async (req,res) => {
     res.json(response.rows);
 };
 const postPago = async (req,res) => {
-    const {cedula_cliente, monto, fechapago, banco, numerot } = req.body;
-    const response = await pool.query('INSERT INTO PAGO ( cedula_cliente, monto, fechapago, banco, numerot ) VALUES ($1,$2,$3,$4,$5)',[cedula_cliente, monto, fechapago, banco, numerot]);
+    const {cedula_cliente,num_pago, fechapago, numerot,banco,monto } = req.body;
+    const response = await pool.query('INSERT INTO PAGO ( cedula_cliente,num_pago, fechapago, numerot,banco,monto ) VALUES ($1,$2,$3,$4,$5,$6)',[cedula_cliente,num_pago, fechapago, numerot,banco,monto]);
     res.json(response.rows);
 };
 const getPagoByCod = async (req,res) => {
     const codlineaaux = req.params.cedula_cliente;
-    const response = await pool.query('SELECT * FROM PAGO WHERE cedula_cliente = $1', [codlineaaux]);
+    const codlineaauxx = req.params.num_pago;
+    const response = await pool.query('SELECT * FROM PAGO WHERE cedula_cliente = $1 AND num_pago = $2', [codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 const deletePagoByCod = async (req,res) => {
     const codlineaaux = req.params.cedula_cliente;
-    const response = await pool.query('DELETE FROM PAGO WHERE cedula_cliente = $1', [codlineaaux]);
+    const codlineaauxx = req.params.num_pago;
+    const response = await pool.query('DELETE FROM PAGO WHERE cedula_cliente = $1 AND num_pago = $2', [codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 const updatePagoByCod = async (req,res) => {
     const codlineaaux = req.params.cedula_cliente;
-    const { cedula_cliente, monto, fechapago, banco, numerot } = req.body;
-    const response = await pool.query('UPDATE PAGO SET cedula_cliente = $1, monto = $2, fechapago = $3, banco = $4, numerot = $5 WHERE cedula_cliente = $6', [ cedula_cliente, monto, fechapago, banco, numerot, codlineaaux]);
+    const codlineaauxx = req.params.num_pago;
+    const { cedula_cliente,num_pago, fechapago, numerot,banco,monto} = req.body;
+    const response = await pool.query('UPDATE PAGO SET cedula_cliente = $1, num_pago = $2, fechapago = $3, numerot = $4, banco = $5, monto = $6 WHERE cedula_cliente = $7 AND num_pago = $8', [ cedula_cliente,num_pago, fechapago, numerot,banco,monto, codlineaaux,codlineaauxx ]);
     res.json(response.rows);
 };
 
@@ -406,8 +409,8 @@ const getFichaServicio= async (req,res) => {
     res.json(response.rows);
 };
 const postFichaServicio = async (req,res) => {
-    const { num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, cedulaaut, nombreaut, personadistinta, cedula_cliente, cod_vehiculo } = req.body;
-    const response = await pool.query('INSERT INTO FICHASERVICIO ( num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, cedulaaut, nombreaut, personadistinta, cedula_cliente, cod_vehiculo ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',[num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, cedulaaut, nombreaut, personadistinta, cedula_cliente, cod_vehiculo]);
+    const { num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, personadistinta,cedulaaut, cedula_cliente, cod_vehiculo, cod_servicio } = req.body;
+    const response = await pool.query('INSERT INTO FICHASERVICIO ( num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, personadistinta,cedulaaut, cedula_cliente, cod_vehiculo,cod_servicio) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',[num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, personadistinta,cedulaaut, cedula_cliente, cod_vehiculo,cod_servicio]);
     res.json(response.rows);
 };
 const getFichaServicioByCod = async (req,res) => {
@@ -416,14 +419,17 @@ const getFichaServicioByCod = async (req,res) => {
     res.json(response.rows);
 };
 const deleteFichaServicioByCod = async (req,res) => {
+    console.log('Estoy en DELETE FICHA');
+    console.log('BORRANDO LA FICHA CON EL ID');
+    console.log(req.params.num_unico);
     const codlineaaux = req.params.num_unico;
     const response = await pool.query('DELETE FROM FICHASERVICIO WHERE num_unico = $1', [codlineaaux]);
     res.json(response.rows);
 };
 const updateFichaServicioByCod = async (req,res) => {
     const codlineaaux = req.params.num_unico;
-    const { num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, cedulaaut, nombreaut, personadistinta, cedula_cliente, cod_vehiculo } = req.body;
-    const response = await pool.query('UPDATE FICHASERVICIO SET num_unico = $1, fechaent = $2, horaent = $3, fechaest = $4, horaest = $5, fechareal = $6, horareal = $7, cedulaaut = $8, nombreaut = $9, personadistinta = $10, cedula_cliente = $11, cod_vehiculo = $12 WHERE num_unico = $13', [ num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, cedulaaut, nombreaut, personadistinta, cedula_cliente, cod_vehiculo, codlineaaux]);
+    const { num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, personadistinta,cedulaaut, cedula_cliente, cod_vehiculo,cod_servicio } = req.body;
+    const response = await pool.query('UPDATE FICHASERVICIO SET num_unico = $1, fechaent = $2, horaent = $3, fechaest = $4, horaest = $5, fechareal = $6, horareal = $7, personadistinta = $8, cedulaaut = $9, cedula_cliente = $10, cod_vehiculo = $11, cod_servicio = $12 WHERE num_unico = $13', [ num_unico, fechaent, horaent, fechaest, horaest, fechareal, horareal, personadistinta,cedulaaut, cedula_cliente, cod_vehiculo,cod_servicio, codlineaaux]);
     res.json(response.rows);
 };
 
@@ -457,37 +463,37 @@ const updateCompraProductoByCod = async (req,res) => {
 };
 
 const getConsume= async (req,res) => {
-    const response = await pool.query('SELECT * FROM CONSUME');
+    const response = await pool.query('SELECT * FROM REQUIERE');
     res.json(response.rows);
 };
 const postConsume = async (req,res) => {
-    const { cedula_personal, cod_producto, nro_consecutivo, cod_servicio } = req.body;
-    const response = await pool.query('INSERT INTO CONSUME ( cedula_personal, cod_producto, nro_consecutivo, cod_servicio  ) VALUES ($1,$2,$3,$4)',[cedula_personal, cod_producto, nro_consecutivo, cod_servicio ]);
+    const { num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('INSERT INTO REQUIERE (  num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto   ) VALUES ($1,$2,$3,$4,$5,$6)',[ num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto  ]);
     res.json(response.rows);
 };
 const getConsumeByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
-    const codlineaauxx = req.params.cod_producto;
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
     const codlineaauxxx = req.params.nro_consecutivo;
-    const codlineaauxxxx = req.params.cod_servicio;
-    const response = await pool.query('SELECT * FROM COMPRAPRODUCTO WHERE cedula_personal = $1 AND cod_producto = $2 AND nro_consecutivo = $3 AND cod_servicio = $4', [codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx]);
+    const codlineaauxxxx = req.params.cod_producto;
+    const response = await pool.query('SELECT * FROM REQUIERE WHERE num_unico = $1 AND cod_servicio = $2 AND nro_consecutivo = $3 AND cod_producto = $4', [codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
 const deleteConsumeByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
-    const codlineaauxx = req.params.cod_producto;
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
     const codlineaauxxx = req.params.nro_consecutivo;
-    const codlineaauxxxx = req.params.cod_servicio;
-    const response = await pool.query('DELETE FROM CONSUME WHERE cedula_personal = $1 AND cod_producto = $2 AND nro_consecutivo = $3 AND cod_servicio = $4', [codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx]);
+    const codlineaauxxxx = req.params.cod_producto;
+    const response = await pool.query('DELETE FROM REQUIERE WHERE num_unico = $1 AND cod_servicio = $2 AND nro_consecutivo = $3 AND cod_producto = $4', [codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
 const updateConsumeByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
-    const codlineaauxx = req.params.cod_producto;
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
     const codlineaauxxx = req.params.nro_consecutivo;
-    const codlineaauxxxx = req.params.cod_servicio;
-    const { cedula_personal, cod_producto, nro_consecutivo, cod_servicio } = req.body;
-    const response = await pool.query('UPDATE CONSUME SET cedula_personal = $1, cod_producto = $2, nro_consecutivo = $3, cod_servicio = $4 WHERE cedula_personal = $5 AND cod_producto = $6 AND nro_consecutivo = $7 AND cod_servicio = $8', [ cedula_personal, cod_producto, nro_consecutivo, cod_servicio, codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx ]);
+    const codlineaauxxxx = req.params.cod_producto;
+    const { num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('UPDATE REQUIERE SET num_unico = $1, cod_servicio = $2, nro_consecutivo = $3, cod_servicio = $4, cantidad = $5, monto = $6 WHERE num_unico = $7 AND cod_servicio = $8 AND nro_consecutivo = $9 AND cod_producto = $10', [ num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto, codlineaaux,codlineaauxx,codlineaauxxx,codlineaauxxxx ]);
     res.json(response.rows);
 };
 
@@ -496,8 +502,8 @@ const getContiene= async (req,res) => {
     res.json(response.rows);
 };
 const postContiene = async (req,res) => {
-    const { cod_orden, cod_producto, cantidad, precio } = req.body;
-    const response = await pool.query('INSERT INTO CONTIENE (  cod_orden, cod_producto, cantidad, precio  ) VALUES ($1,$2,$3,$4)',[ cod_orden, cod_producto, cantidad, precio ]);
+    const { cod_orden, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('INSERT INTO CONTIENE (  cod_orden, cod_producto, cantidad, monto  ) VALUES ($1,$2,$3,$4)',[ cod_orden, cod_producto, cantidad, monto ]);
     res.json(response.rows);
 };
 const getContieneByCod = async (req,res) => {
@@ -515,8 +521,8 @@ const deleteContieneByCod = async (req,res) => {
 const updateContieneByCod = async (req,res) => {
     const codlineaaux = req.params.cod_orden;
     const codlineaauxx = req.params.cod_producto;
-    const { cod_orden, cod_producto, cantidad, precio } = req.body;
-    const response = await pool.query('UPDATE CONTIENE SET cod_orden = $1, cod_producto = $2, cantidad = $3, precio = $4 WHERE cod_orden = $5 AND cod_producto = $6', [ cod_orden, cod_producto, cantidad, precio , codlineaaux,codlineaauxx]);
+    const { cod_orden, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('UPDATE CONTIENE SET cod_orden = $1, cod_producto = $2, cantidad = $3, monto = $4 WHERE cod_orden = $5 AND cod_producto = $6', [ cod_orden, cod_producto, cantidad, monto , codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 
@@ -525,8 +531,8 @@ const getFacturaServicio= async (req,res) => {
     res.json(response.rows);
 };
 const postFacturaServicio = async (req,res) => {
-    const { cod_facturas, montototal, ficha } = req.body;
-    const response = await pool.query('INSERT INTO FACTURASERVICIO (  cod_facturas, montototal, ficha  ) VALUES ($1,$2,$3)',[ cod_facturas, montototal, ficha ]);
+    const { cod_facturas, montototal, descuento, num_unico } = req.body;
+    const response = await pool.query('INSERT INTO FACTURASERVICIO (  cod_facturas, montototal, descuento, num_unico  ) VALUES ($1,$2,$3,$4)',[ cod_facturas, montototal, descuento, num_unico ]);
     res.json(response.rows);
 };
 const getFacturaServicioByCod = async (req,res) => {
@@ -541,8 +547,8 @@ const deleteFacturaServicioByCod = async (req,res) => {
 };
 const updateFacturaServicioByCod = async (req,res) => {
     const codlineaaux = req.params.cod_facturas;
-    const { cod_facturas, montototal, ficha } = req.body;
-    const response = await pool.query('UPDATE FACTURASERVICIO SET cod_facturas = $1, montototal = $2, ficha = $3 WHERE cod_facturas = $4', [ cod_facturas, montototal, ficha, codlineaaux]);
+    const { cod_facturas, montototal, descuento, num_unico } = req.body;
+    const response = await pool.query('UPDATE FACTURASERVICIO SET cod_facturas = $1, montototal = $2,descuento = $3, num_unico = $4 WHERE cod_facturas = $5', [ cod_facturas, montototal, descuento, num_unico, codlineaaux]);
     res.json(response.rows);
 };
 
@@ -577,24 +583,24 @@ const getAjusteProducto= async (req,res) => {
     res.json(response.rows);
 };
 const postAjusteProducto = async (req,res) => {
-    const {  } = req.body;
-    const response = await pool.query('INSERT INTO AJUSTEPRODUCTO (  cod_facturap, fechafacturap, ordencompra  ) VALUES ($1,$2,$3)',[ cod_facturap, fechafacturap, ordencompra ]);
+    const { cod_producto, fechaajuste, cantidad, tipodiferencia } = req.body;
+    const response = await pool.query('INSERT INTO AJUSTEPRODUCTO (  cod_producto, fechaajuste, cantidad, tipodiferencia   ) VALUES ($1,$2,$3,$4)',[ cod_producto, fechaajuste, cantidad, tipodiferencia  ]);
     res.json(response.rows);
 };
 const getAjusteProductoByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_facturap;
-    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+    const codlineaaux = req.params.cod_producto;
+    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO WHERE cod_producto = $1', [codlineaaux]);
     res.json(response.rows);
 };
 const deleteAjusteProductoByCod = async (req,res) => {
     const codlineaaux = req.params.cod_facturap;
-    const response = await pool.query('DELETE FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+    const response = await pool.query('DELETE FROM AJUSTEPRODUCTO WHERE cod_producto = $1', [codlineaaux]);
     res.json(response.rows);
 };
 const updateAjusteProductoByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_facturap;
-    const { cod_facturap, fechafacturap, ordencompra } = req.body;
-    const response = await pool.query('UPDATE AJUSTEPRODUCTO SET cod_facturap = $1, fechafacturap = $2, ordencompra = $3 WHERE cod_facturap = $4', [ cod_facturap, fechafacturap, ordencompra, codlineaaux]);
+    const codlineaaux = req.params.cod_producto;
+    const { cod_producto, fechaajuste, cantidad, tipodiferencia } = req.body;
+    const response = await pool.query('UPDATE AJUSTEPRODUCTO SET cod_producto = $1, fechaajuste = $2, cantidad = $3, tipodiferencia = $4 WHERE cod_facturap = $4', [ cod_producto, fechaajuste, cantidad, tipodiferencia, codlineaaux]);
     res.json(response.rows);
 };
 
@@ -603,27 +609,27 @@ const getAsignado= async (req,res) => {
     res.json(response.rows);
 };
 const postAsignado = async (req,res) => {
-    const { cedula_personal, cod_servicio } = req.body;
-    const response = await pool.query('INSERT INTO ASIGNADO (  cedula_personal, cod_servicio  ) VALUES ($1,$2)',[ cedula_personal, cod_servicio ]);
+    const { cedulaper, cod_servicio } = req.body;
+    const response = await pool.query('INSERT INTO ASIGNADO (  cedulaper, cod_servicio  ) VALUES ($1,$2)',[ cedulaper, cod_servicio ]);
     res.json(response.rows);
 };
 const getAsignadoByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
+    const codlineaaux = req.params.cedulaper;
     const codlineaauxx = req.params.cod_servicio;
-    const response = await pool.query('SELECT * FROM ASIGNADO WHERE cedula_personal = $1 AND cod_servicio = $2', [codlineaaux,codlineaauxx]);
+    const response = await pool.query('SELECT * FROM ASIGNADO WHERE cedulaper = $1 AND cod_servicio = $2', [codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 const deleteAsignadoByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
+    const codlineaaux = req.params.cedulaper;
     const codlineaauxx = req.params.cod_servicio;
-    const response = await pool.query('DELETE FROM ASIGNADO WHERE cod_facturap = $1 AND ', [codlineaaux,codlineaauxx]);
+    const response = await pool.query('DELETE FROM ASIGNADO WHERE cedulaper = $1 AND cod_servicio = $2', [codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 const updateAsignadoByCod = async (req,res) => {
-    const codlineaaux = req.params.cedula_personal;
+    const codlineaaux = req.params.cedulaper;
     const codlineaauxx = req.params.cod_servicio;
-    const { cedula_personal, cod_servicio } = req.body;
-    const response = await pool.query('UPDATE ASIGNADO SET cedula_personal = $1, cod_servicio = $2 WHERE cedula_personal = $3 AND cod_servicio = $4', [ cedula_personal, cod_servicio, codlineaaux,codlineaauxx]);
+    const { cedulaper, cod_servicio } = req.body;
+    const response = await pool.query('UPDATE ASIGNADO SET cedulaper = $1, cod_servicio = $2 WHERE cedulaper = $3 AND cod_servicio = $4', [ cedulaper, cod_servicio, codlineaaux,codlineaauxx]);
     res.json(response.rows);
 };
 
@@ -658,91 +664,119 @@ const getDetalleOrden= async (req,res) => {
     res.json(response.rows);
 };
 const postDetalleOrden = async (req,res) => {
-    const { cod_servicio, nro_consecutivo, costomanoobra } = req.body;
-    const response = await pool.query('INSERT INTO DETALLEORDEN (  cod_servicio, nro_consecutivo, costomanoobra   ) VALUES ($1,$2,$3)',[ cod_servicio, nro_consecutivo, costomanoobra ]);
+    const { num_unico,cod_servicio, nro_consecutivo, costomanoobra } = req.body;
+    const response = await pool.query('INSERT INTO DETALLEORDEN (  num_unico,cod_servicio, nro_consecutivo, costomanoobra   ) VALUES ($1,$2,$3,$4)',[num_unico, cod_servicio, nro_consecutivo, costomanoobra ]);
     res.json(response.rows);
 };
 const getDetalleOrdenByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const response = await pool.query('SELECT * FROM DETALLEORDEN WHERE cod_servicio = $1 AND nro_consecutivo = $2', [codlineaaux,codlineaauxx]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+    const codlineaauxxx = req.params.nro_consecutivo;
+    const response = await pool.query('SELECT * FROM DETALLEORDEN WHERE num_unico = $1 AND cod_servicio = $2 AND nro_consecutivo = $3', [codlineaaux,codlineaauxx,codlineaauxxx]);
     res.json(response.rows);
 };
 const deleteDetalleOrdenByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const response = await pool.query('DELETE FROM DETALLEORDEN WHERE cod_servicio = $1 AND nro_consecutivo = $2', [codlineaaux,codlineaauxx]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+     const codlineaauxxx = req.params.nro_consecutivo;
+    const response = await pool.query('DELETE FROM DETALLEORDEN WHERE num_unico = $1 AND cod_servicio = $2 AND nro_consecutivo = $3', [codlineaaux,codlineaauxx,codlineaauxxx]);
     res.json(response.rows);
 };
 const updateDetalleOrdenByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const { cod_servicio, nro_consecutivo, costomanoobra } = req.body;
-    const response = await pool.query('UPDATE DETALLEORDEN SET cod_servicio = $1, nro_consecutivo = $2, costomanoobra = $3 WHERE cod_servicio = $4 AND nro_consecutivo = $5', [  cod_servicio, nro_consecutivo, costomanoobra,codlineaaux,codlineaauxx]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+    const codlineaauxxx = req.params.nro_consecutivo;
+    const { num_unico,cod_servicio, nro_consecutivo, costomanoobra } = req.body;
+    const response = await pool.query('UPDATE DETALLEORDEN SET num_unico = $1, cod_servicio = $2, nro_consecutivo = $3, costomanoobra = $4 WHERE num_unico = $5 AND cod_servicio = $6 AND nro_consecutivo = $7', [  num_unico, cod_servicio, nro_consecutivo, costomanoobra,codlineaaux,codlineaauxx, codlineaauxxx]);
     res.json(response.rows);
 };
 
 const getNecesita= async (req,res) => {
-    const response = await pool.query('SELECT * FROM NECESITA');
+    const response = await pool.query('SELECT * FROM REQUIERE');
     res.json(response.rows);
 };
 const postNecesita = async (req,res) => {
-    const { cod_producto, nro_consecutivo, cod_servicio, cantidad, monto } = req.body;
-    const response = await pool.query('INSERT INTO NECESITA (  cod_producto, nro_consecutivo, cod_servicio, cantidad, monto   ) VALUES ($1,$2,$3,$4,$5)',[ cod_producto, nro_consecutivo, cod_servicio, cantidad, monto ]);
+    const { num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('INSERT INTO REQUIERE (  num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto   ) VALUES ($1,$2,$3,$4,$5,$6)',[  num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto ]);
     res.json(response.rows);
 };
 const getNecesitaByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const codlineaauxxx = req.params.cod_producto;
-    const response = await pool.query('SELECT * FROM NECESITA WHERE cod_servicio = $1 AND nro_consecutivo = $2 AND cod_producto = $3', [codlineaauxxx,codlineaauxx, codlineaaux]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+    const codlineaauxxx = req.params.nro_consecutivo;
+    const codlineaauxxxx = req.params.cod_producto;
+    const response = await pool.query('SELECT * FROM REQUIERE WHERE num_unico = $1 AND cod_servicio = $2, nro_consecutivo = $3 AND cod_producto = $4', [codlineaaux,codlineaauxx, codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
 const deleteNecesitaByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const codlineaauxxx = req.params.cod_producto;
-    const response = await pool.query('DELETE FROM NECESITA WHERE cod_servicio = $1 AND nro_consecutivo = $2 AND cod_producto = $3', [codlineaaux,codlineaauxx,codlineaauxxx]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+    const codlineaauxxx = req.params.nro_consecutivo;
+    const codlineaauxxxx = req.params.cod_producto;
+    const response = await pool.query('DELETE FROM NECESITA REQUIERE num_unico = $1 AND cod_servicio = $2 AND nro_consecutivo = $3 AND cod_producto = $4', [codlineaaux,codlineaauxx, codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
 const updateNecesitaByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_servicio;
-    const codlineaauxx = req.params.nro_consecutivo;
-    const codlineaauxxx = req.params.cod_producto;
-    const { cod_producto, nro_consecutivo, cod_servicio, cantidad, monto } = req.body;
-    const response = await pool.query('UPDATE NECESITA SET cod_producto = $1, nro_consecutivo = $2, cod_servicio = $3,cantidad = $4, monto=$5 WHERE cod_servicio = $6 AND nro_consecutivo = $7 AND cod_producto = $8', [  cod_producto, nro_consecutivo, cod_servicio, cantidad, monto , codlineaaux,codlineaauxx,codlineaauxxx]);
+    const codlineaaux = req.params.num_unico;
+    const codlineaauxx = req.params.cod_servicio;
+    const codlineaauxxx = req.params.nro_consecutivo;
+    const codlineaauxxxx = req.params.cod_producto;
+    const { num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto } = req.body;
+    const response = await pool.query('UPDATE REQUIERE SET num_unico = $1, cod_servicio = $2, nro_consecutivo = $3,cod_producto = $4, cantidad=$5, monto = $6 WHERE num_unico =$7 AND cod_servicio = $8 AND nro_consecutivo = $9 AND cod_producto = $10', [  num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto , codlineaaux,codlineaauxx, codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
 /*NO FUNCIONALES*/
-/*
-const getAjusteProducto= async (req,res) => {
-    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO');
+const getPersonaAsociada= async (req,res) => {
+    const response = await pool.query('SELECT * FROM CONTACTOS');
     res.json(response.rows);
 };
-const postAjusteProducto = async (req,res) => {
-    const {  cod_facturap, fechafacturap, ordencompra } = req.body;
-    const response = await pool.query('INSERT INTO AJUSTEPRODUCTO (  cod_facturap, fechafacturap, ordencompra  ) VALUES ($1,$2,$3)',[ cod_facturap, fechafacturap, ordencompra ]);
+const postPersonaAsociada = async (req,res) => {
+    const {  cedulacontacto, nombre  } = req.body;
+    const response = await pool.query('INSERT INTO CONTACTOS (  cedulacontacto, nombre   ) VALUES ($1,$2)',[ cedulacontacto, nombre  ]);
     res.json(response.rows);
 };
-const getAjusteProductoByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_facturap;
-    const response = await pool.query('SELECT * FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+const getPersonaAsociadaByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulacontacto;
+    const response = await pool.query('SELECT * FROM CONTACTOS WHERE cedulacontacto = $1', [codlineaaux]);
     res.json(response.rows);
 };
-const deleteAjusteProductoByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_facturap;
-    const response = await pool.query('DELETE FROM AJUSTEPRODUCTO WHERE cod_facturap = $1', [codlineaaux]);
+const deletePersonaAsociadaByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulacontacto;
+    const response = await pool.query('DELETE FROM CONTACTOS WHERE cedulacontacto = $1', [codlineaaux]);
     res.json(response.rows);
 };
-const updateAjusteProductoByCod = async (req,res) => {
-    const codlineaaux = req.params.cod_facturap;
-    const { cod_facturap, fechafacturap, ordencompra } = req.body;
-    const response = await pool.query('UPDATE AJUSTEPRODUCTO SET cod_facturap = $1, fechafacturap = $2, ordencompra = $3 WHERE cod_facturap = $4', [ cod_facturap, fechafacturap, ordencompra, codlineaaux]);
+const updatePersonaAsociadaByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulacontacto;
+    const {  cedulacontacto, nombre  } = req.body;
+    const response = await pool.query('UPDATE CONTACTOS SET cedulacontacto = $1, nombre = $2 WHERE cedulacontacto = $3', [ cedulacontacto, nombre, codlineaaux]);
     res.json(response.rows);
 };
-*/
 
-
+const getAutorizado= async (req,res) => {
+    const response = await pool.query('SELECT * FROM AUTORIZADO');
+    res.json(response.rows);
+};
+const postAutorizado = async (req,res) => {
+    const {  cedulaaut, nombreaut   } = req.body;
+    const response = await pool.query('INSERT INTO AUTORIZADO (  cedulaaut, nombreaut   ) VALUES ($1,$2)',[ cedulaaut, nombreaut  ]);
+    res.json(response.rows);
+};
+const getAutorizadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulaaut;
+    const response = await pool.query('SELECT * FROM AUTORIZADO WHERE cedulaaut = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const deleteAutorizadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulaaut;
+    const response = await pool.query('DELETE FROM AUTORIZADO WHERE cedulaaut = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const updateAutorizadoByCod = async (req,res) => {
+    const codlineaaux = req.params.cedulaaut;
+    const {  cedulaaut, nombreaut   } = req.body;
+    const response = await pool.query('UPDATE AUTORIZADO SET cedulaaut = $1, nombreaut = $2 WHERE cedulaaut = $3', [ cedulaaut, nombreaut, codlineaaux]);
+    res.json(response.rows);
+};
 
 
 module.exports = {
@@ -751,6 +785,18 @@ module.exports = {
     getNecesitaByCod,
     deleteNecesitaByCod,
     updateNecesitaByCod,
+
+    getAutorizado,
+    postAutorizado,
+    getAutorizadoByCod,
+    deleteAutorizadoByCod,
+    updateAutorizadoByCod,
+
+    getPersonaAsociada,
+    postPersonaAsociada,
+    getPersonaAsociadaByCod,
+    deletePersonaAsociadaByCod,
+    updatePersonaAsociadaByCod,
 
     getOfrece,
     postOfrece,

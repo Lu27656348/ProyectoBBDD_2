@@ -6,6 +6,7 @@ const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
 const cod_producto = document.getElementById('cod_producto');
+const tipodiferencia = document.getElementById('tipodiferencia');
 const cantidad = document.getElementById('cantidad');
 const fechaajuste = document.getElementById('fechaajuste');
 
@@ -15,6 +16,7 @@ btnCrear.addEventListener('click', ()=> {
     cod_producto.value = '';
     cantidad.value = '';
     fechaajuste.value = '';
+    tipodiferencia.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -25,8 +27,9 @@ const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
                             <td>${linea.cod_producto}</td>
-                            <td>${linea.cantidad}</td>
                             <td>${linea.fechaajuste}</td>
+                            <td>${linea.cantidad}</td>
+                            <td>${linea.tipodiferencia}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -65,17 +68,16 @@ on(document, 'click','.btnEditar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     
     idForm = fila.children[0].innerHTML;
-    const cantidadForm = fila.children[1].innerHTML;
-    const fechaajusteForm = fila.children[2].innerHTML;
+    const cantidadForm = fila.children[2].innerHTML;
+    const fechaajusteForm = fila.children[1].innerHTML;
+    const tipodiferenciaForm = fila.children[3].innerHTML;
 
-    const cod_producto = idForm;
-    const cantidad = cantidadForm;
-    const fechaajuste = fechaajusteForm;
    
     cod_producto.value = idForm;
-    cantidad.value = cantidad;
-    fechaajuste.value = fechaajuste;
-    
+    fechaajuste.value = fechaajusteForm;
+    cantidad.value = cantidadForm;
+    tipodiferencia.value =tipodiferenciaForm; 
+
     opcion = 'editar';
     modalLinea.show();
 });
@@ -89,8 +91,9 @@ formLinea.addEventListener('submit', (e)=>{
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
                 cod_producto: cod_producto.value,
+                fechaajuste: fechaajuste.value,
                 cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                tipodiferencia: tipodiferencia.value
             })
         })
         .then((response) => response.json())
@@ -103,8 +106,9 @@ formLinea.addEventListener('submit', (e)=>{
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
                 cod_producto: cod_producto.value,
+                fechaajuste: fechaajuste.value,
                 cantidad: cantidad.value,
-                fechaajuste: fechaajuste.value
+                tipodiferencia: tipodiferencia.value
            })
        })
        .then((response) => response.json())

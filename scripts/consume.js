@@ -1,23 +1,27 @@
 const url = 'http://localhost:3000/Consume/';
-const urlaux = 'http://localhost:3000/Personal/';
+const urlaux = 'http://localhost:3000/FichaServicio/';
 const contenedor = document.querySelector('tbody');
 let resultados = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
-const cedula_personal= document.getElementById('cedula_personal');
-const cod_producto= document.getElementById('cod_producto');
-const nro_consecutivo= document.getElementById('nro_consecutivo');
+const num_unico= document.getElementById('num_unico');
 const cod_servicio= document.getElementById('cod_servicio');
+const nro_consecutivo= document.getElementById('nro_consecutivo');
+const cod_producto= document.getElementById('cod_producto');
+const cantidad =document.getElementById('cantidad');
+const monto = document.getElementById('monto');
 
 let opcion = '';
 
 btnCrear.addEventListener('click', ()=> {
-    cedula_personal.value = '';
-    cod_producto.value = '';
-    nro_consecutivo.value = '';
+    num_unico.value = '';
     cod_servicio.value = '';
+    nro_consecutivo.value = '';
+    cod_producto.value = '';
+    cantidad.value= '';
+    monto.value='';
 
     modalLinea.show();
     opcion = 'crear';
@@ -27,10 +31,12 @@ btnCrear.addEventListener('click', ()=> {
 const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
-                            <td>${linea.cedula_personal}</td>
-                            <td>${linea.cod_producto}</td>
-                            <td>${linea.nro_consecutivo}</td>
+                            <td>${linea.num_unico}</td>
                             <td>${linea.cod_servicio}</td>
+                            <td>${linea.nro_consecutivo}</td>
+                            <td>${linea.cod_producto}</td>
+                            <td>${linea.cantidad}</td>
+                            <td>${linea.monto}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -56,7 +62,7 @@ on(document, 'click','.btnBorrar', (e)=>{
     
     alertify.confirm("This is a confirm dialog.",
     function(){
-        fetch(urlaux+idaux+'/Producto/'+idauxx+'/Actividad/'+idauxxx+'/Servicio/'+idauxxxx, {
+        fetch(urlaux+idaux+'/Servicio/'+idauxx+'/Actividad/'+idauxxx+'/Producto/'+idauxxxx, {
             method: 'DELETE'
         })
         .then(  (response) => response.json() )
@@ -81,11 +87,15 @@ on(document, 'click','.btnEditar', (e)=>{
     id2Form = fila.children[1].innerHTML;
     id3Form = fila.children[2].innerHTML;
     id4Form = fila.children[3].innerHTML;
+    const cantidadForm = fila.children[4].innerHTML;
+    const montoForm = fila.children[5].innerHTML;
 
-    cedula_personal.value = idForm;
-    cod_producto.value = id2Form;
+    num_unico.value = idForm;
+    cod_servicio.value = id2Form;
     nro_consecutivo.value = id3Form;
-    cod_servicio.value = id4Form;
+    cod_producto.value = id4Form;
+    cantidad.value= cantidadForm;
+    monto.value=montoForm;
 
     opcion = 'editar';
     modalLinea.show();
@@ -96,21 +106,23 @@ formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
 
     const fila = e.target;
-    const filaced = fila.children[0].children[1].value;
-    const filacod_p = fila.children[1].children[1].value;
+    const filanum = fila.children[0].children[1].value;
+    const filacod_s = fila.children[1].children[1].value;
     const filanro = fila.children[2].children[1].value;
-    const filacod_s = fila.children[3].children[1].value;
+    const filacod_p = fila.children[3].children[1].value;
 
     if(opcion=='editar'){
  
-        fetch(urlaux+idForm+'/Producto/'+id2Form+'/Actividad/'+id3Form+'/Servicio/'+id4Form, {
+        fetch(urlaux+idForm+'/Servicio/'+id2Form+'/Actividad/'+id3Form+'/Producto/'+id4Form, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                cedula_personal: cedula_personal.value,
-                cod_producto: cod_producto.value,
+                num_unico: num_unico.value,
+                cod_servicio: cod_servicio.value,
                 nro_consecutivo: nro_consecutivo.value,
-                cod_servicio: cod_servicio.value
+                cod_producto: cod_producto.value,
+                cantidad: cantidad.value,
+                monto: monto.value
             })
         })
         .then((response) => response.json())
@@ -119,14 +131,16 @@ formLinea.addEventListener('submit', (e)=>{
     
     if(opcion=='crear'){
      
-       fetch(urlaux+filaced+'/Producto/'+filacod_p+'/Actividad/'+filanro+'/Servicio/'+filacod_s, {
+       fetch(urlaux+filanum+'/Servicio/'+filacod_s+'/Actividad/'+filanro+'/Producto/'+filacod_p, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-                cedula_personal: cedula_personal.value,
-                cod_producto: cod_producto.value,
+                num_unico: num_unico.value,
+                cod_servicio: cod_servicio.value,
                 nro_consecutivo: nro_consecutivo.value,
-                cod_servicio: cod_servicio.value
+                cod_producto: cod_producto.value,
+                cantidad: cantidad.value,
+                monto: monto.value
            })
        })
        .then((response) => response.json())

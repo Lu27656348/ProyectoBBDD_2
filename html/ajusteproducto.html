@@ -78,8 +78,9 @@
                     <thead>
                         <tr class="text-center">
                             <th>COD_PRODUCTO</th>
-                            <th>CANTIDAD</th>
                             <th>FECHA-AJUSTE</th>
+                            <th>CANTIDAD</th>
+                            <th>DIFERENCIA</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -101,12 +102,16 @@
                                         <input id="cod_producto" type="number" class="form-control">
                                     </div>
                                     <div class="mb-3">
+                                        <label for="fechaajuste" class="col-form-label">fechaajuste</label>
+                                        <input id="fechaajuste" type="date" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="cantidad" class="col-form-label">cantidad</label>
                                         <input id="cantidad" type="number" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="fechaajuste" class="col-form-label">fechaajuste</label>
-                                        <input id="fechaajuste" type="date" class="form-control">
+                                        <label for="tipodiferencia" class="col-form-label">tipodiferencia</label>
+                                        <input id="tipodiferencia" type="text" class="form-control">
                                     </div>
                             </div>
                             <div class="modal-footer">

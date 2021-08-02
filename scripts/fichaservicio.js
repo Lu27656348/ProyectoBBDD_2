@@ -12,11 +12,11 @@ const horaest = document.getElementById('horaest');
 const fechareal = document.getElementById('fechareal');
 const horareal = document.getElementById('horareal');
 const cedulaaut = document.getElementById('cedulaaut');
-const nombreaut = document.getElementById('nombreaut');
 const personadistinta = document.getElementById('personadistinta');
 const cedula_cliente = document.getElementById('cedula_cliente');
 const cod_vehiculo = document.getElementById('cod_vehiculo');
 const horaent = document.getElementById('horaent');
+const cod_servicio = document.getElementById('cod_servicio');
 
 let opcion = '';
 
@@ -29,10 +29,10 @@ btnCrear.addEventListener('click', ()=> {
     fechareal.value = '';
     horareal.value = '';
     cedulaaut.value = '';
-    nombreaut.value = '';
     personadistinta.value = '';
     cedula_cliente.value = '';
     cod_vehiculo.value = '';
+    cod_servicio.value = '';
 
     modalLinea.show();
     opcion = 'crear';
@@ -50,10 +50,10 @@ const mostrar = (l) => {
                             <td>${linea.fechareal}</td>
                             <td>${linea.horareal}</td>
                             <td>${linea.cedulaaut}</td>
-                            <td>${linea.nombreaut}</td>
                             <td>${linea.personadistinta}</td>
                             <td>${linea.cedula_cliente}</td>
                             <td>${linea.cod_vehiculo}</td>
+                            <td>${linea.cod_servicio}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
                         </tr>`;
     });
@@ -72,6 +72,7 @@ const on = (element, event, selector, handler) => {
 on(document, 'click','.btnBorrar', (e)=>{
     const fila = e.target.parentNode.parentNode;
     const idaux = fila.firstElementChild.innerHTML;
+    console.log(url);
     console.log('BORRANDO '+ idaux);
     alertify.confirm("This is a confirm dialog.",
     function(){
@@ -100,11 +101,10 @@ on(document, 'click','.btnEditar', (e)=>{
     const fecharealForm = fila.children[5].innerHTML;
     const horarealForm = fila.children[6].innerHTML;
     const cedulaautForm = fila.children[7].innerHTML;
-    const nombreautForm = fila.children[8].innerHTML;
-    const personadistintaForm = fila.children[9].innerHTML;
-    const cedula_clienteForm = fila.children[10].innerHTML;
-    const cod_vehiculoForm = fila.children[11].innerHTML;
-
+    const personadistintaForm = fila.children[8].innerHTML;
+    const cedula_clienteForm = fila.children[9].innerHTML;
+    const cod_vehiculoForm = fila.children[10].innerHTML;
+    const cod_servicioForm = fila.children[11].innerHTML;
 
     num_unico.value = idForm;
     fechaent.value = fechaentForm;
@@ -114,11 +114,10 @@ on(document, 'click','.btnEditar', (e)=>{
     fechareal.value = fecharealForm;
     horareal.value = horarealForm;
     cedulaaut.value = cedulaautForm;
-    nombreaut.value = nombreautForm;
     personadistinta.value = personadistintaForm;
     cedula_cliente.value = cedula_clienteForm;
     cod_vehiculo.value = cod_vehiculoForm;
-
+    cod_servicio.value = cod_servicioForm;
     opcion = 'editar';
     modalLinea.show();
 });
@@ -127,6 +126,7 @@ on(document, 'click','.btnEditar', (e)=>{
 formLinea.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(opcion=='editar'){
+
         fetch(url+idForm, {
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
@@ -139,10 +139,10 @@ formLinea.addEventListener('submit', (e)=>{
                 fechareal: fechareal.value,
                 horareal: horareal.value,
                 cedulaaut: cedulaaut.value,
-                nombreaut: nombreaut.value,
                 personadistinta: personadistinta.value,
                 cedula_cliente: cedula_cliente.value,
-                cod_vehiculo: cod_vehiculo.value
+                cod_vehiculo: cod_vehiculo.value,
+                cod_servicio: cod_servicio.value
             })
         })
         .then((response) => response.json())
@@ -150,7 +150,7 @@ formLinea.addEventListener('submit', (e)=>{
     }
     
     if(opcion=='crear'){
-       console.log(idForm);
+       console.log(cod_vehiculo.value);
        fetch(url, {
            method: 'POST',
            headers: {'Content-Type':'application/json'},
@@ -163,10 +163,10 @@ formLinea.addEventListener('submit', (e)=>{
                 fechareal: fechareal.value,
                 horareal: horareal.value,
                 cedulaaut: cedulaaut.value,
-                nombreaut: nombreaut.value,
                 personadistinta: personadistinta.value,
                 cedula_cliente: cedula_cliente.value,
-                cod_vehiculo: cod_vehiculo.value
+                cod_vehiculo: cod_vehiculo.value,
+                cod_servicio: cod_servicio.value
            })
        })
        .then((response) => response.json())
