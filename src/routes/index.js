@@ -28,8 +28,21 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getDetalleOrden, getDetalleOrdenByCod, postDetalleOrden, deleteDetalleOrdenByCod, updateDetalleOrdenByCod,
         getNecesita, getNecesitaByCod, postNecesita, deleteNecesitaByCod, updateNecesitaByCod,
         getPersonaAsociada, getPersonaAsociadaByCod, postPersonaAsociada, deletePersonaAsociadaByCod, updatePersonaAsociadaByCod,
-        getAutorizado, getAutorizadoByCod, postAutorizado, deleteAutorizadoByCod, updateAutorizadoByCod} = require('../controllers/index.controller');
+        getAutorizado, getAutorizadoByCod, postAutorizado, deleteAutorizadoByCod, updateAutorizadoByCod,
+        getMecanico, getMecanicoByCod, postMecanico, deleteMecanicoByCod, updateMecanicoByCod,
+        getMantenimiento, getMantenimientoByCod, postMantenimiento, deleteMantenimientoByCod, updateMantenimientoByCod} = require('../controllers/index.controller');
+        
+router.get('/Mantenimiento', getMantenimiento);
+router.get('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', getMantenimientoByCod);
+router.post('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', postMantenimiento);
+router.delete('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', deleteMantenimientoByCod);
+router.put('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', updateMantenimientoByCod);
 
+router.get('/Mecanico', getMecanico);
+router.get('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', getMecanicoByCod);
+router.post('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', postMecanico);
+router.delete('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', deleteMecanicoByCod);
+router.put('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', updateMecanicoByCod);
 
 router.get('/Necesita', getNecesita);
 router.get('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getNecesitaByCod);

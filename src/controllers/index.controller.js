@@ -725,7 +725,7 @@ const updateNecesitaByCod = async (req,res) => {
     const response = await pool.query('UPDATE REQUIERE SET num_unico = $1, cod_servicio = $2, nro_consecutivo = $3,cod_producto = $4, cantidad=$5, monto = $6 WHERE num_unico =$7 AND cod_servicio = $8 AND nro_consecutivo = $9 AND cod_producto = $10', [  num_unico, cod_servicio, nro_consecutivo, cod_producto, cantidad, monto , codlineaaux,codlineaauxx, codlineaauxxx,codlineaauxxxx]);
     res.json(response.rows);
 };
-/*NO FUNCIONALES*/
+
 const getPersonaAsociada= async (req,res) => {
     const response = await pool.query('SELECT * FROM CONTACTOS');
     res.json(response.rows);
@@ -777,7 +777,64 @@ const updateAutorizadoByCod = async (req,res) => {
     const response = await pool.query('UPDATE AUTORIZADO SET cedulaaut = $1, nombreaut = $2 WHERE cedulaaut = $3', [ cedulaaut, nombreaut, codlineaaux]);
     res.json(response.rows);
 };
+/*NO FUNCIONALES*/
+const getMecanico= async (req,res) => {
+    const response = await pool.query('SELECT * FROM MECANICO');
+    res.json(response.rows);
+};
+const postMecanico = async (req,res) => {
+    const {  cod_vehiculo, telefono, nombre   } = req.body;
+    const response = await pool.query('INSERT INTO MECANICO (  cod_vehiculo, telefono, nombre     ) VALUES ($1,$2,$3)',[ cod_vehiculo, telefono, nombre  ]);
+    res.json(response.rows);
+};
+const getMecanicoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.telefono;
+    const response = await pool.query('SELECT * FROM MECANICO WHERE cod_vehiculo = $1 AND telefono = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const deleteMecanicoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.telefono;
+    const response = await pool.query('DELETE FROM MECANICO WHERE cod_vehiculo = $1 AND telefono = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const updateMecanicoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.telefono;
+    const {  cod_vehiculo, telefono, nombre   } = req.body;
+    const response = await pool.query('UPDATE MECANICO SET cod_vehiculo = $1, telefono = $2, nombre = $3 WHERE cod_vehiculo = $4 AND telefono = $5', [ cod_vehiculo, telefono, nombre, codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
 
+const getMantenimiento= async (req,res) => {
+    const response = await pool.query('SELECT * FROM MANTENIMIENTO');
+    res.json(response.rows);
+};
+const postMantenimiento = async (req,res) => {
+    const {  cod_vehiculo, fecha_mantenimiento, descripcion   } = req.body;
+    const response = await pool.query('INSERT INTO MANTENIMIENTO (  cod_vehiculo, fecha_mantenimiento, descripcion    ) VALUES ($1,$2,$3)',[ cod_vehiculo, fecha_mantenimiento, descripcion  ]);
+    res.json(response.rows);
+};
+const getMantenimientoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.fecha_mantenimiento;
+    const response = await pool.query('SELECT * FROM MANTENIMIENTO WHERE cod_vehiculo = $1 AND fecha_mantenimiento = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const deleteMantenimientoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.fecha_mantenimiento;
+    const response = await pool.query('DELETE FROM MANTENIMIENTO WHERE cod_vehiculo = $1 AND fecha_mantenimiento = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const updateMantenimientoByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_vehiculo;
+    const codlineaauxx = req.params.fecha_mantenimiento;
+    const {  cod_vehiculo, fecha_mantenimiento, descripcion  } = req.body;
+    const response = await pool.query('UPDATE MANTENIMIENTO SET cod_vehiculo = $1, fecha_mantenimiento = $2, descripcion = $3 WHERE cod_vehiculo = $4 AND fecha_mantenimiento = $5', [ cod_vehiculo, fecha_mantenimiento, descripcion, codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
 
 module.exports = {
     getNecesita,
@@ -785,6 +842,18 @@ module.exports = {
     getNecesitaByCod,
     deleteNecesitaByCod,
     updateNecesitaByCod,
+
+    getMecanico,
+    postMecanico,
+    getMecanicoByCod,
+    deleteMecanicoByCod,
+    updateMecanicoByCod,
+
+    getMantenimiento,
+    postMantenimiento,
+    getMantenimientoByCod,
+    deleteMantenimientoByCod,
+    updateMantenimientoByCod,
 
     getAutorizado,
     postAutorizado,
