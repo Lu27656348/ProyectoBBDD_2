@@ -1,15 +1,29 @@
 const url = 'http://localhost:3000/Cliente/';
-const contenedor = document.querySelector('tbody');
+const urlaux = 'http://localhost:3000/Vehiculo/';
+let cedulaclienteaux;
+const contenedor = document.getElementById('tbody1');
+const contenedor2 = document.getElementById('tbody2');
 let resultados = '';
+let resultados2 = '';
 
 const modalLinea = new bootstrap.Modal(document.getElementById('modalLinea'));
 const formLinea = document.querySelector('form');
 
 const cedula_cliente= document.getElementById('cedula_cliente');
-const nombrecliente = document.getElementById('nombrecliente');
+const nombrecliente = document.getElementById('nombre');
 const email = document.getElementById('emailC');
 const frecuente = document.getElementById('frecuente');
 const cantidadservicios = document.getElementById('cantidadservicios');
+
+const cod_vehiculo= document.getElementById('cod_vehiculo');
+const modelo = document.getElementById('modelo');
+const capacidad_tanque = document.getElementById('capacidad_tanque');
+const placa = document.getElementById('placa');
+const tiempouso = document.getElementById('tiempo_de_uso');
+const kilometraje = document.getElementById('kilometraje');
+const fecha_adquisicion = document.getElementById('fecha_adq');
+const cod_tipovehiculo = document.getElementById('cod_tipovehiculo');
+const cedula_cliente2 = document.getElementById('cedula_cliente2');
 
 let opcion = '';
 
@@ -28,15 +42,35 @@ const mostrar = (l) => {
     l.forEach(linea => {
         resultados += ` <tr>
                             <td>${linea.cedula_cliente}</td>
-                            <td>${linea.nombre}</td>
+                            <td>${linea.nombrecliente}</td>
                             <td>${linea.email}</td>
                             <td>${linea.frecuente}</td>
                             <td>${linea.cantidadservicios}</td>
                             <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
+                            <td class="text-center"><a class="btnVehiculo btn btn-success">VEH</a>
                         </tr>`;
     });
+
     contenedor.innerHTML = resultados;
     
+};
+
+const mostrar2 = (l2) => {
+    l2.forEach(linea2 => {
+        resultados2 += ` <tr>
+                            <td>${linea2.cod_vehiculo}</td>
+                            <td>${linea2.modelo}</td>
+                            <td>${linea2.capacidad_tanque}</td>
+                            <td>${linea2.placa}</td>
+                            <td>${linea2.tiempouso}</td>
+                            <td>${linea2.kilometraje}</td>
+                            <td>${linea2.fecha_adquisicion}</td>
+                            <td>${linea2.cod_tipovehiculo}</td>
+                            <td>${linea2.cedula_cliente}</td>
+                            <td class="text-center"><a class="btnEditar btn btn-primary">EDITAR</a><a class="btnBorrar btn btn-danger">BORRAR</a></td>
+                        </tr>`;
+    });
+    contenedor2.innerHTML = resultados2;
 };
 
 const on = (element, event, selector, handler) => {
@@ -92,7 +126,7 @@ formLinea.addEventListener('submit', (e)=>{
             method: 'PUT',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                nombre: nombrecliente.value,
+                nombrecliente: nombrecliente.value,
                 email: email.value,
                 frecuente: frecuente.value,
                 cantidadservicios: cantidadservicios.value,
@@ -108,7 +142,7 @@ formLinea.addEventListener('submit', (e)=>{
            method: 'POST',
            headers: {'Content-Type':'application/json'},
            body: JSON.stringify({
-            nombre: nombrecliente.value,
+            nombrecliente: nombrecliente.value,
             email: email.value,
             frecuente: frecuente.value,
             cantidadservicios: cantidadservicios.value,
@@ -120,11 +154,27 @@ formLinea.addEventListener('submit', (e)=>{
            const nuevaLinea = [];
            nuevaLinea.push(data);
            mostrar(nuevaLinea);
-       })
-       .then((response) => location.reload())
+       }).then((response) => location.reload());
     }
     modalLinea.hide();
 });
+
+on(document, 'click','.btnVehiculo', (e)=>{
+    resultados2 = '';
+    const fila = e.target.parentNode.parentNode;
+    cedulaclienteaux = fila.firstElementChild.innerHTML;
+    console.log(cedulaclienteaux);
+    fetch (url+cedulaclienteaux+'/Vehiculo/')
+    .then(  (response) => response.json() )
+    .then((data) => mostrar2(data))
+    .catch( (error) => console.log(error));
+        
+});//FIN DE FUNCION ON(); PARA BORRADO DE LINEA
+
+const funcionExport = ()=>{
+    return cedulaclienteaux;
+};
+
 
 fetch (url)
     .then(  (response) => response.json() )

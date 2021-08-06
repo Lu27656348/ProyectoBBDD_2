@@ -10,6 +10,13 @@ const config = {
 const pool = new Pool(config);
 
 /**METODOS FUNCIONALES**/
+const getVehiculoobyCliente = async (req,res) => {
+    const codlineaaux = req.params.cedula_cliente;
+    console.log(codlineaaux);
+    const response = await pool.query('SELECT Veh.* FROM VEHICULO Veh WHERE Veh.cedula_cliente = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+
 const getServicio = async (req,res) => {
     const response = await pool.query('SELECT * FROM SERVICIO');
     res.json(response.rows);
@@ -45,8 +52,8 @@ const getClienteByCod = async (req,res) => {
     res.json(response.rows);
 };
 const postCliente = async (req,res) => {
-    const { cedula_cliente, nombre, email, frecuente, cantidadservicios } = req.body;
-    const response = await pool.query('INSERT INTO CLIENTE (cedula_cliente, nombre, email, frecuente, cantidadservicios) VALUES ($1,$2,$3,$4,$5)',[cedula_cliente, nombre, email, frecuente, cantidadservicios]);
+    const { cedula_cliente, nombrecliente, email, frecuente, cantidadservicios } = req.body;
+    const response = await pool.query('INSERT INTO CLIENTE (cedula_cliente, nombrecliente, email, frecuente, cantidadservicios) VALUES ($1,$2,$3,$4,$5)',[cedula_cliente, nombrecliente, email, frecuente, cantidadservicios]);
 };
 const deleteClienteByCod = async (req,res) => {
     const codlineaaux = req.params.cedula_cliente;
@@ -836,12 +843,121 @@ const updateMantenimientoByCod = async (req,res) => {
     res.json(response.rows);
 };
 
+const getEmite= async (req,res) => {
+    const response = await pool.query('SELECT * FROM EMITE');
+    res.json(response.rows);
+};
+const postEmite = async (req,res) => {
+    const {  riflocal, cod_facturac, cedula_cliente   } = req.body;
+    const response = await pool.query('INSERT INTO EMITE (   riflocal, cod_facturac, cedula_cliente   ) VALUES ($1,$2,$3)',[ riflocal, cod_facturac, cedula_cliente   ]);
+    res.json(response.rows);
+};
+const getEmiteByCod = async (req,res) => {
+    const codlineaaux = req.params.riflocal;
+    const codlineaauxx = req.params.cod_facturac;
+    const codlineaauxxx = req.params.cedula_cliente;
+    const response = await pool.query('SELECT * FROM EMITE WHERE riflocal = $1 AND cod_facturac = $2 AND cedula_cliente = $3', [codlineaaux,codlineaauxx,codlineaauxxx]);
+    res.json(response.rows);
+};
+const deleteEmiteByCod = async (req,res) => {
+    const codlineaaux = req.params.riflocal;
+    const codlineaauxx = req.params.cod_facturac;
+    const codlineaauxxx = req.params.cedula_cliente;
+    const response = await pool.query('DELETE FROM EMITE WHERE riflocal = $1 AND cod_facturac = $2 AND cedula_cliente = $3', [codlineaaux,codlineaauxx,codlineaauxxx]);
+    res.json(response.rows);
+};
+const updateEmiteByCod = async (req,res) => {
+    const codlineaaux = req.params.riflocal;
+    const codlineaauxx = req.params.cod_facturac;
+    const codlineaauxxx = req.params.cedula_cliente;
+    const {  riflocal, cod_facturac, cedula_cliente } = req.body;
+    const response = await pool.query('UPDATE EMITE SET riflocal = $1, cod_facturac = $2, cedula_cliente = $3 WHERE riflocal = $4 AND cod_facturac = $5 AND cedula_cliente = $6', [ riflocal, cod_facturac, cedula_cliente, codlineaaux,codlineaauxx,codlineaauxxx]);
+    res.json(response.rows);
+};
+
+const getFacturaCompra= async (req,res) => {
+    const response = await pool.query('SELECT * FROM FACTURACOMPRA');
+    res.json(response.rows);
+};
+const postFacturaCompra = async (req,res) => {
+    const {  cod_facturac, fechafactura, formapago, descuento, riflocal, cedula_cliente   } = req.body;
+    const response = await pool.query('INSERT INTO FACTURACOMPRA (  cod_facturac, fechafactura, formapago, descuento, riflocal, cedula_cliente    ) VALUES ($1,$2,$3,$4,$5,$6)',[ cod_facturac, fechafactura, formapago, descuento, riflocal, cedula_cliente   ]);
+    res.json(response.rows);
+};
+const getFacturaCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const response = await pool.query('SELECT * FROM FACTURACOMPRA WHERE cod_facturac = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const deleteFacturaCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const response = await pool.query('DELETE FROM FACTURACOMPRA WHERE cod_facturac = $1', [codlineaaux]);
+    res.json(response.rows);
+};
+const updateFacturaCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const {  cod_facturac, fechafactura, formapago, descuento, riflocal, cedula_cliente } = req.body;
+    const response = await pool.query('UPDATE FACTURACOMPRA SET cod_facturac = $1, fechafactura = $2, formapago = $3, descuento= $4, riflocal = $5,cedula_cliente= $6 WHERE cod_facturac=$7', [ cod_facturac, fechafactura, formapago, descuento, riflocal, cedula_cliente, codlineaaux]);
+    res.json(response.rows);
+};
+
+const getDetalleCompra= async (req,res) => {
+    const response = await pool.query('SELECT * FROM DETALLECOMPRA');
+    res.json(response.rows);
+};
+const postDetalleCompra = async (req,res) => {
+    const {  cod_facturac, cod_producto, monto, cantidad   } = req.body;
+    const response = await pool.query('INSERT INTO DETALLECOMPRA ( cod_facturac, cod_producto, monto, cantidad  ) VALUES ($1,$2,$3,$4)',[ cod_facturac, cod_producto, monto, cantidad  ]);
+    res.json(response.rows);
+};
+const getDetalleCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const codlineaauxx = req.params.cod_producto;
+    const response = await pool.query('SELECT * FROM DETALLECOMPRA WHERE cod_facturac = $1 AND cod_producto = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const deleteDetalleCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const codlineaauxx = req.params.cod_producto;
+    console.log('BORRANDO ---'+codlineaaux+' --- '+ codlineaauxx);
+    const response = await pool.query('DELETE FROM DETALLECOMPRA WHERE cod_facturac = $1 AND cod_producto = $2', [codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+const updateDetalleCompraByCod = async (req,res) => {
+    const codlineaaux = req.params.cod_facturac;
+    const codlineaauxx = req.params.cod_producto;
+    const {  cod_facturac, cod_producto, monto, cantidad } = req.body;
+    const response = await pool.query('UPDATE DETALLECOMPRA SET cod_facturac = $1, cod_producto = $2, monto = $3, cantidad= $4 WHERE cod_facturac=$5 AND cod_producto = $6', [ cod_facturac, cod_producto, monto, cantidad, codlineaaux,codlineaauxx]);
+    res.json(response.rows);
+};
+
 module.exports = {
+
+    getVehiculoobyCliente,
+
     getNecesita,
     postNecesita,
     getNecesitaByCod,
     deleteNecesitaByCod,
     updateNecesitaByCod,
+
+    getEmite,
+    postEmite,
+    getEmiteByCod,
+    deleteEmiteByCod,
+    updateEmiteByCod,
+
+    getDetalleCompra,
+    postDetalleCompra,
+    getDetalleCompraByCod,
+    deleteDetalleCompraByCod,
+    updateDetalleCompraByCod,
+
+    getFacturaCompra,
+    postFacturaCompra,
+    getFacturaCompraByCod,
+    deleteFacturaCompraByCod,
+    updateFacturaCompraByCod,
 
     getMecanico,
     postMecanico,

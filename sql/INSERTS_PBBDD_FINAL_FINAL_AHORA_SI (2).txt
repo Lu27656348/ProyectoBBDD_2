@@ -1,0 +1,493 @@
+----ALTER TABLE PERSONAL DROP CONSTRAINT IF EXISTS ck_local_asignado_constraint;
+
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (15323,'Lucy','4036 Semper Road',619493338,'082-608-0458');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (14361,'Ralph','Ap #202-2956 Est Road',656656851,'085-906-1121');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (8246,'Marshall','Ap #845-6351 Erat Avenue',634913771,'094-079-1340');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (14309,'Sylvester','Ap #735-775 Aliquam Street',909907858,'016-913-3323');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (3597,'Carly','Ap #207-2603 Diam. Avenue',892961983,'045-599-3395');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (11260,'Marah','Ap #512-1213 Molestie Street',806508912,'094-819-9442');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (17632,'Wang','1003 Ut, Street',327730958,'034-788-4450');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (4685,'Zoe','5517 Lectus. Rd.',242496974,'024-767-3948');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (11792,'Lani','P.O. Box 487, 1474 Egestas, St.',596514488,'004-379-7998');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (10028,'Shafira','3546 Eros Road',772599155,'032-344-5067');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (18428,'Carson','P.O. Box 627, 8530 Sodales Av.',353287687,'054-553-5463');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (9423,'Jasmine','570-9540 Rutrum Street',964435455,'019-216-8842');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (5828,'Iris','Ap #875-1994 Montes, Rd.',182707853,'069-030-2575');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (3238,'Howard','Ap #678-6318 Pede Avenue',178598613,'091-982-2866');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (1572,'Pandora','731-5882 Sed Avenue',712990532,'052-826-2269');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (10723,'Myles','Ap #229-8955 Arcu. Road',218434533,'094-007-6143');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (18393,'Lester','P.O. Box 238, 1713 Vitae Ave',433118687,'032-942-7823');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (2294,'Breanna','9310 Tellus Av.',10200047,'054-319-8369');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (6791,'Russell','Ap #123-6822 Dui. Ave',942143555,'054-349-6305');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (17500,'Walker','Ap #904-9920 Cursus Rd.',245956159,'073-611-4124');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (14354,'Kimberly','308-6712 Magna, Avenue',413635542,'015-303-3444');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (18138,'Miranda','5854 Curabitur Avenue',773588564,'021-328-4358');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (11066,'Samson','P.O. Box 927, 8973 Vitae, Avenue',883642914,'065-412-8603');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (10735,'Laurel','Ap #390-8670 Est Ave',445635108,'062-458-7165');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (13612,'Leah','297-8458 Luctus. Road',541923190,'032-866-4240');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (1887,'Ivy','4660 Porta Rd.',415169853,'007-962-1435');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (14167,'Hedda','786-9961 Aliquam St.',411486046,'048-615-2639');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (17406,'Ezra','P.O. Box 722, 5303 Donec Rd.',37494424,'058-903-2488');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (7602,'Wanda','284-6290 Senectus Rd.',416315074,'004-675-4778');
+INSERT INTO Personal (cedulaper,nombreper,direccion,sueldo,telefonoper) VALUES (17896,'Callum','639-2443 Nisi. Av.',848832308,'034-311-1715');
+
+ALTER TABLE PERSONAL add constraint ck_local_asignado_constraint
+  foreign key (local_asignado)
+  references LOCALES (riflocal)
+ ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+--ALTER TABLE PERSONAL ADD local_asignado VARCHAR(50) ;
+--ALTER TABLE PERSONAL add constraint ck_local_asignado_constraint
+ -- foreign key (local_asignado)
+ -- references LOCALES (riflocal);
+
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (1,'Lane','Lorem ipsum dolor sit amet, consectetuer',14,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (2,'Oren','Lorem ipsum dolor sit amet, consectetuer adipiscing',18,'N');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (3,'William','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',41,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (4,'Knox','Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',56,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (5,'Garth','Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',9,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (6,'Kristen','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',36,'N');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (7,'Phelan','Lorem ipsum dolor sit amet, consectetuer adipiscing',58,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (8,'Jack','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur',55,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (9,'Anne','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',30,'S');
+INSERT INTO SERVICIO (cod_servicio,nombreserv,descripcion,anticipacion,reserva) VALUES (10,'Alice','Lorem ipsum dolor sit amet, consectetuer adipiscing',10,'S');
+
+-- Select *
+-- from SERVICIO
+
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Pau');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Mackay');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Anzi');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Arica');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Dubbo');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Bucaramanga');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Helensburgh');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Şanlıurfa');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Sabadell');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('São José dos Pinhais');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Dangjin');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Minervino di Lecce');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Zhob');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Kapiti');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Shimanovsk');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Jelenia Góra');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Mostazal');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('New Westminster');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Drancy');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Noicattaro');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('New Orleans');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Grantham');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Valmacca');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Hanam');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Isola di Capo Rizzuto');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Stockholm');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Sivry');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Alès');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Poggio Berni');
+INSERT INTO Ciudad (nombre_ciudad) VALUES ('Hillsboro');
+
+-- Select *
+-- from Ciudad
+
+-- Select *
+-- from LOCALES
+
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('927486','Carolyn','Thames','2021/08/31',17896,'2021/01/27','Hillsboro');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('973841','Jarrod','Marchtrenk','2021/12/11',7602,'2022/06/28','Poggio Berni');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('61350','Logan','Overland Park','2021/09/21',17406,'2020/12/24','Alès');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('21127','Wing','Shrewsbury','2022/04/02',14167,'2020/09/01','Sivry');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('30088','Matthew','Likino-Dulyovo','2022/01/23',1887,'2021/06/29','Stockholm');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('66080','Octavius','Francavilla Fontana','2021/04/21',13612,'2022/02/16','Isola di Capo Rizzuto');
+ INSERT INTO LOCALES (riflocal,nombre,direccion,fechainventario,encargado,fecha_encargado,nombre_ciudad) VALUES ('HR8S 3YG','Randall','Kontich','2021/03/01',10735,'2022/03/12','Hanam');
+
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (11930,'Lesley','Cras@Duis.net',47,9);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (83512,'Kamal','fermentum.metus@luctusetultrices.co.uk',82,28);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (30214,'Branden','consequat.enim.diam@ametdapibusid.com',29,13);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (64660,'Yuli','Aliquam.nisl@nequevenenatis.net',8,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (68808,'Ethan','vitae.velit.egestas@euaccumsan.co.uk',54,14);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72504,'Baker','odio@consectetuer.org',67,30);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72517,'Harrison','luctus.et@Integervitae.net',33,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (68695,'Gil','bibendum.sed@Curabiturvellectus.net',28,22);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (67893,'Brian','lorem@iaculisodioNam.org',14,1);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (43829,'Asher','arcu.Sed@justoPraesent.org',93,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (18358,'Dante','pede.nec.ante@auctor.org',36,1);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (53190,'Dora','Proin.nisl@eliterat.edu',47,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (36166,'Theodore','eleifend.non.dapibus@Nullamutnisi.edu',22,1);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (1235,'Nichole','erat@mauriserat.edu',39,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (47153,'Alfreda','Quisque@IntegerurnaVivamus.com',8,16);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (80465,'Colleen','aliquam.enim@dictumeleifend.net',73,26);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (21422,'Leila','consectetuer.cursus@Aliquamauctor.edu',26,8);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (58216,'Quon','Fusce.dolor.quam@lectussit.net',81,7);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (2115,'Linus','Fusce.diam.nunc@tempor.co.uk',64,26);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (81757,'Michelle','velit.in@lectusrutrumurna.co.uk',20,23);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (61924,'Rafael','Suspendisse.eleifend@accumsannequeet.com',99,17);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (68591,'Moana','commodo.at@erat.edu',27,2);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (35580,'Germaine','nisl.elementum.purus@seddictum.com',90,12);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (29410,'Jessica','et.malesuada.fames@tellusidnunc.org',97,30);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (75632,'Vera','arcu.et@Phasellus.edu',73,4);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (1872,'Davis','consequat.enim.diam@at.co.uk',88,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (78854,'Ava','purus.accumsan.interdum@risusInmi.net',44,14);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (4334,'Ulric','venenatis.vel.faucibus@ligulaDonec.edu',77,25);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (36421,'Lois','interdum.Sed.auctor@Donec.com',46,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (5463,'Blake','vitae.nibh@facilisisegetipsum.org',31,12);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (82854,'Imani','sem.elit.pharetra@pharetraNam.net',47,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (76317,'Debra','gravida.mauris.ut@aodio.edu',85,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (41783,'Oleg','dui.Fusce@purussapien.edu',38,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (17120,'Coby','aliquet@orcilacusvestibulum.net',79,21);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (51636,'Quentin','Nullam.scelerisque.neque@nuncIn.ca',51,22);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (30006,'Lucian','cursus.et.eros@Proinegetodio.com',52,27);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (65565,'Hermione','lacus.Mauris.non@eleifendnunc.net',87,30);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (15051,'Noble','Donec.nibh.enim@mifelis.net',58,1);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (36025,'Tiger','et.eros@nonlorem.ca',95,4);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (80220,'Connor','Nam.consequat@lacusMaurisnon.ca',83,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (80966,'Stewart','ullamcorper.Duis@nonlobortis.com',2,24);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (34890,'Hunter','ut.pharetra@felisadipiscing.co.uk',50,11);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (49607,'Yvonne','risus@velitPellentesqueultricies.ca',2,30);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (11626,'Anjolie','Duis.mi.enim@mattissemperdui.com',19,28);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (80026,'Yoko','nascetur.ridiculus@ultrices.ca',23,11);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (1608,'Brittany','bibendum.ullamcorper.Duis@pede.net',60,22);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (18219,'Shelly','lacus@imperdietnonvestibulum.org',82,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (53780,'Cullen','nisi.Cum@sempertellusid.com',67,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (6148,'Cheyenne','nulla@augueut.org',24,27);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (52529,'Fuller','metus.eu@enimSed.co.uk',90,27);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72216,'Kylan','pharetra@nec.edu',10,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (2861,'Leilani','consectetuer.ipsum.nunc@tristique.net',32,21);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (51015,'Karly','nibh.Donec@convallisconvallisdolor.co.uk',51,3);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (31706,'Ariana','euismod.enim@egetmetusIn.net',14,7);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (65112,'Christine','aliquet.diam@risus.org',87,28);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (8403,'Shafira','risus.In@feugiatSednec.org',12,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (82237,'Lee','Nunc.pulvinar.arcu@lacusUtnec.com',52,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (43321,'Samson','volutpat.Nulla.facilisis@etlacinia.net',39,27);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (41561,'Blair','Integer.sem@enimnectempus.co.uk',31,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (10835,'Sylvester','sem.eget.massa@Phaselluslibero.ca',72,15);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (76452,'Abra','amet.ultricies@commodoauctor.com',54,28);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (34248,'Jamalia','eget.mollis@loremacrisus.net',84,5);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (44130,'Macon','gravida.Praesent@sollicitudin.net',86,2);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (75421,'Malik','senectus.et@semconsequatnec.com',50,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (29938,'Charles','eleifend.nec.malesuada@anteNuncmauris.edu',5,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (59257,'Harriet','netus@aliquameuaccumsan.edu',56,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (23003,'Griffith','diam.Proin@velit.edu',70,5);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (41635,'Vincent','augue.scelerisque@risus.ca',74,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (69480,'Lewis','congue@dictum.com',36,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (71899,'Germaine','conubia.nostra@tellus.co.uk',89,7);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (73254,'Slade','mattis.Integer@porttitorinterdumSed.net',63,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (9133,'Nigel','et.risus.Quisque@acrisusMorbi.com',82,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (66671,'Sasha','sit.amet@IntegermollisInteger.org',72,17);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (60382,'Quemby','orci.sem.eget@odio.org',60,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (73209,'Helen','diam.Sed@scelerisquenequeNullam.co.uk',58,12);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (62328,'Cameran','Vivamus@risusat.net',65,17);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (1939,'Cairo','auctor@et.ca',73,29);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (81354,'Cairo','purus.sapien@Aeneangravidanunc.ca',96,24);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (32340,'Vincent','in@ridiculus.edu',48,20);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (70122,'Harlan','eleifend@iderat.net',76,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (11853,'Coby','Pellentesque.ut@odioEtiam.ca',6,6);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (38761,'Echo','sed@tellusjusto.com',29,13);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (66099,'Rashad','dolor.vitae@pede.co.uk',87,12);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (44144,'Justina','sapien@justositamet.com',28,15);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (51351,'Madonna','laoreet@magnisdisparturient.org',63,24);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72510,'Driscoll','hymenaeos.Mauris.ut@euturpis.com',55,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (82375,'Dustin','faucibus.Morbi@mus.com',29,24);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (2951,'Matthew','purus.sapien@mattisCraseget.ca',47,11);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (28141,'Hunter','Integer.urna@leo.co.uk',88,18);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (82148,'Kim','Donec.feugiat@turpisIn.co.uk',55,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (7387,'Aquila','Nunc@enimcommodo.ca',67,16);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (76052,'Mariko','Donec@ullamcorperviverraMaecenas.edu',65,23);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (50407,'Orla','bibendum.fermentum@consectetueripsum.com',60,26);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (59854,'Halla','auctor.velit.Aliquam@lectus.com',65,10);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (22146,'Maile','Mauris@eget.co.uk',18,29);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (47359,'Barclay','egestas.a.dui@nequesed.net',69,3);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (26782,'Jennifer','dui@posuere.ca',18,5);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (80736,'Maia','metus.Aliquam@vitaedolorDonec.edu',31,15);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72632,'Ulysses','purus.mauris@Uttinciduntvehicula.edu',87,19);
+INSERT INTO cliente (cedula_cliente,nombrecliente,email,frecuente,cantidadservicios) VALUES (72912,'Tyler','nisi@Intincidunt.ca',59,23);
+
+--select *
+--from cliente
+
+INSERT INTO TipoVehiculo (cod_tipovehiculo,descripcion) VALUES (1,'Carro Payaso');
+INSERT INTO TipoVehiculo (cod_tipovehiculo,descripcion) VALUES (2,'Gandola Gasolina');
+INSERT INTO TipoVehiculo (cod_tipovehiculo,descripcion) VALUES (3,'Draku Movil');
+INSERT INTO TipoVehiculo (cod_tipovehiculo,descripcion) VALUES (4,'Motocicleta');
+INSERT INTO TipoVehiculo (cod_tipovehiculo,descripcion) VALUES (5,'Negro con Silla');
+
+--select *
+--from TipoVehiculo
+
+ALTER TABLE vehiculo ADD COLUMN marcavehiculo DominioNombre;
+ALTER TABLE vehiculo add constraint ck_marcavehiculo_constraint
+  foreign key (MarcaVehiculo)
+  references MarcaVehiculo(nombremarca)
+ ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Akeem Daniel','SP-III',647,'6','Agua Destilada','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Phelan Green','SP-IV',780,'6','Anticongelante','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Jermaine Patton','ATF Tipo A',909,'1','Anticongelante','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Salvador Cote','Mercon',408,'4','Anticorrosivo','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Hoyt Perry','ATF Tipo F',842,'2','Desmineralizada','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Gage Skinner','ATF Tipo F',534,'1','Anticorrosivo','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Noble Sexton','Mercon V',908,'1','Anticorrosivo','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Ryan Barnes','Dexron VI',526,'1','Anticongelante','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Hamilton Cameron','Dexron',579,'2','Anticongelante','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Melvin Drake','ATF Tipo A',576,'4','Desmineralizada','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Wing Powell','Dexron VI',854,'6','Anticorrosivo','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Hasad Buckner','ATF Tipo F',561,'2','Agua Destilada','95');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Timon Delaney','SP-II',818,'6','Agua Destilada','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Wing Knox','SP-II',358,'2','Anticorrosivo','91');
+INSERT INTO MarcaVehiculo (nombremarca,aceitecaja,descripcion,cantidadp,refrigerante,octanaje) VALUES ('Jamal Sampson','SP-III',652,'2','Desmineralizada','91');
+
+--select *
+--from MarcaVehiculo
+
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (1,38596,'Mercedes-Benz',4178,10449,'50','2022/06/27', '72912','5','Jamal Sampson');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (2,377987,'Audi',69,89527,'20','2020/09/23',           '80736','4','Wing Knox');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (3,559606,'Renault',1427,3322,'80','2021/12/24',       '26782','3','Timon Delaney');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (4,688114,'Mercedes-Benz',3522,8715,'80','2022/04/06', '22146','2','Hamilton Cameron');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (5,714476,'Mercedes-Benz',3037,84719,'30','2021/07/29','59854','1','Salvador Cote');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (6,847675,'Opel',1962,90377,'30','2022/05/08',         '7387' ,'5','Hoyt Perry');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (7,430725,'Seat',3870,76582,'50','2021/03/13',         '26782','3','Timon Delaney');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (8,415026,'Mercedes-Benz',5163,15623,'80','2022/02/07','82148','5','Salvador Cote');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (9,261803,'Seat',4696,28225,'20','2022/05/12',         '50407','3','Wing Knox');
+INSERT INTO Vehiculo (cod_vehiculo,placa,modelo,tiempouso,kilometraje,capacidad_tanque,fecha_adquisicion,cedula_cliente,cod_tipovehiculo,MarcaVehiculo) VALUES (10,489504,'Opel',2350,63255,'30','2022/01/13',        '28141','1','Timon Delaney');
+
+--select *
+--from Vehiculo
+
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (1,'2020/08/06','11:30:21','12:00:00','2021/07/26','14:30:21','S','27301846','72912','1','1','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (2,'2021/07/20','11:30:21','12:00:00','2022/03/14','14:30:21','S','30568412','80736','2','1','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (3,'2020/10/16','11:30:21','12:00:00','2020/12/30','14:30:21','N','0'       ,'26782','3','1','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (4,'2022/05/22','11:30:21','12:00:00','2021/04/03','14:30:21','N','0'       ,'22146','4','1','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (5,'2021/12/04','11:30:21','12:00:00','2020/11/26','14:30:21','N','0'       ,'59854','5','2','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (6,'2022/07/15','11:30:21','12:00:00','2021/05/31','14:30:21','N','0'       , '7387','6','2','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (7,'2021/10/13','11:30:21','12:00:00','2020/08/23','14:30:21','S','32689547','26782','7','3','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (8,'2021/09/17','11:30:21','12:00:00','2021/09/18','14:30:21','N','0'       ,'82148','8' ,'5','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (9,'2020/11/20','11:30:21','12:00:00','2021/11/15','14:30:21','N','0'       ,'50407','9','2','2021/03/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (10,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','5','2021/03/24');
+
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (11,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','5','2021/05/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (12,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','5','2021/10/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (13,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','3','2021/10/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (14,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','2','2021/10/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (15,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','1','2021/10/24');
+INSERT INTO FichaServicio (num_unico,fechaent,horaent,horaest,fechareal,horareal,personadistinta,cedulaaut,cedula_cliente,cod_vehiculo,cod_servicio,fechaest) VALUES (16,'2021/01/26','11:30:21','12:00:00','2022/03/28','14:30:21','N','0'      ,'28141','10','4','2021/10/24');
+
+
+
+--select *
+--from FichaServicio
+
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('15323','1');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('14361','2');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('8246' ,'3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('14309','4');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('3597' ,'5');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('11260','6');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('17632','7');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('4685' ,'8');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('11792','9');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('10028','10');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18428','1');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18428','2');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18428','3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18428','4');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('9423' ,'2');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('5828' ,'3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('3238' ,'5');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('10723','4');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18393','9');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('2294' ,'8');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('6791' ,'4');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('17500','5');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('14354','2');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('18138','3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('11066','5');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('10735','8');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('13612','6');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('1887' ,'3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('14167','1');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('17406','1');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('7602' ,'3');
+INSERT INTO Asignado (cedulaper,cod_servicio) VALUES ('17896','7');
+
+--select *
+--from Asignado
+
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (1,'Alexa');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (2,'Hayfa');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (3,'Macon');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (4,'Genevieve');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (5,'Paloma');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (6,'April');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (7,'Kai');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (8,'Dylan');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (9,'Hedley');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (10,'Lilah');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (11,'Veda');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (12,'Adam');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (13,'Mari');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (14,'Basia');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (15,'Wilma');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (16,'Anjolie');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (17,'Emerson');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (18,'Gray');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (19,'Suki');
+INSERT INTO LineaSuministro (cod_linea,descripcion) VALUES (20,'Ferris');
+
+----------------------------
+
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (1 ,'Ingrid');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (2 ,'Daquan');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (3 ,'Cameron');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (4 ,'Aubrey');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (5 ,'Yvonne');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (6 ,'Ivory');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (7 ,'Maryam');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (8 ,'Fiona');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (9 ,'Bevis');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (10,'Remedios');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (11,'Kaye');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (12,'Hilel');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (13,'Logan');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (14,'Alfreda');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (15,'Hiroko');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (16,'Quinlan');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (17,'Drew');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (18,'Eleanor');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (19,'Anjolie');
+INSERT INTO Contactos (cedulacontacto,nombre) VALUES (20,'Howard');
+
+---------------------------------------------------------------------
+
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16121108 8487','Barbara','Ap #169-4206 Erat. St.',161058173,191911050,'Sloan','1');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16110101 6457','Lydia','P.O. Box 938, 1454 Orci. Rd.',550818589,567980476,'Sutton','2');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16990203 4553','Jordan','540-2099 Nunc Ave',800249133,900830847,'Gaines','3');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16830807 9006','Irma','939-7604 Vitae, Rd.',642935320,361143554,'Burns','4');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16680723 7448','Jasper','739-764 Gravida Ave',522762655,520467175,'Klein','5');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16571208 3384','Zoe','149-270 Nunc, Ave',478359200,127737777,'Sosa','6');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16810621 0803','Holmes','Ap #149-3311 Euismod Avenue',918988254,203002334,'Duke','7');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16210319 6826','Lisandra','P.O. Box 539, 7747 Vestibulum, Street',979957581,95475968,'Brennan','8');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16130802 5657','Sophia','Ap #202-6593 Est. St.',113572473,126371779,'Ayers','9');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16111006 3896','Colby','P.O. Box 883, 8595 Molestie Av.',792272551,853879442,'Kelly','10');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16380830 9870','Amethyst','812-5681 Auctor, St.',243758212,218223699,'Schmidt','11');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16180512 3484','Ayanna','P.O. Box 935, 6948 Donec Av.',724051128,572118775,'Rose','12');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16240806 9108','Kevyn','Ap #775-5418 Vel Road',550677726,637747910,'Moss','13');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16570719 7777','Blaine','P.O. Box 623, 4750 Imperdiet Avenue',638101613,873964087,'Porter','14');
+INSERT INTO Proveedor (rif_proveedor,razonsocial,direccion,telefono,celular,nombre,cedulacontacto) VALUES ('16751022 5589','Kane','P.O. Box 775, 6337 A, St.',877424106,245409607,'Watts','15');
+
+---------------------------------------------------------------------
+
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (1,'Pennington','650','15','Libero Lacus Foundation','Guadeloupe',113,'N',							'1','16121108 8487');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (2,'Savage','400','25','Amet Consectetuer Inc.','Sao Tome and Principe',50,'S',					'2','16110101 6457');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (3,'Schroeder','800','16','Nisi Nibh Ltd','Tonga',156,'S',										'3','16990203 4553');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (4,'Guthrie','800','80','Fringilla Inc.','Colombia',248,'N',										'4','16830807 9006');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (5,'Huff','250','40','Arcu Vivamus PC','Sao Tome and Principe',280,'N',							'5','16680723 7448');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (6,'Casey','300','16','Sed Corporation','San Marino',126,'N',										'6','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (7,'Ochoa','500','60','Faucibus Company','Dominican Republic',180,'S',								'4','16810621 0803');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (8,'Ramsey','250','25','Velit Ltd','Panama',75,'N',												'5','16210319 6826');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (9,'Wilkinson','400','16','Tempor Bibendum Donec Company','Holy See (Vatican City State)',178,'N','8','16130802 5657');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (10,'Church','300','70','Elit Nulla Facilisi Associates','Malta',34,'N',							'7','16111006 3896');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (11,'Obrien','600','16','Nunc Inc.','Belarus',174,'S',											'9','16380830 9870');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (12,'Sims','400','80','Aptent Taciti Sociosqu LLP','Belize',223,'N',								'11','16180512 3484');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (13,'Stein','300','16','Lorem Limited','Svalbard and Jan Mayen Islands',287,'S',					'15','16240806 9108');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (14,'Wilkinson','650','25','Scelerisque Industries','Virgin Islands, British',85,'S',				'14','16570719 7777');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (15,'Matthews','250','40','Elit Company','Singapore',74,'N',										'16','16751022 5589');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (16,'Tran','250','45','Velit LLP','Swaziland',243,'S',												'19','16751022 5589');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (17,'Murray','400','7','Adipiscing Elit Etiam Incorporated','Antigua and Barbuda',150,'N',			'20','16751022 5589');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (18,'Weiss','250','65','Dignissim Pharetra Institute','Albania',21,'N',							'15','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (19,'Poole','650','25','Ad Litora Limited','Sierra Leone',271,'N',								'12','16990203 4553');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (20,'Keith','300','30','Euismod Incorporated','Guinea-Bissau',90,'S',								'19','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (21,'Rush','800','60','Dolor LLP','Puerto Rico',263,'N',											'18','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (22,'Hatfield','650','60','Imperdiet Limited','Italy',69,'N',										'19','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (23,'Blankenship','250','60','Viverra Donec Tempus Company','Vanuatu',277,'N',					'4','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (24,'Mcleod','300','30','Nec Ltd','Cambodia',163,'N',												'10','16810621 0803');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (25,'Kane','160','24','Maecenas Ornare Egestas Industries','Congo, the Democratic Republic of the',165,'N','13','16240806 9108');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (26,'Roach','44','40','Arcu Limited','United Arab Emirates',33,'N',									'12','16810621 0803');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (27,'England','400','65','Vestibulum Nec Foundation','Kazakhstan',115,'S',							'15','16571208 3384');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (28,'Foster','800','10','Aliquet Diam Sed Foundation','Saint Vincent and The Grenadines',47,'S',	'7','16121108 8487');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (29,'Cooke','800','25','Nunc Id Industries','Sao Tome and Principe',130,'N',						'12','16121108 8487');
+INSERT INTO Producto (cod_producto,nombrep,maximo,minimo,descripcionp,fabricante,precio,ecologico,cod_linea,rif_proveedor) VALUES (30,'Price','600','30','Nibh PC','Bahrain',180,'N',												'7','16111006 3896');
+
+
+---------------------------------------------------------------------
+
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (1,'2021/08/11','Credito','N','927486','1235');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (2,'2021/10/21','Transferencia','S','973841','58216');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (3,'2022/04/30','Debito','S','61350','35580');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (4,'2022/04/04','Debito','S','21127','1872');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (5,'2022/04/20','Debito','N','30088','5463');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (6,'2021/06/13','Divisa','N','66080','36421');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (7,'2020/12/13','Debito','N','HR8S 3YG','80465');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (8,'2021/11/06','Efectivo','N','30088','18358');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (9,'2021/09/17','Efectivo','S','30088','18358');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (10,'2022/03/14','Transferencia','N','30088','36166');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (11,'2022/04/03','Divisa','S','21127','67893');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (12,'2021/03/02','Divisa','N','21127','67893');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (13,'2021/05/30','Efectivo','S','61350','30214');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (14,'2021/07/11','Divisa','N','HR8S 3YG','11930');
+INSERT INTO FacturaCompra (cod_facturac,fechafactura,formapago,descuento,riflocal,cedula_cliente) VALUES (15,'2022/04/09','Efectivo','S','927486','1235');
+
+---------------------------------------------------------------------
+
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('1','2',44,6);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('2','1',97,8);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('3','3',32,13);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('4','5',65,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('5','4',94,14);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('6','6',29,12);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('7','8',72,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('8','7',146,8);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('9','10',56,10);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('10','4',148,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('11','5',71,12);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('12','9',110,4);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('13','3',23,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('14','1',62,13);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('15','10',22,10);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('1','16',149,14);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('1','11',22,5);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('2','14',63,12);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('3','13',101,8);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('5','16',45,4);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('5','11',149,11);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('8','12',54,3);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('8','1',142,3);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('9','6',79,8);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('9','13',93,5);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('9','5',120,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('2','4',31,12);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('3','19',102,9);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('1','14',99,11);
+INSERT INTO DetalleCompra (cod_facturac,Cod_Producto,Monto,Cantidad) VALUES ('12','14',132,5);
+
+---------------------------------------------------------------------
+
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (1,'2021/07/26','1','72912');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (2,'2020/12/30','1','80736');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (3,'2021/03/17','1','26782');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (4,'2021/04/03','1','22146');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (5,'2020/11/26','2','59854');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (6,'2021/05/31','2','7387');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (7,'2020/08/23','3','26782');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (8,'2021/09/18','5','82148');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (9,'2021/11/15','2','50407');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (10,'2022/03/28','5','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (11,'2022/03/28','5','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (12,'2022/03/28','5','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (13,'2022/03/28','3','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (14,'2022/03/28','2','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (15,'2022/03/28','1','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (16,'2022/03/28','4','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (17,'2022/01/20','2','28141');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (18,'2022/03/08','7','72912');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (19,'2022/06/30','8','71899');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (20,'2021/01/13','9','72912');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (21,'2021/02/15','6','44144');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (22,'2022/01/06','2','81354');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (23,'2020/04/27','3','23003');
+INSERT INTO Reservacion (num_reservacion,fecha_reservacion,cod_servicio,cedula_cliente) VALUES (24,'2020/03/20','1','76452');
+
+---------------------------------------------------------------------
+
+---------------------------------------------------------------------
+

@@ -1,13 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>EMITE</title>
+	<!-- Se comento la linea que se ve abajo porque interfiere con el disenno visual de la pantalla -->
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-    <title>CLIENTES</title>
     <style>
         body{
             background-color: #f7f6f6;
@@ -17,10 +18,12 @@
             color: white;
         }
     </style>
-    <link rel="stylesheet" href="../css/maquetado_base.css">
-  </head>
-  <body>
-    <!-- Sidebar -->
+	<!-- Nuestro css-->
+	<link rel="stylesheet" href="../css/maquetado_base.css">
+</head>
+<body>
+
+	<!-- Sidebar -->
     <header class="header">
         <div class="header__logo">
             <h1 class="header__logo--Texto">M & M</h1>
@@ -33,7 +36,7 @@
             <li ><a id="productos" href="Productos.html">Productos</a></li>
             <li ><a id="proveedores" href="Proveedores2.html">Proveedores</a></li>
             <li ><a id="personaasociada" href="personaAsociada.html">Persona Asociada a Proveedor</a></li>
-            <li ><a id="actual" href="cliente.html">Cliente</a></li>
+            <li ><a id="cliente" href="cliente.html">Cliente</a></li>
             <li ><a id="finanzas" href="#">Finanzas</a></li>
             <li ><a id="servicios" href="servicio.html"> Servicios</a> </li>
             <li ><a id="vehiculos" href="vehiculo.html">Vehiculos</a></li>
@@ -57,7 +60,7 @@
             <li ><a id="Asignado" href="asignado.html">Asignado</a</li>
             <li ><a id="Contiene" href="contiene.html">Contiene</a</li>
             <li ><a id="Necesita" href="necesita.html">Necesita</a</li>
-            <li ><a id="Consume" href="consume.html">Consume</a</li>
+            <li ><a id="actual" href="emite.html">Emite</a</li>
             <li ><a id="salir" href="https://www.google.com/">Salir</a></li>
         </ul>
         <p><i>Cuando la calidad de<br/>
@@ -70,24 +73,21 @@
     <section class="main">
         <section class="main__barraSuperior">
             <img src="" alt="">
-            <input type="search" name="" id="" placeholder="Buscar Personal">
+            <input type="search" name="" id="" placeholder="Buscar Proveedor">
         </section>
         <section class="main__content">
             <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
                 <button id="btnCrear" type="button" class="btn btn-primary" data-bs-toggle="modal">NUEVO REGISTRO</button>
-                <table id="tablaLinea" class="table table-bordered table-hover table-striped">
+                <table id="tablaLinea" class="table mt-2 table-bordered table-striped">
                     <thead>
                         <tr class="text-center">
-                            <th>CÉDULA</th>
-                            <th>NOMBRE</th>
-                            <th>EMAIL</th>
-                            <th>FRECUENTE</th>
-                            <th>CANTIDAD-S</th>
-                            <th>ACCIONES</th>
-                            <th>VEHICULOS</th>
+							<th scope="col">RIF-LOCAL</th>
+                            <th scope="col">COD_FACTURAC</th>
+                            <th scope="col">CEDULA_CLIENTE</th>
+                            <th scope="col">ACCION</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody1">
+                    <tbody>
                     </tbody>
                 </table>
         
@@ -95,32 +95,23 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">CLIENTES</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">EMITE</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form id="form">
                                     <div class="mb-3">
-                                        <label for="cedula_cliente" class="col-form-label">CédulaCliente</label>
-                                        <input id="cedula_cliente" type="text" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nombre" class="col-form-label">NombreCliente</label>
-                                        <input id="nombre" type="text" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="emailC" class="col-form-label">Email Cliente</label>
-                                        <input id="emailC" type="email" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="frecuente" class="col-form-label">Frecuente</label>
-                                        <input id="frecuente" type="text" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="cantidadservicios" class="col-form-label">Cantidad-S</label>
-                                        <input id="cantidadservicios" type="number" class="form-control">
-                                    </div>
-                                
+										<label for="riflocal" class="col-form-label">riflocal</label>
+										<input id="riflocal" type="text" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cod_facturac" class="col-form-label">cod_facturac</label>
+										<input id="cod_facturac" type="number" class="form-control">
+									</div>
+									<div class="mb-3">
+										<label for="cedula_cliente" class="col-form-label">cedula_cliente</label>
+										<input id="cedula_cliente" type="text" class="form-control">
+									</div>                      
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
@@ -132,39 +123,12 @@
                 </div><!-- FIN DELMODAL -->
         
             </div>
-            
-            <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
-                
-                <table id="tablaLinea2" class="table mt-2 table-bordered table-striped">
-                    <thead>
-                        <tr class="text-center">
-                            <th>CODVEHICULO</th>
-                            <th>MODELO</th>
-                            <th>CAPACIDAD TANQUE</th>
-                            <th>PLACA</th>
-                            <th>TIEMPO DE USO</th>
-                            <th>KILOMETRAJE</th>
-                            <th>FECHA_ADQ</th>
-                            <th>COD_TIPOVEHICULO</th>
-                            <th>CEDULA CLIENTE</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody2">
-                    </tbody>
-                </table>
-        
-            </div>
         </section>
     </section>
     <!-- Fin Page Content -->
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="../scripts/cliente.js">
-
-    </script>
-  </body>
+    <script src="../scripts/emite.js"></script>
+</body>
 </html>

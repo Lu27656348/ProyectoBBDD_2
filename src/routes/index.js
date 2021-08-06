@@ -30,19 +30,37 @@ const { getServicio, getServicioByCod,postServicio,deleteServicioByCod,updateSer
         getPersonaAsociada, getPersonaAsociadaByCod, postPersonaAsociada, deletePersonaAsociadaByCod, updatePersonaAsociadaByCod,
         getAutorizado, getAutorizadoByCod, postAutorizado, deleteAutorizadoByCod, updateAutorizadoByCod,
         getMecanico, getMecanicoByCod, postMecanico, deleteMecanicoByCod, updateMecanicoByCod,
-        getMantenimiento, getMantenimientoByCod, postMantenimiento, deleteMantenimientoByCod, updateMantenimientoByCod} = require('../controllers/index.controller');
-        
+        getMantenimiento, getMantenimientoByCod, postMantenimiento, deleteMantenimientoByCod, updateMantenimientoByCod,
+        getEmite,getEmiteByCod, postEmite, deleteEmiteByCod, updateEmiteByCod,
+        getFacturaCompra, getFacturaCompraByCod, postFacturaCompra, deleteFacturaCompraByCod, updateFacturaCompraByCod,
+        getDetalleCompra, getDetalleCompraByCod, postDetalleCompra, deleteDetalleCompraByCod, updateDetalleCompraByCod,
+        getVehiculoobyCliente} = require('../controllers/index.controller');
+
+router.get('/Cliente/:cedula_cliente/Vehiculo', getVehiculoobyCliente);
+
 router.get('/Mantenimiento', getMantenimiento);
 router.get('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', getMantenimientoByCod);
 router.post('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', postMantenimiento);
 router.delete('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', deleteMantenimientoByCod);
 router.put('/Vehiculo/:cod_vehiculo/Mantenimiento/:fecha_mantenimiento', updateMantenimientoByCod);
 
+router.get('/Emite', getEmite);
+router.get('/Locales/:riflocal/FacturaCompra/:cod_facturac/Cliente/:cedula_cliente', getEmiteByCod);
+router.post('/Locales/:riflocal/FacturaCompra/:cod_facturac/Cliente/:cedula_cliente', postEmite);
+router.delete('/Locales/:riflocal/FacturaCompra/:cod_facturac/Cliente/:cedula_cliente', deleteEmiteByCod);
+router.put('/Locales/:riflocal/FacturaCompra/:cod_facturac/Cliente/:cedula_cliente', updateEmiteByCod);
+
 router.get('/Mecanico', getMecanico);
 router.get('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', getMecanicoByCod);
 router.post('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', postMecanico);
 router.delete('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', deleteMecanicoByCod);
 router.put('/Vehiculo/:cod_vehiculo/Mecanico/:telefono', updateMecanicoByCod);
+
+router.get('/DetalleCompra', getDetalleCompra);
+router.get('/FacturaCompra/:cod_facturac/Productos/:cod_producto', getDetalleCompraByCod);
+router.post('/FacturaCompra/:cod_facturac/Productos/:cod_producto', postDetalleCompra);
+router.delete('/FacturaCompra/:cod_facturac/Productos/:cod_producto', deleteDetalleCompraByCod);
+router.put('/FacturaCompra/:cod_facturac/Productos/:cod_producto', updateDetalleCompraByCod);
 
 router.get('/Necesita', getNecesita);
 router.get('/FichaServicio/:num_unico/Servicio/:cod_servicio/Actividad/:nro_consecutivo/Producto/:cod_producto', getNecesitaByCod);
@@ -61,6 +79,12 @@ router.get('/Autorizado/:cedulaaut', getAutorizadoByCod);
 router.post('/Autorizado', postAutorizado);
 router.delete('/Autorizado/:cedulaaut', deleteAutorizadoByCod);
 router.put('/Autorizado/:cedulaaut', updateAutorizadoByCod);
+
+router.get('/FacturaCompra', getFacturaCompra);
+router.get('/FacturaCompra/:cod_facturac', getFacturaCompraByCod);
+router.post('/FacturaCompra', postFacturaCompra);
+router.delete('/FacturaCompra/:cod_facturac', deleteFacturaCompraByCod);
+router.put('/FacturaCompra/:cod_facturac', updateFacturaCompraByCod);
 
 router.get('/MarcaVehiculo', getMarcaVehiculo);
 router.get('/MarcaVehiculo/:nombremarca', getMarcaVehiculoByCod);

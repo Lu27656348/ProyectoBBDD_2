@@ -133,3 +133,23 @@ body{
     overflow-y: visible;
     margin: 10px;
 }
+
+.container{
+    overflow:visible;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar{
+    width: 8px;
+    margin-right: 5px;
+}
+.container::-webkit-scrollbar-thumb{
+    background: #edeaf1;
+    border-radius: 4px;
+    border-right: 5px solid #2b1055;
+    /* margin-right: 10px; */
+}
+.container::-webkit-scrollbar-thumb:active {
+    background-color: #d6d3da;
+  }
